@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<config>
+  <table name="Order_Main">
+    <fields>
+      <field pname="OrderNo" name="Order_No" label="订单号" isPk="true" buildType ="0" />
+      <field pname="PartnerOrderNo" name="Partner_Order_No" label="中大订单号"/>
+      <field pname="PayType" name="Pay_Type" label="支付类型1.支付宝2微信"/>
+      <field pname="ProductName" name="Product_Name" label="产品名称"/>
+      <field pname="Mobile" name="Mobile" label="充值账号"/>
+      <field pname="Account" name="Account" label="中大用户名"/>
+      <field pname="ProductId" name="Product_Id" label="产品编号"/>
+      <field pname="Face" name="Face" label="充值面值"/>
+      <field pname="Price" name="Price" label="支付金额"/>
+      <field pname="ZdOrderTime" name="Zd_Order_Time" label="中大订单时间"/>
+      <field pname="CardType" name="Card_Type" label="充值类型1-话费2-流量"/>
+      <field pname="FlowType" name="Flow_Type" label="流量类型"/>
+      <field pname="PayStatus" name="Pay_Status" label="支付状态:20-等待支付30-正在支付90-失败0-成功"/>
+      <field pname="OrderStatus" name="Order_Status" label="订单状态:20-等待充值30-正在充值90-失败0-成功"/>
+      <field pname="RefundState" name="Refund_State" label="退款状态10-无需20-等待退款30-正在退款90-失败0-成功"/>
+      <field pname="CreateTime" name="Create_Time" label="创建时间"/>
+      <field pname="RefundTime" name="Refund_Time" label="退款时间"/>
+      <field pname="PayTime" name="Pay_Time" label="支付完成时间"/>
+      <field pname="FinishTime" name="Finish_Time" label="完成时间"/>
+      <field pname="SucFace" name="Suc_Face" label="成功面值"/>
+      <field pname="BusinessType" name="Business_Type" label="业务类型"/>
+      <field pname="Couponprice" name="Couponprice" label="优惠券金额"/>
+      <field pname="Couponid" name="Couponid" label="优惠券ID"/>
+      <field pname="Couponch" name="Couponch" label="优惠券渠道"/>
+      <field pname="ServiceFee" name="Service_Fee" label="支付手续费用"/>
+      <field pname="UserPayed" name="USER_PAYED" label="用户支付金额"/>
+      <field pname="PayNotifyState" name="PAY_NOTIFY_STATE" label="支付结果回调状态"/>
+      <field pname="OrderNotifyState" name="ORDER_NOTIFY_STATE" label="订单状态回调状态"/>
+      <field pname="PayNotifyTime" name="PAY_NOTIFY_TIME" label="支付结果回调时间"/>
+      <field pname="OrderNotifyTime" name="ORDER_NOTIFY_TIME" label="订单结果回调时间"/>
+      <field pname="ReceiptAccountId" name="RECEIPT_ACCOUNT_ID" label="收款账户编号"/>
+      <field pname="ErrorMsg" name="ERROR_MSG" label="错误消息"/>
+      <field pname="UserIp" name="USER_IP" label="真实ip"/>
+      <field pname="PayFlowOrder" name="PAY_FLOW_ORDER" label="支付方流水号"/>
+      <field pname="PayUserId" name="PAY_USER_ID" label="支付用户编号"/>
+      <field pname="CostPrice" name="COST_PRICE" label="实际充值成本"/>
+      <field pname="NeedRecharge" name="NEED_RECHARGE" label="是否需要充值话费流量"/>
+      <field pname="ManualStatus" name="MANUAL_STATUS" label="审核状态"/>
+      <field pname="EsalesCostPrice" name="Esales_Cost_Price" label="18系统本金"/>
+      <field pname="DownChannelNo" name="Down_Channel_No" label="下游渠道"/>
+    </fields>
+  </table>
+  <template>
+    <item name="getList">
+      <sql>
+        <![CDATA[
+          select t.*,
+                 t1.name PayStatusLabel,
+                 t2.name OrderStatusLabel,
+                 t3.name RefundStatus,
+                 t4.name PayTypeName,
+                 t5.name CardTypeName,
+                 t6.name FlowTypeName,
+                 t7.name Business,
+                 t8.name PayNotifyState,
+                 t9.name OrderNotifyState,
+                 dc.CHANNEL_NAME DChannelName
+                          from (select RID
+                                  from (select R.RID, rownum LineNum
+                                          from (select t.rowid RID
+                                                  from order_main t
+                                                 where {@t.OrderStatus}
+                                                       {&@t.PayStatus}
+                                                       {&@t.RefundState}
+                                                       {&@t.OrderNo}
+                                                       {&@t.PartnerOrderNo}
+                                                       {&@t.Face}
+                                                       {&@t.BusinessType}
+                                                       {&@t.PayType}
+                                                       {&@t.DownChannelNo}
+                                                       {&@t.BusinessType}
+                                                       {& :ST}
+                                                       {& :ET}
+                                                       {& :Condition}
+                                                 order by t.create_time desc) R
+                                         where rownum <= { :PS} * { :PI})
+                                 where LineNum > { :PS} * ({ :PI} - 1)) tab
+                         inner join order_main t on t.rowid = tab.RID
+                         left join sys_dictionary t1 on t1.value = t.pay_status and t1.type = 'PayStatus' 
+                         left join sys_dictionary t2 on t2.value = t.order_status and t2.type = 'OrderStatus'
+                         left join sys_dictionary t3 on t3.value = t.refund_state and t3.type = 'RefundStatus'
+                         left join sys_dictionary t4 on t.pay_type = t4.value and t4.type ='PayType'
+                         left join sys_dictionary t5 on t.card_type = t5.value and t5.type ='CardType'
+                         left join sys_dictionary t6 on t.flow_type = t6.value and t6.type='FlowType'
+                         left join sys_dictionary t7 on t.business_type = t7.value and t7.type='BusinessType'
+                         left join sys_dictionary t8 on t.PAY_NOTIFY_STATE = t8.value and t8.type='PayNotifyState'
+                         left join sys_dictionary t9 on t.ORDER_NOTIFY_STATE = t9.value and t9.type='OrderNotifyState'
+                         left join DOWN_CHANNEL dc on t.Down_Channel_No = dc.DOWN_CHANNEL_NO
+                         order by t.create_time desc
+        ]]>
+      </sql>
+    </item>
+    <item name="getCount">
+      <sql>
+        <![CDATA[
+          select count(*) from Order_Main t where {@t.OrderStatus}
+                                                       {&@t.PayStatus}
+                                                       {&@t.RefundState}
+                                                       {&@t.OrderNo}
+                                                       {&@t.PartnerOrderNo}
+                                                       {&@t.Face}
+                                                       {&@t.BusinessType}
+                                                       {&@t.PayType}
+                                                       {&@t.DownChannelNo}
+                                                       {&@t.BusinessType}
+                                                       {& :ST}
+                                                       {& :ET}
+                                                       {& :Condition}
+                                                       
+        ]]>
+      </sql>
+    </item>
+
+    <item name="getOrderDetailsByOrderNo">
+      <sql>
+        <![CDATA[
+          select t.*,
+                 t1.name PayStatusLabel,
+                 t2.name OrderStatusLabel,
+                 t3.name RefundStatus,
+                 t4.name PayTypeName,
+                 t5.name CardTypeName,
+                 t6.name FlowTypeName,
+                 t8.name PayNotifyState,
+                 t9.name OrderNotifyState,
+                 t10.CHANNEL_NAME DownChannelName
+                         from order_main t 
+                         left join sys_dictionary t1 on t1.value = t.pay_status and t1.type = 'PayStatus' 
+                         left join sys_dictionary t2 on t2.value = t.order_status and t2.type = 'OrderStatus'
+                         left join sys_dictionary t3 on t3.value = t.refund_state and t3.type = 'RefundStatus'
+                         left join sys_dictionary t4 on t.pay_type = t4.value and t4.type ='PayType'
+                         left join sys_dictionary t5 on t.card_type = t5.value and t5.type ='CardType'
+                         left join sys_dictionary t6 on t.flow_type = t6.value and t6.type='FlowType'
+                         -- left join sys_dictionary t7 on t.business_type = t7.value and t7.type=''
+                         left join sys_dictionary t8 on t.PAY_NOTIFY_STATE = t8.value and t8.type='PayNotifyState'
+                         left join sys_dictionary t9 on t.ORDER_NOTIFY_STATE = t9.value and t9.type='OrderNotifyState'
+                         left join DOWN_CHANNEL t10 on t.DOWN_CHANNEL_NO=t10.DOWN_CHANNEL_NO
+                         where {@t.OrderNo}
+        ]]>
+      </sql>
+    </item>
+    <item name="getReviewCount">
+      <sql>
+        <![CDATA[
+              select count(*) from Order_Main t where  t.MANUAL_STATUS = 20     
+                                                       {&@t.OrderStatus}
+                                                       {&@t.PayStatus}
+                                                       {&@t.RefundState}
+                                                       {&@t.OrderNo}
+                                                       {&@t.PartnerOrderNo}
+                                                       {&@t.Face}
+                                                       {&@t.BusinessType}
+                                                       {&@t.PayType}
+                                                       {&@t.CreateTime >= to_date($ST,'yyyy-MM-dd')}
+                                                       {&@t.CreateTime < to_date($ET,'yyyy-MM-dd')+1}
+                                                       {& :Condition}
+                                                       
+        ]]>
+      </sql>
+    </item>
+    <item name="getReviewList">
+      <sql>
+        <![CDATA[
+           select t.*,
+                 t1.name PayStatusLabel,
+                 t2.name OrderStatusLabel,
+                 t3.name RefundStatus,
+                 t4.name PayTypeName,
+                 t5.name CardTypeName,
+                 t6.name FlowTypeName,
+                 t8.name PayNotifyState,
+                 t9.name OrderNotifyState
+                          from (select RID
+                                  from (select R.RID, rownum LineNum
+                                          from (select t.rowid RID
+                                                  from order_main t
+                                                 where t.MANUAL_STATUS = 20     
+                                                       {&@t.OrderStatus}
+                                                       {&@t.PayStatus}
+                                                       {&@t.RefundState}
+                                                       {&@t.OrderNo}
+                                                       {&@t.PartnerOrderNo}
+                                                       {&@t.Face}
+                                                       {&@t.BusinessType}
+                                                       {&@t.PayType}
+                                                       {&@t.CreateTime >= to_date($ST,'yyyy-MM-dd')}
+                                                       {&@t.CreateTime < to_date($ET,'yyyy-MM-dd')+1}
+                                                       {& :Condition}
+                                                 order by t.create_time desc) R
+                                         where rownum <= { :PS} * { :PI})
+                                 where LineNum > { :PS} * ({ :PI} - 1)) tab
+                         inner join order_main t on t.rowid = tab.RID
+                         left join sys_dictionary t1 on t1.value = t.pay_status and t1.type = 'PayStatus' 
+                         left join sys_dictionary t2 on t2.value = t.order_status and t2.type = 'OrderStatus'
+                         left join sys_dictionary t3 on t3.value = t.refund_state and t3.type = 'RefundStatus'
+                         left join sys_dictionary t4 on t.pay_type = t4.value and t4.type ='PayType'
+                         left join sys_dictionary t5 on t.card_type = t5.value and t5.type ='CardType'
+                         left join sys_dictionary t6 on t.flow_type = t6.value and t6.type='FlowType'
+                         -- left join sys_dictionary t7 on t.business_type = t7.value and t7.type=''
+                         left join sys_dictionary t8 on t.PAY_NOTIFY_STATE = t8.value and t8.type='PayNotifyState'
+                         left join sys_dictionary t9 on t.ORDER_NOTIFY_STATE = t9.value and t9.type='OrderNotifyState'
+                         order by t.create_time desc
+        ]]>
+      </sql>
+    </item>
+    <item name="SimpleOrderCount">
+      <sql>
+        <![CDATA[
+                select count(*) from Order_Main t where
+                                          {@t.OrderNo}
+                                          {&@t.PartnerOrderNo}
+                                          {& :Condition}
+        ]]>
+      </sql>
+    </item>
+    <item name="SimpleOrderList">
+      <sql>
+        <![CDATA[
+               select t.*,
+                 t1.name PayStatusLabel,
+                 t2.name OrderStatusLabel,
+                 t3.name RefundStatus,
+                 t4.name PayTypeName,
+                 t5.name CardTypeName,
+                 t6.name FlowTypeName,
+                 t8.name PayNotifyState,
+                 t9.name OrderNotifyState,
+                 dc.CHANNEL_NAME DChannelName
+                          from (select RID
+                                  from (select R.RID, rownum LineNum
+                                          from (select t.rowid RID
+                                                  from order_main t
+                                                 where  {@t.OrderNo}
+                                                        {&@t.PartnerOrderNo}
+                                                        {& :Condition}
+                                                 order by t.create_time desc) R
+                                         where rownum <= { :PS} * { :PI})
+                                 where LineNum > { :PS} * ({ :PI} - 1)) tab
+                         inner join order_main t on t.rowid = tab.RID
+                         left join sys_dictionary t1 on t1.value = t.pay_status and t1.type = 'PayStatus' 
+                         left join sys_dictionary t2 on t2.value = t.order_status and t2.type = 'OrderStatus'
+                         left join sys_dictionary t3 on t3.value = t.refund_state and t3.type = 'RefundStatus'
+                         left join sys_dictionary t4 on t.pay_type = t4.value and t4.type ='PayType'
+                         left join sys_dictionary t5 on t.card_type = t5.value and t5.type ='CardType'
+                         left join sys_dictionary t6 on t.flow_type = t6.value and t6.type='FlowType'
+                         -- left join sys_dictionary t7 on t.business_type = t7.value and t7.type=''
+                         left join sys_dictionary t8 on t.PAY_NOTIFY_STATE = t8.value and t8.type='PayNotifyState'
+                         left join sys_dictionary t9 on t.ORDER_NOTIFY_STATE = t9.value and t9.type='OrderNotifyState'
+                         left join DOWN_CHANNEL dc on t.Down_Channel_No = dc.DOWN_CHANNEL_NO
+                         order by t.create_time desc
+        ]]>
+      </sql>
+    </item>
+  </template>
+</config>

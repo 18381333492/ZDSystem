@@ -1,0 +1,236 @@
+﻿@model ZDSystem.Model.OrderRefundListModel
+@{
+    ViewBag.Title = "订单退款";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+    function MRCenterOrder() {
+        this.bind = function () {
+            $.paging.config.form = "#conditionForm";
+            $.paging.bind();
+            $("#ddlps").val($("#ps").val());
+            $("#ddlps").change(function () {
+                $("#ps").val($(this).val());
+                $.paging.submit();
+            });
+            $('select').change(function () {
+                //$.paging.submit();
+            });
+            $(".list_submit").click(function () {
+                $.paging.submit();
+            });
+        }
+    }
+    $(function () {
+        var user = new MRCenterOrder();
+        user.bind();
+    });
+    
+</script>
+<div class="channel_list">
+    <form method="get" id="conditionForm">
+    <div class="con_search_box clearfix">
+        <div class="con_search_box clearfix">
+            <p class="sc_p">
+                时间:
+                <input class="list_input Wdate" type="text" name="s" id="s" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'%y-%M-%d'});" value="@DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd")"/>
+                -
+                <input class="list_input Wdate" type="text" name="e" id="e" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'s\')}',maxDate:'%y-%M-%d'});" value="@DateTime.Now.ToString("yyyy-MM-dd")"/>
+            </p>
+            <p class="sc_p">
+                退款状态:
+                @Html.DropDownList("ReStatus", new SelectList(SysDictionaryService.Instance.GetDataListByType("RefundStatus"), "Value", "Name"), "--请选择--", new { style = " width:120px;" })
+            </p>
+            <p class="sc_p">
+                下游渠道:
+                @Html.DropDownList("DownChannelNo", new SelectList(DownChannelSerivce.Instance.GetDataList(), "DownChannelNo", "ChannelName"), "--请选择--", new { style = " width:120px;" })
+            </p>
+            <p class="sc_p">
+                回调状态：
+                @Html.DropDownList("NotifyStatus", new SelectList(SysDictionaryService.Instance.GetDataList("NotifyStatus"), "Value", "Name"), "--请选择--")
+            </p>
+            <p class="sc_p">
+                <input class="frame_middle" id="checked1" type="radio" name="keytype" checked="checked"
+                    value="1" />
+                <label for="checked3">
+                    订单号</label>
+                <input class="frame_middle" id="checked2" type="radio" name="keytype" value="2" />
+                <label for="checked4">
+                    退款单号</label>
+                <input class="frame_middle" id="checked3" type="radio" name="keytype" value="3" />
+                <label for="checked4">
+                    退款金额</label>
+                <input class="sc_frame" style="width: 180px;" type="text" name="KeyWords" id="key"
+                    value="" />
+            </p>
+            <p class="sc_p">
+                <input class="list_submit" type="button" />
+            </p>
+        </div>
+    </div>
+    <div id="pnl_plugin">
+    </div>
+    <input type="hidden" value="0" name="pi" id="pi" />
+    <input type="hidden" value="10" name="ps" id="ps" />
+    <input type="hidden" value="@Model.TotalCount" id="count" />
+    </form>
+    <div class="list_content">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>
+                        创建时间
+                    </th>
+                    <th>
+                        订单号
+                    </th>
+                    <th>
+                        下游渠道
+                    </th>
+                    <th>
+                        退款单号
+                    </th>
+                    <th>
+                        退款金额
+                    </th>
+                     <th>
+                       亏损手续费
+                    </th>
+                    <th>
+                        退款状态
+                    </th>
+                    <th>
+                        回调状态
+                    </th>
+                    <th>
+                        是否通知
+                    </th>
+                    <th>
+                        退款消息
+                    </th>
+                    <th>
+                        退款原因
+                    </th>
+                    <th>
+                        退款ip
+                    </th>
+                    <th>
+                        查询ip
+                    </th>
+                    <th>
+                        完成时间
+                    </th>
+                    <th>
+                        回调时间
+                    </th>
+                    <th>
+                        下次查询时间
+                    </th>
+                    <th>
+                        退款时间
+                    </th>
+                    <th>
+                        备注
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.List)
+                {
+                    <tr>
+                        <td>
+                            @if (item.CreateTime != null)
+                            {                                                           
+                                @item.CreateTime.Value.ToString("MM-dd HH:mm:ss")
+                            }
+                        </td>
+                        <td>
+                            <a href="/OrderMain/Details?id=@item.OrderNo" title="点击查看详情" target="_blank">@item.OrderNo</a>
+                        </td>
+                        <td>
+                            @item.GetDataValue("DChannelName")
+                        </td>
+                        <td>
+                            @item.RecordId
+                        </td>
+                        <td>
+                            @item.RefundFee
+                        </td>
+                           <td>
+                            @item.LossServiceFee
+                        </td>
+                        <td>
+                            @item.GetDataValue("ReStatus")
+                        </td>
+                        <td>
+                            @item.GetDataValue("NotSataus")
+                        </td>
+                        <td>
+                            @if (item.NeedNotify == 0)
+                            {
+                                @("是")
+                            }
+                            else if (item.NeedNotify == 1)
+                            {
+                                @("否")
+                            }
+                        </td>
+                        <td>
+                            <label class="lblTextfull" title="@item.RefundMsg" style="width:70px">@item.RefundMsg</label>
+                        </td>
+                        <td>
+                            <label class="lblTextfull" title="@item.RefundDesc" style="width:70px">@item.RefundDesc</label>
+                        </td>
+                        <td>
+                            @item.RobotIP
+                        </td>
+                        <td>
+                            @item.QueryIP
+                        </td>
+                        <td>
+                            @if (item.FinishTime != null)
+                            {
+                                @item.FinishTime.Value.ToString("MM-dd HH:mm:ss")
+                            }
+                        </td>
+                        <td>
+                            @if (item.NotifyTime != null)
+                            {
+                                @item.NotifyTime.Value.ToString("MM-dd HH:mm:ss")
+                            }
+                        </td>
+                        <td>
+                            @if (item.NextTime != null)
+                            {
+                                @item.NextTime.Value.ToString("MM-dd HH:mm:ss")
+                            }
+                        </td>
+                        <td>
+                            @if (item.SendTime != null)
+                            {
+                                @item.SendTime.Value.ToString("MM-dd HH:mm:ss")
+                            }
+                        </td>
+                        <td>
+                            <label class="lblTextfull" title="@item.Remark" style="width:70px">@item.Remark</label>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="list_number">
+            共 @Model.TotalCount 条记录 | 每页显示:
+            <select id="ddlps">
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+            </select>
+            条
+        </div>
+        <div id="pager" class="list_pager" style="height: 30px;">
+        </div>
+        <div style="clear: both;">
+        </div>
+    </div>
+</div>

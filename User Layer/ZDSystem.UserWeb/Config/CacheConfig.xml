@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Items>
+  <Item CacheName="CustomSession" TimeOut="5" AutoDely="false"  />
+  <Item CacheName="UserLoginStatus" TimeOut="20000" AutoDely="true"  />
+  <Item CacheName="UserNavigates" TimeOut="10" AutoDely="true"  />
+  <Item CacheName="FuncPermission" TimeOut="20000" AutoDely="true"  />
+  <Item CacheName="PageFieldsInfo" TimeOut="null" AutoDely="true"  />
+  <Item CacheName="PagePluginInfo" TimeOut="null" AutoDely="true"  />
+  <Item CacheName="PageInfo" TimeOut="null" AutoDely="true"  />
+  <Item CacheName="CustomerGroup" TimeOut="5" AutoDely="true"  />
+  <Item CacheName="FunctionCompetence" TimeOut="null" AutoDely="true"  />
+  <!--下次能登陆时间是24小时后-->
+  <Item CacheName="ErrorLoginSession" TimeOut="1440" AutoDely="true"  />
+    
+</Items>

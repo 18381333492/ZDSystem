@@ -1,0 +1,196 @@
+﻿@{
+    ViewBag.Title = "账户统计表(运营管理)";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model System.Data.DataTable
+<script src="../../Scripts/popDialog.js" type="text/javascript"></script>
+<script type="text/javascript">
+    function MRCenterMsg() {
+        this.bind = function () {
+            $.paging.config.form = "#conditionForm";
+            $.paging.bind();
+            $("#ddlps").val($("#ps").val());
+            $("#ddlps").change(function () {
+                $("#ps").val($(this).val());
+            });
+            $(".list_submit").click(function () {
+                var start_date = new Date($('#start_date').val());
+                var end_date = new Date($('#end_date').val());
+                var date3 = end_date.getTime() - start_date.getTime();
+                if (date3 >= 0) {
+                    var days = Math.floor(date3 / (24 * 3600 * 1000))
+                    if (days <= 31) {
+                        $.paging.submit();
+                    }
+                    else {
+                        alert("只能连续查询31天的数据");
+                    }
+                }
+                else {
+                    alert("结束时间不能小于开始时间");
+                }
+            });
+        }
+    }
+    $(function () {
+        var user = new MRCenterMsg();
+        user.bind();
+
+
+        //导出报表
+        $('#export').click(function () {
+            var start_date = new Date($('#start_date').val());
+            var end_date = new Date($('#end_date').val());
+            var date3 = end_date.getTime() - start_date.getTime();
+            if (date3 >= 0) {
+                var days = Math.floor(date3 / (24 * 3600 * 1000))
+                if (days <= 31) {
+                    //导出报表
+                    conditionForm.action = "/ReceiptAccountInfo/Export";
+                    conditionForm.method = "post";
+                    conditionForm.submit();
+                    conditionForm.action = "";
+                    conditionForm.target = "";
+                    conditionForm.method = "get"
+                }
+                else {
+                    alert("只能连续导出31天的数据");
+                }
+            }
+            else {
+                alert("结束时间不能小于开始时间");
+            }
+        });
+    });
+</script>
+<div class="channel_list">
+    <form method="get" id="conditionForm">
+    <div class="con_search_box clearfix">
+        <p class="sc_p">
+            统计时间:
+            <input class="list_input Wdate" style=" height:25px" type="text" name="start_date" id="start_date"  onclick="WdatePicker({maxDate:'%y-%M-%d',onpicked:function(dp){toggleHourChkBox(dp);} });" value="@DateTime.Now.ToString("yyyy-MM-dd")"/>
+            --
+            <input class="list_input Wdate" style=" height:25px" type="text" name="end_date"  id="end_date" onclick="WdatePicker({maxDate:'%y-%M-%d',onpicked:function(dp){toggleHourChkBox(dp);} });" value="@DateTime.Now.ToString("yyyy-MM-dd")"/>
+        </p>
+        <p class="sc_p">
+            下游渠道:
+            @Html.DropDownList("channel_no", new SelectList(DownChannelSerivce.Instance.GetDataList(), "DownChannelNo", "ChannelName"), "--请选择--", new { style = " width:120px;" })
+        </p>
+         <p class="sc_p">
+            账户类型:
+            @Html.DropDownList("pay_type", new SelectList(SysDictionaryService.Instance.GetDataListByType("PayType"), "Value", "Name"), "--请选择--", new { style = " width:120px;" })
+        </p>
+          <p class="sc_p">
+            业务类型:
+            @Html.DropDownList("card_type", new SelectList(SysDictionaryService.Instance.GetDataListByType("CardType"), "Value", "Name"), "--请选择--", new { style = " width:120px;" })
+        </p>
+        <p class="sc_p">
+            <input class="list_submit" type="button" />
+        </p>
+        <p class="sc_p">
+            <input type="button" id="export" value="导出报表" style=" height:25px; width:60px;" />
+        </p>
+    </div>
+    <input type="hidden" value="0" name="pi" id="pi" />
+    <input type="hidden" value="10" name="ps" id="ps" />
+    <input type="hidden" value="@Model.Rows.Count" id="count" />
+    </form>
+    <div>
+    </div>
+    <div class="list_content" id="divshelflist" style=" border-bottom:none">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>
+                        统计时间
+                    </th>
+                    <th>
+                        下游渠道
+                    </th>
+                    <th>
+                        业务类型
+                    </th>
+                    <th>
+                        支付类型
+                    </th>
+                    <th>
+                        支付金额
+                    </th>
+                    <th>
+                       支付笔数
+                    </th>
+                    <th>
+                        成功金额
+                    </th>
+                    <th>
+                       成功笔数
+                    </th>
+                     <th>
+                        手续费
+                    </th>
+                    <th>
+                        退款金额
+                    </th>
+                    <th>
+                       退款笔数
+                    </th>
+                    <th>
+                       亏损的手续费
+                    </th>
+                </tr>
+            </thead>
+             @{ 
+               decimal allprice = 0;//总金额
+               int allordernumber = 0;//总订单
+               decimal successprice = 0;//成功的金额
+               int successordernumber = 0;// 成功的订单
+               decimal service_fee = 0;//手续费
+               decimal refund_money = 0;//退款金额
+               int refund_number = 0;//退款笔数
+               decimal loss_service = 0;//亏损的手续费
+            }
+            <tbody>
+                @for (var i = 0; i < Model.Rows.Count;i++)
+                {
+                    allprice += Convert.ToDecimal(Convert.ToString(Model.Rows[i]["allprice"]) == string.Empty ? 0 : Model.Rows[i]["allprice"]);
+                    allordernumber += Convert.ToInt32(Convert.ToString(Model.Rows[i]["allordernumber"]) == string.Empty ? 0 : Model.Rows[i]["allordernumber"]);
+                    successprice += Convert.ToDecimal(Convert.ToString(Model.Rows[i]["price"]) == string.Empty ? 0 : Model.Rows[i]["price"]);
+                    successordernumber += Convert.ToInt32(Convert.ToString(Model.Rows[i]["successordernumber"]) == string.Empty ? 0 : Model.Rows[i]["successordernumber"]);
+                    service_fee += Convert.ToDecimal(Convert.ToString(Model.Rows[i]["service_fee"]) == string.Empty ? 0 : Model.Rows[i]["service_fee"]);
+                    refund_money += Convert.ToDecimal(Convert.ToString(Model.Rows[i]["refund_money"]) == string.Empty ? 0 : Model.Rows[i]["refund_money"]);
+                    refund_number += Convert.ToInt32(Convert.ToString(Model.Rows[i]["refund_number"]) == string.Empty ? 0 : Model.Rows[i]["refund_number"]);
+                    loss_service += Convert.ToDecimal(Convert.ToString(Model.Rows[i]["loss_service"]) == string.Empty ? 0 : Model.Rows[i]["loss_service"]);      
+                    <tr>
+                        <td>@Convert.ToDateTime(Model.Rows[i][0]).ToString("yyyy-MM-dd")</td>
+                        <td>@Model.Rows[i]["channel_name"]</td>
+                        <td>@Model.Rows[i]["card_name"]</td>
+                        <td>@Model.Rows[i]["pay_name"]</td>
+                        <td>@Model.Rows[i]["allprice"]</td>
+                        <td>@Model.Rows[i]["allordernumber"]</td>
+                        <td>@Model.Rows[i]["price"]</td>
+                        <td>@Model.Rows[i]["successordernumber"]</td>
+                        <td>@Model.Rows[i]["service_fee"]</td>
+                        <td>@Model.Rows[i]["refund_money"]</td>
+                        <td>@Model.Rows[i]["refund_number"]</td>
+                        <td>@Model.Rows[i]["loss_service"]</td>
+                    </tr>
+                }
+                 <tr>
+
+                    <td>总计</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>@allprice</td>
+                    <td>@allordernumber</td>
+                    <td>@successprice</td>
+                    <td>@successordernumber</td>
+                    <td>@service_fee</td>
+                    <td>@refund_money</td>
+                    <td>@refund_number</td>
+                    <td>@loss_service</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<config>
+  <table name="SYS_DICTIONARY">
+    <fields>
+      <field pname="Dicid" name="Dicid" label="编号" isPk="true" buildType ="0" valueSql="select SYS_DICTIONARY_autoId.nextval from dual"/>
+      <field pname="Name" name="Name" label="名称"/>
+      <field pname="Value" name="Value" label="值"/>
+      <field pname="Type" name="Type" label="类型"/>
+      <field pname="Short" name="Short" label="顺序"/>
+    </fields>
+  </table>
+  <template>
+    <item name="getList">
+      <sql>
+        <![CDATA[
+            SELECT d.*
+              FROM (SELECT tab.*, ROWNUM rn
+                      FROM (SELECT *
+                             FROM SYS_DICTIONARY t
+                             where
+                             {:Name}
+                             {&:Type}
+                             order by t.short desc) tab) d
+             WHERE rn BETWEEN ({ :PI} - 1) * { :PS} + 1 AND { :PI} * { :PS}
+        ]]>
+      </sql>
+    </item>
+    <item name="getCount">
+      <sql>
+        <![CDATA[
+          select count(1) from SYS_DICTIONARY t
+                                  where 
+                                   {:Name}
+                                   {&:Type}
+        ]]>
+      </sql>
+    </item>
+  </template>
+</config>

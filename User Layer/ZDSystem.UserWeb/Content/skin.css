@@ -1,0 +1,493 @@
+﻿/* 由 F12 开发人员工具生成。这可能不是原始源文件的准确表示形式。*/
+DIV {
+	FONT-SIZE: 14px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px
+}
+UL {
+	FONT-SIZE: 14px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px
+}
+TABLE {
+	FONT-SIZE: 14px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px; color: Black;
+}
+.fbold {
+	FONT-WEIGHT: bold
+}
+.bold {
+	FONT-WEIGHT: bold
+}
+.input1 {
+	FONT-SIZE: 16px; BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 163px; BORDER-BOTTOM: #000 1px solid; BORDER-LEFT: medium none
+}
+.tip {
+	COLOR: red
+}
+.fRed {
+	COLOR: red
+}
+.fGreen {
+	COLOR: green
+}
+.f20 {
+	FONT-SIZE: 20px
+}
+.hide {
+	DISPLAY: none
+}
+.show {
+	DISPLAY: block
+}
+.f12 {
+	FONT-SIZE: 12px
+}
+.clear {
+	CLEAR: both
+}
+.h20 {
+	HEIGHT: 20px
+}
+.h10 {
+	HEIGHT: 10px
+}
+.pointer {
+	CURSOR: pointer
+}
+A:visited {
+	TEXT-DECORATION: none; COLOR: #000
+}
+A:link {
+	TEXT-DECORATION: none; COLOR: #000
+}
+.wbtleft {
+	BACKGROUND: url(../images/allbg.png) no-repeat
+}
+.wbtcenter {
+	BACKGROUND: url(../images/allbg.png) no-repeat
+}
+.wbtright {
+	BACKGROUND: url(../images/allbg.png) no-repeat
+}
+.wbbleft {
+	BACKGROUND: url(../images/allbg.png) no-repeat
+}
+.wbbcenter {
+	BACKGROUND: url(../images/allbg.png) no-repeat
+}
+.wbbright {
+	BACKGROUND: url(../images/allbg.png) no-repeat
+}
+.exit {
+	BACKGROUND: url(../images/npbg.gif) no-repeat
+}
+.wfocus TH {
+	BACKGROUND: url(../images/npbg.gif) no-repeat
+}
+.wnfocus TH {
+	BACKGROUND: url(../images/npbg.gif) no-repeat
+}
+.headermenu LI {
+	BACKGROUND: url(../images/npbg.gif) no-repeat
+}
+.anniu {
+	BACKGROUND: url(../images/npbg.gif) no-repeat
+}
+#timelab {
+	FONT-SIZE: 16px; WIDTH: 100%; POSITION: absolute; COLOR: #fff; TEXT-ALIGN: center; LINE-HEIGHT: 30px; TOP: 0px
+}
+.sxheader {
+	OVERFLOW: hidden; WIDTH: 100%; BACKGROUND: url(../images/headerbg.png) no-repeat center top
+}
+.btn_bg {
+	CURSOR: pointer; FONT-SIZE: 12px; BORDER-TOP: 0px; HEIGHT: 23px; BORDER-RIGHT: 0px; WIDTH: 80px; BACKGROUND: url(../image/btn_bg.gif) no-repeat; BORDER-BOTTOM: 0px; COLOR: #114060; PADDING-BOTTOM: 0px; TEXT-ALIGN: center; PADDING-TOP: 0px; PADDING-LEFT: 0px; BORDER-LEFT: 0px; LETTER-SPACING: 1px; LINE-HEIGHT: 23px; PADDING-RIGHT: 0px; MARGIN-RIGHT: 6px; maring: 0px
+}
+.btn_bg_90 {
+	CURSOR: pointer; FONT-SIZE: 12px; BORDER-TOP: 0px; HEIGHT: 23px; BORDER-RIGHT: 0px; WIDTH: 80px; BACKGROUND: url(../image/btn_bg.gif) no-repeat; BORDER-BOTTOM: 0px; COLOR: #114060; PADDING-BOTTOM: 0px; TEXT-ALIGN: center; PADDING-TOP: 0px; PADDING-LEFT: 0px; BORDER-LEFT: 0px; LETTER-SPACING: 1px; LINE-HEIGHT: 23px; PADDING-RIGHT: 0px; MARGIN-RIGHT: 6px; maring: 0px
+}
+.btn_bg_90 {
+	WIDTH: 90px; BACKGROUND: url(../image/btn_bg_90.gif) no-repeat
+}
+.loading {
+	HEIGHT: 16px; WIDTH: 16px; BACKGROUND: url(../images/loading.gif) no-repeat
+}
+.logo {
+	MARGIN-BOTTOM: 4px; FLOAT: left
+}
+.headermenu {
+	LIST-STYLE-TYPE: none; FLOAT: left; MARGIN-TOP: 36px
+}
+.headermenu LI {
+	BACKGROUND-POSITION: 0px -67px; FLOAT: left; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 10px; MARGIN: 0px 0px 0px 5px; LINE-HEIGHT: 25px; PADDING-RIGHT: 10px
+}
+.headermenu LI A {
+	COLOR: #c80000
+}
+.menu LI A:visited {
+	COLOR: #c80000
+}
+.exit {
+	HEIGHT: 27px; FLOAT: right; MARGIN-TOP: 27px; LINE-HEIGHT: 27px
+}
+.exitli LI {
+	LIST-STYLE-TYPE: none; FONT-SIZE: 12px; FLOAT: left; MARGIN-LEFT: 14px; DISPLAY: inline
+}
+.hx {
+	BACKGROUND: url(../images/hb.png) repeat-x 50% top; PADDING-TOP: 6px
+}
+.wdate {
+	WIDTH: 350px; FLOAT: left; MARGIN-LEFT: 50px; LINE-HEIGHT: 26px
+}
+.news {
+	LIST-STYLE-TYPE: none; HEIGHT: 27px; WIDTH: 565px; BACKGROUND: url(../images/newsbg.png) no-repeat right center; MARGIN-LEFT: 15px; LINE-HEIGHT: 24px
+}
+.news LI {
+	FLOAT: left; PADDING-LEFT: 10px
+}
+.yhm {
+	WIDTH: 200px
+}
+.newsl {
+	OVERFLOW: hidden; WIDTH: 187px; TEXT-OVERFLOW: ellipsis
+}
+.fy {
+	MARGIN: 0px 0px 15px
+}
+.w900 {
+	MIN-WIDTH: 900px
+}
+.wrap {
+	OVERFLOW: hidden; WIDTH: 1024px; CLEAR: both; MARGIN: 10px 0px 0px
+}
+.wleft {
+	WIDTH: 198px; FLOAT: left; MARGIN: 0px
+}
+.yjtable {
+	VERTICAL-ALIGN: top
+}
+.wbtleft {
+	HEIGHT: 8px; WIDTH: 8px; BACKGROUND-POSITION: 0px -76px
+}
+.wbtcenter {
+	HEIGHT: 8px; BACKGROUND-REPEAT: repeat-x; BACKGROUND-POSITION: 0px -102px
+}
+.wbtright {
+	HEIGHT: 8px; WIDTH: 8px; BACKGROUND-POSITION: -7px -76px
+}
+.wbbleft {
+	HEIGHT: 8px; WIDTH: 8px; BACKGROUND-POSITION: 0px -85px
+}
+.wbbcenter {
+	HEIGHT: 8px; BACKGROUND-REPEAT: repeat-x; BACKGROUND-POSITION: 0px -96px
+}
+.wbbright {
+	HEIGHT: 8px; WIDTH: 8px; BACKGROUND-POSITION: -7px -85px
+}
+.wbuttom {
+	HEIGHT: 410px; VERTICAL-ALIGN: top
+}
+.btleft {
+	WIDTH: 1px; BACKGROUND: url(../images/redborder.png) repeat-y
+}
+.btright {
+	WIDTH: 1px; BACKGROUND: url(../images/redborder.png) repeat-y
+}
+.btright {
+	BACKGROUND-POSITION: 7px 0px
+}
+.wfocus TH {
+	HEIGHT: 33px; BACKGROUND-POSITION: 0px -92px; COLOR: #fff; TEXT-ALIGN: left; PADDING-LEFT: 35px
+}
+.wnfocus TH {
+	HEIGHT: 33px; BACKGROUND-POSITION: 0px -125px; TEXT-ALIGN: left; PADDING-LEFT: 35px
+}
+.buttomtd {
+	MARGIN-BOTTOM: 10px
+}
+.buttomtd TD {
+	HEIGHT: 28px; BORDER-BOTTOM: #ccc 1px dashed; PADDING-LEFT: 24px; LINE-HEIGHT: 27px
+}
+.buttomMenu TH {
+	CURSOR: hand; HEIGHT: 33px; WIDTH: 180px; BACKGROUND: url(../images/npbg.gif) 0px -125px; LINE-HEIGHT: 28px
+}
+.wright {
+	FONT-SIZE: 16px; POSITION: relative; FLOAT: left; COLOR: #555;width:100%; margin-top: 25px;
+}
+.toptit {
+	TEXT-ALIGN: left
+}
+.toptit SPAN {
+	FONT-SIZE: 16px; HEIGHT: 40px; BACKGROUND: url(../images/toptitbg.gif) right top; COLOR: #c80000; PADDING-LEFT: 12px; LINE-HEIGHT: 30px; PADDING-RIGHT: 20px
+}
+.bborder {
+	FONT-SIZE: 16px; BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 165px; BORDER-BOTTOM: #000 1px solid; BORDER-LEFT: medium none
+}
+.edstyle {
+	FONT-SIZE: 16px; BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 165px; BORDER-BOTTOM: #000 1px solid; BORDER-LEFT: medium none
+}
+.edline {
+	FONT-SIZE: 16px; BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 165px; BORDER-BOTTOM: #000 1px solid; BORDER-LEFT: medium none
+}
+.wlist TD {
+	WIDTH: 33%
+}
+.wlist .bborder {
+	WIDTH: 265px
+}
+.wlist .edstyle {
+	WIDTH: 265px
+}
+.wlist .edline {
+	WIDTH: 265px
+}
+.edline265 .edline {
+	WIDTH: 265px
+}
+.claim .edline {
+	WIDTH: 109px
+}
+.jianj TD {
+	WIDTH: 30px; PADDING-TOP: 45px
+}
+.yhts {
+	PADDING-BOTTOM: 0px; TEXT-ALIGN: right; PADDING-TOP: 0px; PADDING-LEFT: 24px; PADDING-RIGHT: 24px
+}
+.xiala {
+	HEIGHT: 27px; WIDTH: 80px; BACKGROUND: url(../images/xiala.png) no-repeat center 5px
+}
+.xiala2 {
+	HEIGHT: 27px; WIDTH: 80px; BACKGROUND: url(../images/xiala.png) no-repeat left 5px
+}
+.newagents {
+	WIDTH: 140px; BACKGROUND-IMAGE: url(../images/newagents.gif); FLOAT: right; PADDING-BOTTOM: 4px; TEXT-ALIGN: center; PADDING-TOP: 4px; PADDING-LEFT: 5px; PADDING-RIGHT: 6px
+}
+.xinx TD {
+	BACKGROUND-IMAGE: url(../images/bg.png); PADDING-BOTTOM: 10px; PADDING-TOP: 10px; PADDING-LEFT: 10px; PADDING-RIGHT: 10px
+}
+.cleft {
+	BACKGROUND: url(../images/stbg.gif) no-repeat left bottom
+}
+.cright {
+	BACKGROUND: url(../images/stbg.gif) no-repeat 7px bottom
+}
+.anniu {
+	BORDER-TOP: medium none; HEIGHT: 25px; BORDER-RIGHT: medium none; WIDTH: 100px; BORDER-BOTTOM: medium none; BACKGROUND-POSITION: -78px -67px; BORDER-LEFT: medium none
+}
+.aboutustd {
+	WIDTH: 70%; BACKGROUND: url(../images/bred.png) repeat-x left bottom; PADDING-BOTTOM: 3px; PADDING-TOP: 15px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px
+}
+.lineH {
+	LINE-HEIGHT: 45px
+}
+.pL50 {
+	HEIGHT: 40px; PADDING-LEFT: 50px
+}
+.pL50 IMG {
+	MARGIN: 0px 6px
+}
+.liebiao TH {
+	HEIGHT: 37px; BORDER-RIGHT: #efefef 1px solid; BACKGROUND: url(../content/images/lbht.gif) no-repeat center top
+}
+.liebiao2 TH {
+	HEIGHT: 37px; BORDER-RIGHT: #efefef 1px solid; BACKGROUND: url(../content/images/lbht.gif) no-repeat center top
+}
+.liebiao TD {
+	HEIGHT: 24px; BORDER-RIGHT: #ededed 1px solid; BORDER-BOTTOM: #efefef 1px solid; TEXT-ALIGN: center; PADDING-LEFT: 3px; LINE-HEIGHT: 24px; PADDING-RIGHT: 3px
+}
+.liebiao2 TD {
+	HEIGHT: 24px; BORDER-RIGHT: #ededed 1px solid; BORDER-BOTTOM: #efefef 1px solid; TEXT-ALIGN: center; PADDING-LEFT: 3px; LINE-HEIGHT: 24px; PADDING-RIGHT: 3px
+}
+.liebiao .lbtL {
+	BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 5px; BACKGROUND: url(../content/images/lbtL.png) no-repeat; BORDER-BOTTOM: medium none; BORDER-LEFT: medium none
+}
+.liebiao2 .lbtL {
+	BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 5px; BACKGROUND: url(../content/images/lbtL.png) no-repeat; BORDER-BOTTOM: medium none; BORDER-LEFT: medium none
+}
+.liebiao .lbtR {
+	BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 15px; BACKGROUND: url(../content/images/lbr.png) no-repeat right 50%; BORDER-BOTTOM: medium none; BORDER-LEFT: medium none
+}
+.liebiao2 .lbtR {
+	BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 15px; BACKGROUND: url(../content/images/lbr.png) no-repeat right 50%; BORDER-BOTTOM: medium none; BORDER-LEFT: medium none
+}
+.liebiao .lbbL {
+	BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 5px; BACKGROUND: url(../content/images/lbbL.png) left bottom; BORDER-BOTTOM: medium none; BORDER-LEFT: medium none
+}
+.liebiao2 .lbbL {
+	BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 5px; BACKGROUND: url(../content/images/lbbL.png) left bottom; BORDER-BOTTOM: medium none; BORDER-LEFT: medium none
+}
+.liebiao .lbbR {
+	BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 5px; BACKGROUND: url(../content/images/lbbR.png) right bottom; BORDER-BOTTOM: medium none; BORDER-LEFT: medium none
+}
+.liebiao2 .lbbR {
+	BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 5px; BACKGROUND: url(../content/images/lbbR.png) right bottom; BORDER-BOTTOM: medium none; BORDER-LEFT: medium none
+}
+.liebiao .td1 {
+	BORDER-RIGHT: medium none; BORDER-LEFT: #ededed 1px solid
+}
+.liebiao2 .td1 {
+	BORDER-RIGHT: medium none; BORDER-LEFT: #ededed 1px solid
+}
+.liebiao .td2 {
+	BORDER-RIGHT: medium none; BORDER-BOTTOM: #efefef 1px solid
+}
+.liebiao2 .td2 {
+	BORDER-RIGHT: medium none; BORDER-BOTTOM: #efefef 1px solid
+}
+.liebiao .td3 {
+	BORDER-RIGHT: medium none; BORDER-BOTTOM: #efefef 1px solid; BORDER-LEFT: medium none
+}
+.liebiao2 .td3 {
+	BORDER-RIGHT: medium none; BORDER-BOTTOM: #efefef 1px solid; BORDER-LEFT: medium none
+}
+.lineH TD {
+	LINE-HEIGHT: 40px
+}
+.pL50 A {
+	TEXT-DECORATION: underline; COLOR: red
+}
+.pL50 A:visited {
+	TEXT-DECORATION: underline; COLOR: red
+}
+.selectOff {
+	OVERFLOW: hidden; CURSOR: hand; FONT-SIZE: 14px; BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 265px; BORDER-BOTTOM: medium none; PADDING-TOP: 5px; BORDER-LEFT: medium none
+}
+.selectOn {
+	OVERFLOW: hidden; FONT-SIZE: 14px; BORDER-TOP: 1px solid; BORDER-RIGHT: 1px solid; WIDTH: 240px; BORDER-BOTTOM: 1px solid; POSITION: absolute; LEFT: -1000px; MARGIN: -18px 0px 0px -11px; BORDER-LEFT: 1px solid; Z-INDEX: 100; DISPLAY: block; VISIBILITY: hidden; BACKGROUND-COLOR: white
+}
+.tworows .selectOn {
+	MARGIN: -20px 0px 0px -11px
+}
+.m_5 .selectOn {
+	MARGIN: -5px 0px 0px
+}
+.enumClass {
+	FONT-SIZE: 14px; BORDER-TOP: medium none; HEIGHT: 26px; BORDER-RIGHT: medium none; WIDTH: 240px; BORDER-BOTTOM: medium none; TEXT-ALIGN: center; BORDER-LEFT: medium none; LINE-HEIGHT: 24px; BACKGROUND-COLOR: transparent
+}
+.selectItem {
+	WIDTH: 260px; BACKGROUND: #f0f0f0; TEXT-ALIGN: left
+}
+.claim .xiala {
+	HEIGHT: 27px; WIDTH: 80px; BACKGROUND: url(../images/xialat.png) no-repeat center 5px
+}
+.tworows .xiala {
+	HEIGHT: 27px; WIDTH: 80px; BACKGROUND: url(../images/xialat.png) no-repeat center 5px
+}
+.claim .selectOff {
+	WIDTH: 175px
+}
+.claim .selectItem {
+	WIDTH: 175px
+}
+.tworows .selectOff {
+	WIDTH: 175px
+}
+.tworows .selectItem {
+	WIDTH: 175px
+}
+.claim .enumClass {
+	WIDTH: 140px
+}
+.claim .selectOn {
+	WIDTH: 140px
+}
+.tworows .enumClass {
+	WIDTH: 140px
+}
+.tworows .selectOn {
+	WIDTH: 140px
+}
+.tz .xiala {
+	HEIGHT: 27px; BACKGROUND: url(../images/xialax.png) no-repeat center 5px
+}
+.tz .selectOff {
+	WIDTH: 130px
+}
+.tz .selectItem {
+	WIDTH: 130px
+}
+.tz .enumClass {
+	WIDTH: 110px
+}
+.tz .selectOn {
+	WIDTH: 110px
+}
+.tz .edline {
+	WIDTH: 100px
+}
+.date .edline {
+	WIDTH: 105px
+}
+.line30 {
+	LINE-HEIGHT: 30px
+}
+.w750 {
+	WIDTH: 750px
+}
+.foot {
+	WIDTH: 750px; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 0px; MARGIN: 0px auto; LINE-HEIGHT: 180%; PADDING-RIGHT: 0px
+}
+.foot IMG {
+	MARGIN: 4px 0px 0px
+}
+.open {
+	CURSOR: pointer; HEIGHT: 23px; WIDTH: 40px; BACKGROUND: url(../images/open.gif) no-repeat center 5px; MARGIN-LEFT: 20px
+}
+.close {
+	CURSOR: pointer; HEIGHT: 23px; WIDTH: 40px; BACKGROUND: url(../images/open.gif) no-repeat center 5px; MARGIN-LEFT: 20px
+}
+.close {
+	BACKGROUND: url(../images/close.gif) no-repeat center 5px
+}
+#Tcontent {
+	BORDER-TOP: red 1px solid; BORDER-RIGHT: red 1px solid; WIDTH: 270px; BACKGROUND: white; BORDER-BOTTOM: red 1px solid; PADDING-BOTTOM: 10px; TEXT-ALIGN: center; PADDING-TOP: 10px; PADDING-LEFT: 10px; BORDER-LEFT: red 1px solid; PADDING-RIGHT: 10px
+}
+#Tcontent DIV {
+	HEIGHT: 25px; LINE-HEIGHT: 25px
+}
+.liebiao TR.odd TD {
+	BACKGROUND: #f8fbfc
+}
+.liebiao TR.even TD {
+	BACKGROUND: #f6f6f6
+}
+.liebiao TR.select TD {
+	BACKGROUND: #bce774
+}
+.liebiao TR.hover TD {
+	BACKGROUND: #3366cc; COLOR: white
+}
+.liebiao2 TR TD.odd {
+	BACKGROUND: #f8fbfc
+}
+.liebiao2 TR TD.even {
+	BACKGROUND: #ffffee
+}
+.liebiao2 TR TD.select {
+	BACKGROUND: #bce774
+}
+.liebiao2 TR TD.hover {
+	BACKGROUND: #3366cc; COLOR: white
+}
+.searchTableHead {
+	WIDTH: 100%; marign: 0px
+}
+.searchTableHead TR {
+	HEIGHT: 25px; MARGIN: 10px 0px; LINE-HEIGHT: 40px
+}
+.searchTableHead TD.col1 {
+	WIDTH: 25%
+}
+.searchTableHead TD.col2 {
+	WIDTH: 20%
+}
+.searchTableHead TD.col3 {
+	WIDTH: 12%
+}
+.searchTableHead TD.col4 {
+	WIDTH: 20%
+}
+.searchTableHead TD.col5 {
+	WIDTH: 23%
+}
+.searchTableHead TD INPUT.btn {
+	MARGIN-LEFT: 5px
+}
+.searchTableHead TD INPUT.edline {
+	WIDTH: 163px
+}

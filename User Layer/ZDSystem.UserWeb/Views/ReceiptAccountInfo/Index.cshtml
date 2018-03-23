@@ -1,0 +1,222 @@
+﻿@model ZDSystem.Model.ReceiptAccountInfoListModel
+@{
+    ViewBag.Title = "收款账户信息表";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="../../Scripts/popDialog.js" type="text/javascript"></script>
+<script type="text/javascript">
+    function MRCenterMsg() {
+        this.bind = function () {
+            $.paging.config.form = "#conditionForm";
+            $.paging.bind();
+            $("#ddlps").val($("#ps").val());
+            $("#ddlps").change(function () {
+                $("#ps").val($(this).val());
+            });
+            $(".list_submit").click(function () {
+                $.paging.submit();
+            });
+        }
+    }
+    $(function () {
+        var user = new MRCenterMsg();
+        user.bind();
+    });
+
+    //编辑
+    function edit(id) {
+        if (id != '') {
+            popEditDialog('/ReceiptAccountInfo/Edit', 'id=' + id, '修改');
+        }
+        else {
+            popEditDialog('/ReceiptAccountInfo/Edit', 'id=' + id, '添加');
+        }
+    }
+    //删除
+    function del(id, obj) {
+        var url = location.href;
+        if (!confirm("你确认要删除该信息吗?")) {
+            return false;
+        }
+        $.ajax({
+            type: "post",
+            data: { id: id },
+            url: '/ReceiptAccountInfo/Delete',
+            success: function (data) {
+                data = $.parseJSON(data);
+                if (data.Status) {
+                    art.dialog.tips("删除成功！");
+                    location.href = url;
+                }
+                return true;
+            },
+            error: function () {
+                alert("调用失败，请重试");
+            }
+        });
+    }
+    //提现
+    function draw(id) {
+        popEditDialog('/ReceiptAccountInfo/Draw', 'id=' + id, '提现');
+    }
+</script>
+<div class="channel_list">
+    <form method="get" id="conditionForm">
+    <div class="con_search_box clearfix">
+        <p class="sc_p">
+            账户类型:
+            @Html.DropDownList("AccountType", new SelectList(SysDictionaryService.Instance.GetDataListByType("AccountType"), "Value", "Name"), "--请选择--", new { style = " width:120px;" })
+        </p>
+        <p class="sc_p">
+            状态:
+            @Html.DropDownList("Status", new SelectList(SysDictionaryService.Instance.GetDataListByType("AccountStatus"), "Value", "Name"), "--请选择--", new { style = " width:120px;" })
+        </p>
+        <p class="sc_p">
+            下游渠道:
+            @Html.DropDownList("DownChannelNo", new SelectList(DownChannelSerivce.Instance.GetDataList(), "DownChannelNo", "ChannelName"), "--请选择--", new { style = " width:120px;" })
+        </p>
+        <p class="sc_p">
+            <input class="list_submit" type="button" />
+            <input type="button" onclick="edit('')" class="add_btn hand" />
+        </p>
+    </div>
+    <input type="hidden" value="0" name="pi" id="pi" />
+    <input type="hidden" value="10" name="ps" id="ps" />
+    <input type="hidden" value="@Model.TotalCount" id="count" />
+    </form>
+    <div>
+    </div>
+    <div class="list_content" id="divshelflist">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+            <thead>
+                <tr>
+                    @* <th>
+                        账户编号
+                    </th>*@
+                    <th>
+                        账户类型
+                    </th>
+                    <th>
+                        收款账户ID
+                    </th>
+                    <th>
+                        下游渠道
+                    </th>
+                    <th>
+                        商户号
+                    </th>
+                    @* <th>
+                        密(公)钥
+                    </th>
+                    <th>
+                        私钥
+                    </th>*@
+                    <th>
+                        余额
+                    </th>
+                    <th>
+                        手续费率
+                    </th>
+                    <th>
+                        退款亏损
+                    </th>
+                    <th>
+                        证书路径
+                    </th>
+                    <th>
+                        同步通知地址
+                    </th>
+                    <th>
+                        异步通知地址
+                    </th>
+                    <th>
+                        退款脚本地址
+                    </th>
+                    <th>
+                        状态
+                    </th>
+                    <th>
+                        备注
+                    </th>
+                    <th>
+                        操作
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (ZDSystem.Entity.MReceiptAccountInfo item in Model.List)
+                {
+                    <tr>
+                        @*<td>
+                            @item.AccountId
+                        </td>*@
+                        <td>
+                            @item.GetDataValue("AccountTypeName")
+                        </td>
+                        <td>
+                            @item.Appid
+                        </td>
+                        <td>
+                            @item.GetDataValue("DChannelName")
+                        </td>
+                        <td>
+                            @item.MchId
+                        </td>
+                        @*<td>
+                            @item.PubKey
+                        </td>
+                        <td>
+                            @item.PriKey
+                        </td>*@
+                        <td style="color: Red">
+                            @item.Balance
+                        </td>
+                        <td>
+                            @item.ServiceRadio
+                        </td>
+                        <td>
+                            @item.ServiceLoss
+                        </td>
+
+                        <td>
+                            <a class="lblTextfull" style="width:100px;" title="@item.CertificatePath">@item.CertificatePath</a>
+                        </td>
+                        <td>
+                            <a class="lblTextfull" style="width:100px;" title="@item.SyncNotifyUrl">@item.SyncNotifyUrl</a>
+                        </td>
+                        <td>
+                            <a class="lblTextfull" style="width:100px;" title="@item.NonsyncNotifyUrl">@item.NonsyncNotifyUrl</a>
+                        </td>
+                        <td>
+                            <a class="lblTextfull" style="width:100px;" title="@item.RefundScriptUrl">@item.RefundScriptUrl</a>
+                        </td>
+                        <td  @(item.Status == 1 ? "style=color:#ff6600" : "")>
+                            @item.GetDataValue("StatusName")
+                        </td>
+                        <td>
+                            <label class="lblTextfull" title="@item.Remark" style=" width:70px;">@item.Remark</label>
+                        </td>
+                        <td>
+                            @* <a href="javascript:void(0)" onclick="edit('@item.AccountId')">修改</a>*@ <a href="javascript:void(0)" onclick="draw('@item.AccountId',this)">
+                                提现</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="list_number">
+            共 @Model.TotalCount 条记录 | 每页显示:
+            <select id="ddlps">
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+            </select>
+            条
+        </div>
+        <div id="pager" class="list_pager">
+        </div>
+        <div style="clear: both;">
+        </div>
+    </div>
+</div>

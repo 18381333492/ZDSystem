@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<config>
+  <table name="Receipt_Fund_Record">
+    <fields>
+            <field pname="RecordId" name="Record_Id" label="记录编号"/>
+            <field pname="AccountId" name="Account_Id" label="账户编号"/>
+            <field pname="ChangeType" name="Change_Type" label="变动类型1:支付2:退款2:提现"/>
+            <field pname="ChangeAmount" name="Change_Amount" label="变动金额"/>
+            <field pname="Balance" name="Balance" label="当前余额"/>
+            <field pname="ChangeTime" name="Change_Time" label="变动时间"/>
+            <field pname="Operator" name="Operator" label="操作人"/>
+            <field pname="Remark" name="Remark" label="备注"/>
+            <field pname="ProductType" name="Product_Type" label="产品类型1:话费2:流量"/>
+            <field pname="OrderNO" name="ORDER_NO" label="订单编号"/>
+            <field pname="ServiceLoss" name="SERVICE_LOSS" label="亏损的服务费"/>
+      </fields>
+  </table>
+  <template>
+    <item name="getList">
+      <sql>
+        <![CDATA[
+          select t.record_id,
+               t.account_id,
+               t.change_type,
+               t.change_amount,
+               t.balance,
+               t.change_time,
+               t.operator,
+               t.remark,
+               t.product_type,
+               t.ORDER_NO,
+               t.SERVICE_LOSS,
+               t4.channel_name,
+               t5.name PayType,
+               t1.name ChangeTypeName,
+               t2.name ProductTypeName
+                                  from (select RID
+                                          from (select R.RID, rownum LineNum
+                                          from (select t.rowid RID
+                                                  from RECEIPT_FUND_RECORD t
+                                                  inner join RECEIPT_ACCOUNT_INFO t1 on t1.account_id=t.account_id 
+                                                 where {@t.ChangeType}
+                                                       {&@t.ProductType}
+                                                       {&@t.OrderNO}
+                                                       {&@t.ChangeTime >= to_date($ST,'yyyy-MM-dd')}
+                                                       {&@t.ChangeTime < to_date($ET,'yyyy-MM-dd')+1}
+                                                       {:WhereString} 
+                                                 order by t.change_time desc) R
+                                         where rownum <= { :PS} * { :PI})
+                                 where LineNum > { :PS} * ({ :PI} - 1)) tab
+                         inner join RECEIPT_FUND_RECORD t on t.rowid = tab.RID
+                         left join sys_dictionary t1 on t1.value = t.change_type and t1.type = 'ChangeType' 
+                         left join sys_dictionary t2 on t2.value = t.product_type and t2.type = 'ProductType'
+                         left join RECEIPT_ACCOUNT_INFO t3 on t3.account_id=t.account_id
+                         left join DOWN_CHANNEL t4 on t3.down_channel_no=t4.down_channel_no
+                         left join sys_dictionary t5 on t3.account_type = t5.value and t5.type = 'PayType'
+                         order by t.change_time desc
+        ]]>
+      </sql>
+    </item>
+    <item name="getCount">
+      <sql>
+        <![CDATA[
+          select count(*) from RECEIPT_FUND_RECORD t  inner join RECEIPT_ACCOUNT_INFO t1 on t1.account_id=t.account_id 
+                                                 where 
+                                                       {@t.ChangeType}
+                                                       {&@t.ProductType}
+                                                       {&@t.OrderNO}
+                                                       {&@t.ChangeTime >= to_date($ST,'yyyy-MM-dd')}
+                                                       {&@t.ChangeTime < to_date($ET,'yyyy-MM-dd')+1}
+                                                       {:WhereString} 
+        ]]>
+      </sql>
+    </item>
+  </template>
+</config>

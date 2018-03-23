@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<config>
+  <table name="Order_Refund">
+    <fields>
+      <field pname="RecordId" name="Record_Id" label="退款编号"/>
+      <field pname="OrderNo" name="Order_No" label="订单号"/>
+      <field pname="RefundFee" name="Refund_Fee" label="退款金额"/>
+      <field pname="CreateTime" name="Create_Time" label="创建时间"/>
+      <field pname="CreateUser" name="Create_User" label="创建人"/>
+      <field pname="Remark" name="Remark" label="备注"/>
+      <field pname="RefundNo" name="Refund_No" label="退款单号"/>
+      <field pname="Status" name="Status" label="状态20-等待退款30-正在退款90-失败0-成功"/>
+      <field pname="FinishTime" name="Finish_Time" label="完成时间"/>
+      <field pname="RefundMsg" name="REFUND_MSG" label="上游退款消息"/>
+      <field pname="SendTime" name="SEND_TIME" label="发送上游退款的时间"/>
+      <field pname="RobotIP" name="ROBOT_IP" label="退款机器人"/>
+      <field pname="QueryIP" name="QUERY_IP" label="查询机器ip"/>
+      <field pname="NextTime" name="NEXT_TIME" label="下次查询时间"/>
+      <field pname="NotifyStatus" name="NOTIFY_STATE" label="回调状态 10-无需20-等待30-正在90-失败0-成功"/>
+      <field pname="NotifyTime" name="NOTIFY_TIME" label="回调时间"/>
+      <field pname="RefundDesc" name="REFUND_DESC" label="退款原因"/>
+      <field pname="NeedNotify" name="NEED_NOTIFY" label="是否需要通知  0:需要 1:不需要"/>
+      <field pname="DownChannelNo" name="Down_Channel_No" label="下游渠道编号"/>
+      <field pname="LossServiceFee" name="Loss_Service_Fee" label="亏损服务费"/>
+    </fields>
+  </table>
+  <template>
+    <item name="getList">
+      <sql>
+        <![CDATA[
+              select t.*,
+                     t1.name ReStatus,
+                     t2.name NotSataus,
+                     dc.CHANNEL_NAME DChannelName
+                          from (select RID
+                                  from (select R.RID, rownum LineNum
+                                          from (select t.rowid RID
+                                                  from Order_Refund t
+                                                 where  {@t.CreateTime >= to_date($ST,'yyyy-MM-dd')}
+                                                        {&@t.CreateTime < to_date($ET,'yyyy-MM-dd')+1}
+                                                        {&@t.Status}
+                                                        {&@t.NotifyStatus}
+                                                        {&@t.NeedNotify}
+                                                        {&@t.OrderNo}
+                                                        {&@t.RecordId}
+                                                        {&@t.RefundFee}
+                                                        {&@t.DownChannelNo}
+                                                 order by t.Create_Time desc) R
+                                         where rownum <= { :PS} * { :PI})
+                                 where LineNum > { :PS} * ({ :PI} - 1)) tab
+                         inner join Order_Refund t on t.rowid = tab.RID
+                         left join sys_dictionary t1 on t.status = t1.value and t1.type = 'RefundStatus'
+                         left join sys_dictionary t2 on t.notify_state = t2.value and t2.type = 'NotifyStatus'
+                         left join DOWN_CHANNEL dc on t.Down_Channel_No = dc.DOWN_CHANNEL_NO
+                         order by t.create_time desc
+        ]]>
+      </sql>
+    </item>
+    <item name="getCount">
+      <sql>
+        <![CDATA[
+          SELECT count(*) FROM Order_Refund t where 
+                                      {@t.CreateTime >= to_date($ST,'yyyy-MM-dd')}
+                                      {&@t.CreateTime < to_date($ET,'yyyy-MM-dd')+1}
+                                      {&@t.Status}
+                                      {&@t.NotifyStatus}
+                                      {&@t.NeedNotify}
+                                      {&@t.OrderNo}
+                                      {&@t.RecordId}
+                                      {&@t.RefundFee}
+                                      {&@t.DownChannelNo}
+        ]]>
+      </sql>
+    </item>
+  </template>
+</config>

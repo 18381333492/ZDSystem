@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<config>
+  <table name="DOWN_CHANNEL">
+    <fields>
+      <field pname="DownChannelNo" name="DOWN_CHANNEL_NO" label="下游渠道编号" isPk="true" buildType ="0" valueSql="select DOWN_CHANNEL_auto_ID.nextval from dual"/>
+      <field pname="ChannelName" name="CHANNEL_NAME" label="渠道名称"/>
+      <field pname="Status" name="STATUS" label="状态 0-启用 1-禁用"/>
+      <field pname="NotifyScript" name="NOTIFY_SCRIPT" label="通知脚本"/>
+      <field pname="NotifyUrl" name="NOTIFY_URL" label="通知地址"/>
+      <field pname="CpName" name="CP_NAME" label="cp名称"/>
+      <field pname="ProductLine" name="PRODUCT_LINE" label="产品线"/>
+      <field pname="DeailUrl" name="DEAIL_URL" label="订单详情页面"/>
+      <field pname="NeedRechargeTel" name="Need_Recharge_Tel" label="是否需要充值话费  0-需要 1-不需要"/>
+      <field pname="NeedRechargeFlow" name="Need_Rechagre_Flow" label="是否需要充值流量  0-需要 1-不需要"/>
+      <field pname="NeedNotity" name="Need_Notity" label="是否需要通知  0-需要 1-不需要"/>
+    </fields>
+  </table>
+  <template>
+    <item name="getList">
+      <sql>
+        <![CDATA[
+          SELECT t.*,
+                 t1.name StatusName,
+                 t2.name NeedTel,
+                 t3.name NeedFlow,
+                 t4.name NeedNotit
+                FROM (SELECT RID
+                        FROM (SELECT R.RID, ROWNUM LINENUM
+                                FROM (SELECT t.rowid RID
+                                        FROM DOWN_CHANNEL t
+                                       WHERE 
+                                       {@t.DownChannelNo}
+                                       {&@t.Status}
+                                       {&:ChannelName}
+                                       order by t.DOWN_CHANNEL_NO desc) R
+                               WHERE ROWNUM <= { :PS} * { :PI})
+                       WHERE LINENUM > { :PS} * ({ :PI} - 1)) TAB1
+               inner join DOWN_CHANNEL t on t.rowid = TAB1.RID
+               left join sys_dictionary t1 on t1.value = t.Status and t1.type = 'Status'
+               left join sys_dictionary t2 on t2.value = t.Need_Recharge_Tel and t2.type = 'IsNeed'
+               left join sys_dictionary t3 on t3.value = t.Need_Rechagre_Flow and t3.type = 'IsNeed'
+               left join sys_dictionary t4 on t4.value = t.Need_Notity and t4.type = 'IsNeed'
+               order by t.DOWN_CHANNEL_NO desc
+        ]]>
+      </sql>
+    </item>
+    <item name="getCount">
+      <sql>
+        <![CDATA[
+          select count(*) from DOWN_CHANNEL t where
+                                       {@t.DownChannelNo}
+                                       {&@t.Status}
+                                       {&:ChannelName}
+        ]]>
+      </sql>
+    </item>
+  </template>
+</config>

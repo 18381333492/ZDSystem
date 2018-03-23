@@ -1,0 +1,535 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{ED9ABE6E-FDBF-4F92-8658-747C0E717CDA}</ProjectGuid>
+    <ProjectTypeGuids>{E53F8FEA-EAE0-44A6-8774-FFD645390401};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ZDSystem.UserWeb</RootNamespace>
+    <AssemblyName>ZDSystem.UserWeb</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <MvcProjectUpgradeChecked>true</MvcProjectUpgradeChecked>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Enyim.Caching, Version=1.0.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\..\ClassLibrary\Enyim.Caching.dll</HintPath>
+    </Reference>
+    <Reference Include="hyper_redis_dotnet">
+      <HintPath>..\..\..\..\..\..\..\..\ClassLibrary\hyper_redis_dotnet.dll</HintPath>
+    </Reference>
+    <Reference Include="Lib4Net4.Core">
+      <HintPath>..\..\..\..\..\..\..\..\ClassLibrary\Lib4Net4.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Lib4Net4.Framework">
+      <HintPath>..\..\..\..\..\..\..\..\ClassLibrary\Lib4Net4.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="LoginSystem">
+      <HintPath>..\..\..\..\..\..\..\..\ClassLibrary\LoginSystem.dll</HintPath>
+    </Reference>
+    <Reference Include="MemcacheHelper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\..\ClassLibrary\MemcacheHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.WebPages" />
+    <Reference Include="System.Web.Helpers" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\DailyAccountSnapshotController.cs" />
+    <Compile Include="Controllers\DownChannelController.cs" />
+    <Compile Include="Controllers\MainBaseController.cs" />
+    <Compile Include="Controllers\ManualReviewController.cs" />
+    <Compile Include="Controllers\MemberController.cs" />
+    <Compile Include="Controllers\OperateLogController.cs" />
+    <Compile Include="Controllers\OrderDeliveryController.cs" />
+    <Compile Include="Controllers\OrderMainController.cs" />
+    <Compile Include="Controllers\OrderRefundController.cs" />
+    <Compile Include="Controllers\PayController.cs" />
+    <Compile Include="Controllers\ReceiptAccountInfoController.cs" />
+    <Compile Include="Controllers\ReceiptFundRecordController.cs" />
+    <Compile Include="Controllers\SharedController.cs" />
+    <Compile Include="Controllers\SysDictionaryController.cs" />
+    <Compile Include="Controllers\SystemController.cs" />
+    <Compile Include="Controllers\OrderNotifyController.cs" />
+    <Compile Include="Controllers\SystemLogController.cs" />
+    <Compile Include="Controllers\UpChannelConfigController.cs" />
+    <Compile Include="Controllers\ZdCouponUsedController.cs" />
+    <Compile Include="delPermission.ashx.cs">
+      <DependentUpon>delPermission.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Config\BusinessLogic.xml" />
+    <Content Include="Config\CacheConfig.xml" />
+    <Content Include="Config\DataAccess.xml" />
+    <Content Include="Config\EConfig\DailyAccountSnapshot.xml" />
+    <Content Include="Config\EConfig\DownChannel.xml" />
+    <Content Include="Config\EConfig\OperateLog.xml" />
+    <Content Include="Config\EConfig\OrderDelivery.xml" />
+    <Content Include="Config\EConfig\OrderMain.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Config\EConfig\OrderNotify.xml" />
+    <Content Include="Config\EConfig\OrderRefund.xml" />
+    <Content Include="Config\EConfig\ReceiptAccountInfo.xml" />
+    <Content Include="Config\EConfig\ReceiptFundRecord.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Config\EConfig\SysDictionary.xml" />
+    <Content Include="Config\EConfig\SystemLog.xml" />
+    <Content Include="Config\EConfig\UpChannelConfig.xml" />
+    <Content Include="Config\EConfig\ZdCouponUsed.xml" />
+    <Content Include="Config\ErrorCode.xml" />
+    <Content Include="Config\Lib4NetLog.xml" />
+    <Content Include="Config\Settings.xml" />
+    <Content Include="Config\UrlMappingConfig.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Content\comm.css" />
+    <Content Include="Content\dialog.css" />
+    <Content Include="Content\Images\add_btn_bg.gif" />
+    <Content Include="Content\Images\add_btn_bg.png" />
+    <Content Include="Content\Images\advertising1.jpg" />
+    <Content Include="Content\Images\advertising2.jpg" />
+    <Content Include="Content\Images\apply_refund.gif" />
+    <Content Include="Content\Images\apply_refund1.gif" />
+    <Content Include="Content\Images\apply_refund2.gif" />
+    <Content Include="Content\Images\bgkuang.jpg" />
+    <Content Include="Content\Images\blue_btn.gif" />
+    <Content Include="Content\Images\button_g.gif" />
+    <Content Include="Content\Images\button_grey_pause.png" />
+    <Content Include="Content\Images\button_next.gif" />
+    <Content Include="Content\Images\cancel.gif" />
+    <Content Include="Content\Images\cancel_failure.gif" />
+    <Content Include="Content\Images\center_bg.jpg" />
+    <Content Include="Content\Images\center_head_bg.gif" />
+    <Content Include="Content\Images\center_logo_bg.gif" />
+    <Content Include="Content\Images\chuli_icon.png" />
+    <Content Include="Content\Images\cjzd_set_icon.gif" />
+    <Content Include="Content\Images\conpu.gif" />
+    <Content Include="Content\Images\contact_icon.jpg" />
+    <Content Include="Content\Images\contact_us.gif" />
+    <Content Include="Content\Images\contact_us.jpg" />
+    <Content Include="Content\Images\contact_us_bg.jpg" />
+    <Content Include="Content\Images\con_center.png" />
+    <Content Include="Content\Images\con_center_back.png" />
+    <Content Include="Content\Images\con_left_menu_nav.png" />
+    <Content Include="Content\Images\corner.gif" />
+    <Content Include="Content\Images\corner1.gif" />
+    <Content Include="Content\Images\cwgl_pic.png" />
+    <Content Include="Content\Images\czbb_pic.png" />
+    <Content Include="Content\Images\c_menu_li.gif" />
+    <Content Include="Content\Images\c_menu_title.gif" />
+    <Content Include="Content\Images\c_menu_title1.gif" />
+    <Content Include="Content\Images\c_menu_title2.gif" />
+    <Content Include="Content\Images\c_menu_top.gif" />
+    <Content Include="Content\Images\ddgl_pic.png" />
+    <Content Include="Content\Images\delete.png" />
+    <Content Include="Content\Images\dlx.gif" />
+    <Content Include="Content\Images\dou_login.gif" />
+    <Content Include="Content\Images\dou_login1.gif" />
+    <Content Include="Content\Images\dou_login2.gif" />
+    <Content Include="Content\Images\dou_login3.gif" />
+    <Content Include="Content\Images\down.gif" />
+    <Content Include="Content\Images\dropdown.blue.active.png" />
+    <Content Include="Content\Images\dropdown.blue.hover.png" />
+    <Content Include="Content\Images\dropdown.blue.png" />
+    <Content Include="Content\Images\dt_logo.gif" />
+    <Content Include="Content\Images\err.gif" />
+    <Content Include="Content\Images\export_btnn.gif" />
+    <Content Include="Content\Images\footer_bg.png" />
+    <Content Include="Content\Images\foot_img_line.png" />
+    <Content Include="Content\Images\fwdw.gif" />
+    <Content Include="Content\Images\fwdw1.gif" />
+    <Content Include="Content\Images\game_1.gif" />
+    <Content Include="Content\Images\game_charg.jpg" />
+    <Content Include="Content\Images\game_charg1.jpg" />
+    <Content Include="Content\Images\game_charg2.gif" />
+    <Content Include="Content\Images\game_charg5.gif" />
+    <Content Include="Content\Images\game_charg7.gif" />
+    <Content Include="Content\Images\game_charg8.gif" />
+    <Content Include="Content\Images\game_fail1.gif" />
+    <Content Include="Content\Images\game_list.gif" />
+    <Content Include="Content\Images\game_list1.gif" />
+    <Content Include="Content\Images\game_list10.gif" />
+    <Content Include="Content\Images\game_list11.gif" />
+    <Content Include="Content\Images\game_list12.jpg" />
+    <Content Include="Content\Images\game_list13.gif" />
+    <Content Include="Content\Images\game_list14.gif" />
+    <Content Include="Content\Images\game_list2.gif" />
+    <Content Include="Content\Images\game_list3.gif" />
+    <Content Include="Content\Images\game_list4.gif" />
+    <Content Include="Content\Images\game_list5.gif" />
+    <Content Include="Content\Images\game_list6.gif" />
+    <Content Include="Content\Images\game_list7.gif" />
+    <Content Include="Content\Images\game_list8.gif" />
+    <Content Include="Content\Images\game_list9.gif" />
+    <Content Include="Content\Images\game_rcg.gif" />
+    <Content Include="Content\Images\game_recharge.gif" />
+    <Content Include="Content\Images\game_success1.gif" />
+    <Content Include="Content\Images\game_tle_bg.gif" />
+    <Content Include="Content\Images\general_bg.gif" />
+    <Content Include="Content\Images\gen_but.gif" />
+    <Content Include="Content\Images\header_ph.jpg" />
+    <Content Include="Content\Images\ico_list.png" />
+    <Content Include="Content\Images\img_test.jpg" />
+    <Content Include="Content\Images\input_bg.gif" />
+    <Content Include="Content\Images\input_bg.jpg" />
+    <Content Include="Content\Images\k_phone.gif" />
+    <Content Include="Content\Images\lbbL.png" />
+    <Content Include="Content\Images\lbbR.png" />
+    <Content Include="Content\Images\lbht.gif" />
+    <Content Include="Content\Images\lbr.png" />
+    <Content Include="Content\Images\lbtL.png" />
+    <Content Include="Content\Images\list_way1.gif" />
+    <Content Include="Content\Images\list_way2.gif" />
+    <Content Include="Content\Images\logining.gif" />
+    <Content Include="Content\Images\login\login_bg_pic01.jpg" />
+    <Content Include="Content\Images\login\login_bg_pic02.jpg" />
+    <Content Include="Content\Images\login_btn.gif" />
+    <Content Include="Content\Images\login_button.jpg" />
+    <Content Include="Content\Images\logo.png" />
+    <Content Include="Content\Images\logo1.jpg" />
+    <Content Include="Content\Images\logo2.jpg" />
+    <Content Include="Content\Images\logo_bg.jpg" />
+    <Content Include="Content\Images\logo_user_bg.jpg" />
+    <Content Include="Content\Images\longin_bg.jpg" />
+    <Content Include="Content\Images\magnifier.jpg" />
+    <Content Include="Content\Images\mail_bg.png" />
+    <Content Include="Content\Images\man.png" />
+    <Content Include="Content\Images\menu_bg.gif" />
+    <Content Include="Content\Images\menu_hv.gif" />
+    <Content Include="Content\Images\message_tab_icon.gif" />
+    <Content Include="Content\Images\nav_bg.png" />
+    <Content Include="Content\Images\nav_list_right.png" />
+    <Content Include="Content\Images\new_features.png" />
+    <Content Include="Content\Images\no.png" />
+    <Content Include="Content\Images\nub_blue_btn.gif" />
+    <Content Include="Content\Images\num_bg.gif" />
+    <Content Include="Content\Images\order_list.gif" />
+    <Content Include="Content\Images\order_list1.gif" />
+    <Content Include="Content\Images\order_list2.gif" />
+    <Content Include="Content\Images\payout_way.gif" />
+    <Content Include="Content\Images\payout_way1.gif" />
+    <Content Include="Content\Images\payout_way2.gif" />
+    <Content Include="Content\Images\payout_way3.gif" />
+    <Content Include="Content\Images\pay_sure.gif" />
+    <Content Include="Content\Images\phone_rcg.gif" />
+    <Content Include="Content\Images\ph_payout.gif" />
+    <Content Include="Content\Images\ph_payout1.jpg" />
+    <Content Include="Content\Images\ph_payout2.gif" />
+    <Content Include="Content\Images\ph_payout3.gif" />
+    <Content Include="Content\Images\ph_payout4.gif" />
+    <Content Include="Content\Images\ph_payout5.gif" />
+    <Content Include="Content\Images\ph_recharge.gif" />
+    <Content Include="Content\Images\pick_up.gif" />
+    <Content Include="Content\Images\register1.gif" />
+    <Content Include="Content\Images\register2.gif" />
+    <Content Include="Content\Images\register3.gif" />
+    <Content Include="Content\Images\register4.gif" />
+    <Content Include="Content\Images\register5.gif" />
+    <Content Include="Content\Images\register8.gif" />
+    <Content Include="Content\Images\sett_but.gif" />
+    <Content Include="Content\Images\sid_icon1.gif" />
+    <Content Include="Content\Images\start_up_btn .gif" />
+    <Content Include="Content\Images\start_up_btn.gif" />
+    <Content Include="Content\Images\statistics.gif" />
+    <Content Include="Content\Images\success.gif" />
+    <Content Include="Content\Images\sw_save.gif" />
+    <Content Include="Content\Images\tab_menu_bg.gif" />
+    <Content Include="Content\Images\tab_menu_select.gif" />
+    <Content Include="Content\Images\tel.gif" />
+    <Content Include="Content\Images\title_bg_pic1.gif" />
+    <Content Include="Content\Images\top_img_line.png" />
+    <Content Include="Content\Images\top_line.png" />
+    <Content Include="Content\Images\triangle.gif" />
+    <Content Include="Content\Images\ucenter_logo.jpg" />
+    <Content Include="Content\Images\up.gif" />
+    <Content Include="Content\Images\url_p.png" />
+    <Content Include="Content\Images\user.gif" />
+    <Content Include="Content\Images\userman.png" />
+    <Content Include="Content\Images\user_search.gif" />
+    <Content Include="Content\Images\user_search1.png" />
+    <Content Include="Content\Images\user_search2.gif" />
+    <Content Include="Content\Images\warning_pic.png" />
+    <Content Include="Content\Images\xtpz_pic.png" />
+    <Content Include="Content\Images\yes.png" />
+    <Content Include="Content\Images\yhgl_pic.png" />
+    <Content Include="Content\Images\yygl_pic.png" />
+    <Content Include="Content\jquery.multiSelect.css" />
+    <Content Include="Content\main.css" />
+    <Content Include="Content\order_detail.css" />
+    <Content Include="Content\pagination.css" />
+    <Content Include="Content\report.css" />
+    <Content Include="Content\reset-min.css" />
+    <Content Include="Content\skin.css" />
+    <Content Include="Content\st_main.css" />
+    <Content Include="Content\user_layout.css" />
+    <Content Include="Content\Css\comm.css" />
+    <Content Include="Content\Css\main.css" />
+    <Content Include="Content\Css\pagination.css" />
+    <Content Include="Content\Css\user_layout.css" />
+    <Content Include="Content\Images\msg_bg.png" />
+    <Content Include="Global.asax" />
+    <Content Include="PayConfig\Pay.xml" />
+    <Content Include="Scripts\ArtDialog\artDialog.js" />
+    <Content Include="Scripts\ArtDialog\plugins\iframeTools.js" />
+    <Content Include="Scripts\ArtDialog\skins\aero.css" />
+    <Content Include="Scripts\ArtDialog\skins\aero\aero_s.png" />
+    <Content Include="Scripts\ArtDialog\skins\aero\aero_s2.png" />
+    <Content Include="Scripts\ArtDialog\skins\aero\ie6\aui_close.hover.png" />
+    <Content Include="Scripts\ArtDialog\skins\aero\ie6\aui_close.png" />
+    <Content Include="Scripts\ArtDialog\skins\aero\ie6\aui_e.png" />
+    <Content Include="Scripts\ArtDialog\skins\aero\ie6\aui_n.png" />
+    <Content Include="Scripts\ArtDialog\skins\aero\ie6\aui_ne.png" />
+    <Content Include="Scripts\ArtDialog\skins\aero\ie6\aui_nw.png" />
+    <Content Include="Scripts\ArtDialog\skins\aero\ie6\aui_s.png" />
+    <Content Include="Scripts\ArtDialog\skins\aero\ie6\aui_se.png" />
+    <Content Include="Scripts\ArtDialog\skins\aero\ie6\aui_sw.png" />
+    <Content Include="Scripts\ArtDialog\skins\aero\ie6\aui_title_icon.png" />
+    <Content Include="Scripts\ArtDialog\skins\aero\ie6\aui_w.png" />
+    <Content Include="Scripts\ArtDialog\skins\chrome.css" />
+    <Content Include="Scripts\ArtDialog\skins\chrome\border.png" />
+    <Content Include="Scripts\ArtDialog\skins\chrome\chrome_s.png" />
+    <Content Include="Scripts\ArtDialog\skins\default.css" />
+    <Content Include="Scripts\ArtDialog\skins\icons\error.png" />
+    <Content Include="Scripts\ArtDialog\skins\icons\face-sad.png" />
+    <Content Include="Scripts\ArtDialog\skins\icons\face-smile.png" />
+    <Content Include="Scripts\ArtDialog\skins\icons\loading.gif" />
+    <Content Include="Scripts\ArtDialog\skins\icons\question.png" />
+    <Content Include="Scripts\ArtDialog\skins\icons\succeed.png" />
+    <Content Include="Scripts\ArtDialog\skins\icons\warning.png" />
+    <Content Include="Scripts\Calendar\calendar.js" />
+    <Content Include="Scripts\Calendar\config.js" />
+    <Content Include="Scripts\Calendar\lang\en.js" />
+    <Content Include="Scripts\Calendar\lang\zh-cn.js" />
+    <Content Include="Scripts\Calendar\lang\zh-tw.js" />
+    <Content Include="Scripts\Calendar\My97DatePicker.htm" />
+    <Content Include="Scripts\Calendar\skin\datePicker.gif" />
+    <Content Include="Scripts\Calendar\skin\default\datepicker.css" />
+    <Content Include="Scripts\Calendar\skin\default\img.gif" />
+    <Content Include="Scripts\Calendar\skin\WdatePicker.css" />
+    <Content Include="Scripts\Calendar\skin\whyGreen\bg.jpg" />
+    <Content Include="Scripts\Calendar\skin\whyGreen\datepicker.css" />
+    <Content Include="Scripts\Calendar\skin\whyGreen\img.gif" />
+    <Content Include="Scripts\Calendar\WdatePicker.js" />
+    <Content Include="Scripts\changeMoney.js" />
+    <Content Include="Scripts\Common.js" />
+    <Content Include="Scripts\finicialManage.js" />
+    <Content Include="Scripts\jquery-blockui.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
+    <Content Include="Scripts\jquery.contextmenu.r2.js" />
+    <Content Include="Scripts\jquery.cookie.js" />
+    <Content Include="Scripts\jquery.pagination.js" />
+    <Content Include="Scripts\jquery.paging.js" />
+    <Content Include="Scripts\jquery.query.js" />
+    <Content Include="Scripts\jquery.serialize.js" />
+    <Content Include="Scripts\jquery.tablesorter.min.js" />
+    <Content Include="Scripts\jquery.treeview.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\menu.js" />
+    <Content Include="Scripts\MessageBox.js" />
+    <Content Include="Scripts\messagePop.js" />
+    <Content Include="Scripts\notCopy.js" />
+    <Content Include="Scripts\ordermain.js" />
+    <Content Include="Scripts\page.list.js" />
+    <Content Include="Scripts\Ss\icon_more.gif" />
+    <Content Include="Scripts\Ss\icon_more_hover.gif" />
+    <Content Include="Scripts\Ss\jquery.select1.0.css" />
+    <Content Include="Scripts\Ss\jquery.select1.0.js" />
+    <Content Include="Scripts\sysframe.js" />
+    <Content Include="Scripts\Validate\error.png" />
+    <Content Include="Scripts\Validate\jquery.validate1.12.release.css" />
+    <Content Include="Scripts\Validate\jquery.validate1.12.release.js" />
+    <Content Include="Scripts\Validate\succeed.png" />
+    <Content Include="Scripts\zk.textSelect.js" />
+    <Content Include="Scripts\page.validate.js" />
+    <Content Include="Scripts\popDialog.js" />
+    <Content Include="Views\OperateLog\index.cshtml" />
+    <Content Include="Views\OrderDelivery\index.cshtml" />
+    <Content Include="Views\OrderMain\index.cshtml" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Scripts\jquery-1.4.4.min.js" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\Shared\Error.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Scripts\ArtDialog\skins\black\" />
+    <Folder Include="Scripts\ArtDialog\skins\blue\" />
+    <Folder Include="Scripts\ArtDialog\skins\green\" />
+    <Folder Include="Scripts\ArtDialog\skins\idialog\" />
+    <Folder Include="Scripts\ArtDialog\skins\opera\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="delPermission.ashx" />
+    <None Include="PayConfig\apiclient_cert.p12" />
+    <None Include="Scripts\Calendar\skin\whyGreen\Thumbs.db" />
+    <Content Include="Views\OrderNotify\index.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\NavigateMenu.cshtml" />
+    <Content Include="Views\Shared\NoPermission.cshtml" />
+    <Content Include="Views\System\Index.cshtml" />
+    <Content Include="Views\ViewStart.cshtml" />
+    <Content Include="Views\OrderRefund\index.cshtml" />
+    <Content Include="Views\SystemLog\index.cshtml" />
+    <Content Include="Views\UpChannelConfig\Index.cshtml" />
+    <Content Include="Views\SysDictionary\Index.cshtml" />
+    <Content Include="Views\SysDictionary\Item.cshtml" />
+    <Content Include="Views\OrderMain\Details.cshtml" />
+    <Content Include="Views\ReceiptFundRecord\Index.cshtml" />
+    <Content Include="Views\ReceiptAccountInfo\Index.cshtml" />
+    <Content Include="Views\ReceiptAccountInfo\Edit.cshtml" />
+    <Content Include="Views\ZdCouponUsed\Index.cshtml" />
+    <Content Include="Views\ManualReview\OrderReview.cshtml" />
+    <Content Include="Views\ManualReview\OrderShipReview.cshtml" />
+    <Content Include="Views\ManualReview\OrderManaul.cshtml" />
+    <Content Include="Views\ManualReview\OrderShipManaul.cshtml" />
+    <Content Include="Views\OrderDelivery\Details.cshtml" />
+    <Content Include="Views\DownChannel\Index.cshtml" />
+    <Content Include="Views\DownChannel\Item.cshtml" />
+    <Content Include="Views\ReceiptAccountInfo\Draw.cshtml" />
+    <Content Include="Views\UpChannelConfig\Item.cshtml" />
+    <Content Include="Views\ReceiptAccountInfo\AccountCount.cshtml" />
+    <Content Include="Views\OrderMain\SimpleOrderQuery.cshtml" />
+    <Content Include="Views\ReceiptAccountInfo\AccountCountBusiness.cshtml" />
+    <Content Include="Views\DailyAccountSnapshot\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common Layer\ZDSystem.Entity\ZDSystem.Entity.csproj">
+      <Project>{BF4BE8ED-1502-464D-8341-F260356A7324}</Project>
+      <Name>ZDSystem.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common Layer\ZDSystem.Interfaces\ZDSystem.Interfaces.csproj">
+      <Project>{E454D93D-E193-4CDA-BC73-668644E32C09}</Project>
+      <Name>ZDSystem.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common Layer\ZDSystem.Utility\ZDSystem.Utility.csproj">
+      <Project>{5ADC1695-B401-4E12-BDD7-67BF2C7DC02C}</Project>
+      <Name>ZDSystem.Utility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data Layer\ZDSystem.DBAccess\ZDSystem.DBAccess.csproj">
+      <Project>{3F302949-4B5F-4E73-BF28-3A9EF4090419}</Project>
+      <Name>ZDSystem.DBAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data Layer\ZDSystem.DataAccessFactory\ZDSystem.DataAccessFactory.csproj">
+      <Project>{AA9B21C3-42F5-4654-80C4-EEB99D5A602E}</Project>
+      <Name>ZDSystem.DataAccessFactory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Logic Layer\ZDSystem.Logic\ZDSystem.Logic.csproj">
+      <Project>{4C5D5633-8C08-4239-B047-195DDBF30E55}</Project>
+      <Name>ZDSystem.Logic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Logic Layer\ZDSystem.LogicFactory\ZDSystem.LogicFactory.csproj">
+      <Project>{FA15BCF9-2CC0-4627-BD4F-E8393CB089C0}</Project>
+      <Name>ZDSystem.LogicFactory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Service Layer\ZDSystem.Model\ZDSystem.Model.csproj">
+      <Project>{7CEE363C-E0F9-427B-988B-59955643469B}</Project>
+      <Name>ZDSystem.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Service Layer\ZDSystem.UserService\ZDSystem.UserService.csproj">
+      <Project>{AE9A8857-B524-41C9-B40E-C3C93B2865C6}</Project>
+      <Name>ZDSystem.UserService</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>2318</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

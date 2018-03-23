@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E454D93D-E193-4CDA-BC73-668644E32C09}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ZDSystem.DataAccessFactories</RootNamespace>
+    <AssemblyName>ZDSystem.Interfaces</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Lib4Net4.Core">
+      <HintPath>..\..\..\..\..\..\..\..\ClassLibrary\Lib4Net4.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Lib4Net4.Framework">
+      <HintPath>..\..\..\..\..\..\..\..\ClassLibrary\Lib4Net4.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataAccess\IDailyAccountSnapshotDataAccess.cs" />
+    <Compile Include="DataAccess\IDownChannelDataAccess.cs" />
+    <Compile Include="DataAccess\IOperateLogDataAccess.cs" />
+    <Compile Include="DataAccess\IOrderDeliveryDataAccess.cs" />
+    <Compile Include="DataAccess\IOrderMainDataAccess.cs" />
+    <Compile Include="DataAccess\IOrderNotifyDataAccess.cs" />
+    <Compile Include="DataAccess\IOrderRefundDataAccess.cs" />
+    <Compile Include="DataAccess\IReceiptAccountInfoDataAccess.cs" />
+    <Compile Include="DataAccess\IReceiptFundRecordDataAccess.cs" />
+    <Compile Include="DataAccess\ISysDictionaryDataAccess.cs" />
+    <Compile Include="DataAccess\ISystemLogDataAccess.cs" />
+    <Compile Include="DataAccess\IUpChannelConfigDataAccess.cs" />
+    <Compile Include="DataAccess\IZdCouponUsedDataAccess.cs" />
+    <Compile Include="Logic\IDailyAccountSnapshotHandler.cs" />
+    <Compile Include="Logic\IDownChannelHandler.cs" />
+    <Compile Include="Logic\IOperateLogHandler.cs" />
+    <Compile Include="Logic\IOrderDeliveryHandler.cs" />
+    <Compile Include="Logic\IOrderMainHandler.cs" />
+    <Compile Include="Logic\IOrderNotifyHandler.cs" />
+    <Compile Include="Logic\IOrderRefundHandler.cs" />
+    <Compile Include="Logic\IReceiptAccountInfoHandler.cs" />
+    <Compile Include="Logic\IReceiptFundRecordHandler.cs" />
+    <Compile Include="Logic\ISysDictionaryHandler.cs" />
+    <Compile Include="Logic\ISystemLogHandler.cs" />
+    <Compile Include="Logic\IUpChannelConfigHandler.cs" />
+    <Compile Include="Logic\IZdCouponUsedHandler.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ZDSystem.Entity\ZDSystem.Entity.csproj">
+      <Project>{BF4BE8ED-1502-464D-8341-F260356A7324}</Project>
+      <Name>ZDSystem.Entity</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

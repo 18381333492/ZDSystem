@@ -1,0 +1,380 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>手机充值</title>
+    <!-- 引入 WeUI -->
+    <link href="/WeUI/weui.min.css" rel="stylesheet" type="text/css" />
+    <link href="/WeUI/jquery-weui.min.css" rel="stylesheet" type="text/css" />
+    <script src="/WeUI/jquery.min.js" type="text/javascript"></script>
+    <script src="/WeUI/jquery-weui.min.js" type="text/javascript"></script>
+    <script src="/js/common.js" type="text/javascript"></script>
+    <style>
+        .weui-cell
+        {
+            padding:7px 15px;
+        }
+        .weui-cell:before {
+            border-top:none;
+        }
+         .weui-cells
+        {
+            margin-top:0px;
+        }
+        .weui-cells:before {
+            border-top:none;
+        }
+        .weui-cells:after {
+            border-top:none;
+            border-bottom:none;
+        }
+        .mobile_focus{
+            font-weight:600;
+        }
+        .paymoney:before
+        {
+            left:15px;
+            right:15px;
+            border-top: 1px solid #d9d9d9; 
+        }
+         .rechagre_phone:after
+        {
+            left:15px;
+            right:15px;
+            border-bottom: 1px solid #d9d9d9; 
+        }
+        ul li p b
+        {
+            font-size:20px;
+        }
+         ul li p a
+         {
+             font-size:13px;
+         }
+        /*style的第一种样式*/
+        .able_ul{
+            list-style:none;
+            width:100%;
+        }
+        .able_ul li
+        {
+            position:relative;
+            float:left;
+            border:1px solid #F1682E;
+            height:60px;
+            text-align:center;
+            width:29.1%;
+            line-height:15px;
+            border-radius:5px;
+            margin-right:5%;
+            margin-bottom:10px;
+            color:#F1682E;
+        }
+        .able_ul li p{
+            margin-top:15px;
+        }
+        .able_ul li span{
+            font-size:10px;
+        }
+        .able_ul li img
+        {
+            position: absolute;
+            top: -5px;
+            right:-5px;
+            width: 44.8px;
+            height: 20px;
+        }
+        .unable_ul li img
+        {
+            position: absolute;
+            top: -5px;
+            right:-5px;
+            width: 44.8px;
+            height: 20px;
+            display:none
+        }
+        /*style的第二种样式*/
+        .unable_ul{
+            list-style:none;
+            width:100%;
+        }
+        .unable_ul li p b
+        {
+           color:#FAE1DA;
+        }
+         .unable_ul li p a
+        {
+           color:#FAE1DA;
+        }
+        .unable_ul li
+        {
+            position:relative;
+            float:left;
+            border:1px solid #CACACA;
+            height:60px;
+            text-align:center;
+            width:29.1%;
+            line-height:60px;
+            border-radius:5px;
+            margin-right:5%;
+            margin-bottom:10px;
+            color:#CACACA;
+        }
+        .unable_ul li span{
+            display:none;
+            font-size:10px;
+        }
+        ul li:nth-child(3n+0)
+        {
+          margin-right:0%;
+        }
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #a1a1a1; opacity:1; 
+}
+
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #a1a1a1;opacity:1;
+}
+
+input:-ms-input-placeholder{
+    color:#a1a1a1;opacity:1;
+}
+
+input::-webkit-input-placeholder{
+    color: #a1a1a1;opacity:1;
+}
+.bar
+{
+    float:left; 
+    width:35%;
+    text-align:center;
+    border:1px solid #B4D7FC;
+    padding:5px 0px;
+    font-size:14px;
+    font-weight:600;
+    cursor:pointer;
+}
+.bar_left
+{
+    border-top-left-radius:16px;
+    border-bottom-left-radius:16px;
+     margin-left:14%;
+    border-right-width:0px;
+}
+.bar_right
+{
+    border-top-right-radius:16px;
+    border-bottom-right-radius:16px
+}
+.select_bar
+{
+    color:#006DFF;
+    background-color:#D6E9FC;
+}
+
+
+/*流量的样式*/
+.line:before
+{
+    right:15px;
+    border-top: 1px solid #d9d9d9;
+}
+.detailinfo:before
+{
+    left:15px;
+    right:15px;
+    border-top: 1px solid #d9d9d9;
+}
+.detailinfo:after
+{
+    left:15px;
+    right:15px;
+    border-bottom: 1px solid #d9d9d9;
+}
+
+/*按钮的样式的重写*/
+.weui-btn
+{
+   padding:0px;
+   font-size: 13px;
+}
+.weui-btn_plain-primary
+{
+    color: #F1682E;
+    border: 1px solid #F1682E;
+}
+.selectItem
+{
+   background-color:#F1682E;
+}
+.selectItem span,.selectItem p
+{
+     color:#fff;
+}
+/*三角形的样式*/
+.icon_cash 
+{ 
+ background-color:#0cb6fa;
+ color:#fff;
+ font-size:12px; 
+ position: relative; 
+ display: inline-block;
+ height: 18px;
+ line-height: 18px;
+ padding:0 5px 0 5px;
+} 
+.icon_cash:before
+{ 
+content:""; 
+position: absolute; 
+right: 100%; 
+top: 4px; 
+width: 0; 
+height: 0; 
+border-top: 5px solid transparent; 
+border-right: 5px solid #0cb6fa; 
+border-bottom: 5px solid transparent; 
+border-left:5px solid  transparent;
+} 
+ </style>
+</head>
+<body ontouchstart style="background-color: #fff; margin-bottom:95px;">
+    <div class="weui-cells weui-cells_form" style="margin-top: 0px;">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+               <div data-value="rechagre_phone" class="bar bar_left select_bar">充话费</div>
+               <div data-value="recharge_flow" class="bar bar_right">充流量</div>
+            </div>
+        </div>
+    </div>
+    <!--话费-->
+    <div class="weui-cells weui-cells_form rechagre_phone">
+        <div class="weui-cell">
+            <div class="weui-cell__bd" style=" background-color:#efefef; padding:5px 0px; border-radius:20px;">
+                <input class="weui-input mobile_blur" type="tel" name="mobile" maxlength="13" placeholder="手机号(移动﹑联通﹑电信)" autofocus="autofocus"
+                    style="height: 30px; font-size: 18px;width:80%; padding-left:20px;">
+                <a class="weui-icon-clear" data-value="phone" style="display: inline-block;margin: auto; margin-bottom:5px; display:none"></a>
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <div style="display: block; width: 100%">
+                    <ul class="unable_ul">
+                        <li>
+                            <p><b>30</b><a>元</a></p>
+                            <span></span> </li>
+                        <li>
+                            <p><b>50</b><a>元</a></p>
+                            <span></span> </li>
+                        <li>
+                           <p><b>100</b><a>元</a></p>
+                            <span></span> </li>
+                        <li>
+                            <p><b>200</b><a>元</a></p>
+                            <span></span> </li>
+                        <li>
+                            <p><b>300</b><a>元</a></p>
+                            <span></span> </li>
+                        <li>
+                            <p><b>500</b><a>元</a></p>
+                            <span></span> </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="weui-cell paymoney">
+            <div class="weui-cell__bd">
+                <p style=" font-weight:600; float:left; width:40%; padding:2px 0px;">支付金额</p>
+                <p style="float:right; width:40%; text-align:right; color:#F1682E; padding:2px 0px;"></p>
+            </div>
+        </div>
+         <!--bottom-->
+       <div class="hw_bottom" style="font-size: 12px; background-color: #fff; padding-top: 3px;
+        color: #0B346E; text-align: center; position: fixed; bottom: 0px; width: 100%; z-index:-100">
+        <div id="payrequest" style=" width:100%;height:38px; background-color:#FAE1DA;text-align:center; margin:0 auto; border-radius:20px; margin-bottom:10px; cursor:pointer;
+            color:#fff; line-height:38px; font-size:14px; width:90%">立即充值</div>
+        <a class="recharge_record" data-value="phone">充值记录</a>
+        <a style="display: inline-block; background-color: #0B346E; margin: 0px 3px; margin-right: 4px;height: 10px; width: 1px;"></a>
+          <a class="kehu_help" data-value="phone">客服帮助</a>
+          <a style="display: inline-block; background-color: #0B346E; margin: 0px 3px; margin-right: 4px;height: 10px; width: 1px;"></a>
+          <a href="tel:4008111801" style="color:#0B346E">客服电话</a>
+        <div style="margin-bottom: 5px;">
+            <a style="display: inline-block; color: #91989F;">手机充值服务由四川千行你我科技有限公司提供</a>
+        </div>
+    </div>
+    </div>
+     <!--流量-->
+    <div class="weui-cells weui-cells_form recharge_flow" style="display:none">
+      <div class="weui-cell">
+            <div class="weui-cell__bd" style=" background-color:#efefef; padding:5px 0px; border-radius:20px;">
+                <input class="weui-input mobile_blur" type="tel" name="mobile" maxlength="13" placeholder="手机号(移动﹑联通﹑电信)" autofocus="autofocus"
+                    style="height: 30px; font-size: 18px;width:80%; padding-left:20px;">
+                <a class="weui-icon-clear" data-value="flow" style="display: inline-block;margin: auto; margin-bottom:5px; display:none"></a>
+            </div>
+        </div>
+      <div class="weui-cell" style="padding-bottom:0px;">
+            <div class="weui-cell__bd">
+                <div style="display: block; width: 100%">
+                    <ul class="unable_ul">
+                        <li> 
+                            <p><b>100</b><a>M</a></p>
+                            <span></span> 
+                        </li>
+                        <li>
+                              <p><b>200</b><a>M</a></p>
+                            <span></span> 
+                        </li>
+                        <li>
+                              <p><b>300</b><a>M</a></p>
+                            <span></span> 
+                        </li>
+                        <li>
+                             <p><b>500</b><a>M</a></p>
+                            <span></span> 
+                        </li>
+                        <li>
+                            <p><b>1</b><a>G</a></p>
+                            <span></span> 
+                        </li>
+                        <li>
+                            <p><b>2</b><a>G</a></p>
+                            <span></span> 
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+      <div class="weui-cells weui-cells_form detailinfo" style="margin-top: 0px;">
+          <!--  <div class="weui-cell">
+                <div class="weui-cell__bd details_list">
+                    <div style=" float:left; width:85% ">
+                       <span style=" font-weight:500">0.02元</span>
+                        <span style="font-size:12px;color:#a1a1a1">原价:<del>3.00</del></span>
+                        &nbsp;<span class="icon_cash">月底失效，到帐后生效</span>
+                        <br />
+                       <span style=" font-size:12px; background-color:#FF4500;color:White; padding:2px 5px;border-radius:4px;">全国流量</span>
+                       <span style=" font-size:12px; color:#a1a1a1">月底失效，到帐后生效</span>
+                    </div>
+                    <div style=" float:right; width:15%; text-align:center; right:0px;">
+                        <a  class="weui-btn weui-btn_plain-primary">购 买</a>
+                    </div>
+                </div>
+            </div>-->
+        </div>
+       <!--bottom-->
+       <div class="hw_bottom" style="font-size: 12px; background-color: #fff; padding-top: 3px;
+        color: #0B346E; text-align: center; position: fixed; bottom: 0px; width: 100%; z-index:10">
+        <a class="recharge_record" data-value="flow" >充值记录</a>
+        <a style="display: inline-block; background-color: #0B346E; margin: 0px 3px; margin-right: 4px;height: 10px; width: 1px;"></a>
+           <a class="kehu_help" data-value="flow" >客服帮助</a>
+          <a style="display: inline-block; background-color: #0B346E; margin: 0px 3px; margin-right: 4px;height: 10px; width: 1px;"></a>
+           <a href="tel:4008111801" style="color:#0B346E">客服电话</a>
+        <div style="margin-bottom: 5px;">
+            <a style="display: inline-block; color: #91989F;">手机充值服务由四川千行你我科技有限公司提供</a>
+        </div>
+    </div>
+      </div>
+</body>
+</html>
+<script src="js/wappay.js" type="text/javascript"></script>

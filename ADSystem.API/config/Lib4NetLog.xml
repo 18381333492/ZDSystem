@@ -1,0 +1,302 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Lib4NetLog>
+  <Appender name="FileAppender" level="All" source="web"
+          type="Lib4Net.Logs.Appenders.FileAppender">
+    <param name="File" value="~/logs\%sr\%l\%date.log"/>
+    <param name="DateFormat" value="YYYYMMddhhmmss"/>
+    <param name="MaxFileSize" value="1M"/>
+    <layouts>
+      <layout level="Fatal">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br%e%br%trace%br</layout>
+      <layout level="Error">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br%e%br%trace%br</layout>
+      <layout level="Debug">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br</layout>
+      <layout level="Info">[%yy-%mm-%dd %h:%mi:%s:%fff][%sr] %message%br</layout>
+    </layouts>
+  </Appender>
+  
+  <Appender name="FileAppender" level="All" source="WxHttp"
+   type="Lib4Net.Logs.Appenders.FileAppender">
+    <param name="File" value="~/logs\%sr\%l\%date.log"/>
+    <param name="DateFormat" value="YYYYMMddhhmmss"/>
+    <param name="MaxFileSize" value="1M"/>
+    <layouts>
+      <layout level="Fatal">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br%e%br%trace%br</layout>
+      <layout level="Error">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br%e%br%trace%br</layout>
+      <layout level="Debug">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br</layout>
+      <layout level="Info">[%yy-%mm-%dd %h:%mi:%s:%fff][%sr] %message%br</layout>
+    </layouts>
+  </Appender>
+
+  <Appender name="FileAppender" level="All" source="request"
+            type="Lib4Net.Logs.Appenders.FileAppender">
+    <param name="File" value="~/logs\%sr\%l\%date.log"/>
+    <param name="DateFormat" value="YYYYMMddhhmmss"/>
+    <param name="MaxFileSize" value="1M"/>
+    <layouts>
+      <layout level="Fatal">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br%e%br%trace%br</layout>
+      <layout level="Error">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br%e%br%trace%br</layout>
+      <layout level="Debug">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br</layout>
+      <layout level="Info">[%yy-%mm-%dd %h:%mi:%s:%fff][%sr] %message%br</layout>
+    </layouts>
+  </Appender>
+
+  <Appender name="FileAppender" level="All" source="refund"
+            type="Lib4Net.Logs.Appenders.FileAppender">
+    <param name="File" value="~/logs\%sr\%l\%date.log"/>
+    <param name="DateFormat" value="YYYYMMddhhmmss"/>
+    <param name="MaxFileSize" value="1M"/>
+    <layouts>
+      <layout level="Fatal">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br%e%br%trace%br</layout>
+      <layout level="Error">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br%e%br%trace%br</layout>
+      <layout level="Debug">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br</layout>
+      <layout level="Info">[%yy-%mm-%dd %h:%mi:%s:%fff][%sr] %message%br</layout>
+    </layouts>
+  </Appender>
+  
+  <Appender name="FileAppender" level="All" source="WxApplyRefund"
+          type="Lib4Net.Logs.Appenders.FileAppender">
+    <param name="File" value="~/logs\%sr\%l\%date.log"/>
+    <param name="DateFormat" value="YYYYMMddhhmmss"/>
+    <param name="MaxFileSize" value="1M"/>
+    <layouts>
+      <layout level="Fatal">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br%e%br%trace%br</layout>
+      <layout level="Error">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br%e%br%trace%br</layout>
+      <layout level="Debug">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br</layout>
+      <layout level="Info">[%yy-%mm-%dd %h:%mi:%s:%fff][%sr] %message%br</layout>
+    </layouts>
+  </Appender>
+
+  <Appender name="FileAppender" level="All" source="WxPayNotify"
+          type="Lib4Net.Logs.Appenders.FileAppender">
+    <param name="File" value="~/logs\%sr\%l\%date.log"/>
+    <param name="DateFormat" value="YYYYMMddhhmmss"/>
+    <param name="MaxFileSize" value="1M"/>
+    <layouts>
+      <layout level="Fatal">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br%e%br%trace%br</layout>
+      <layout level="Error">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br%e%br%trace%br</layout>
+      <layout level="Debug">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br</layout>
+      <layout level="Info">[%yy-%mm-%dd %h:%mi:%s:%fff][%sr] %message%br</layout>
+    </layouts>
+  </Appender>
+
+  <Appender name="FileAppender" level="All" source="PingAnRefundQuery"
+        type="Lib4Net.Logs.Appenders.FileAppender">
+    <param name="File" value="~/logs\%sr\%l\%date.log"/>
+    <param name="DateFormat" value="YYYYMMddhhmmss"/>
+    <param name="MaxFileSize" value="1M"/>
+    <layouts>
+      <layout level="Fatal">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br%e%br%trace%br</layout>
+      <layout level="Error">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br%e%br%trace%br</layout>
+      <layout level="Debug">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br</layout>
+      <layout level="Info">[%yy-%mm-%dd %h:%mi:%s:%fff][%sr] %message%br</layout>
+    </layouts>
+  </Appender>
+
+  <Appender name="FileAppender" level="All" source="WxRefundNotify"
+          type="Lib4Net.Logs.Appenders.FileAppender">
+    <param name="File" value="~/logs\%sr\%l\%date.log"/>
+    <param name="DateFormat" value="YYYYMMddhhmmss"/>
+    <param name="MaxFileSize" value="1M"/>
+    <layouts>
+      <layout level="Fatal">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br%e%br%trace%br</layout>
+      <layout level="Error">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br%e%br%trace%br</layout>
+      <layout level="Debug">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br</layout>
+      <layout level="Info">[%yy-%mm-%dd %h:%mi:%s:%fff][%sr] %message%br</layout>
+    </layouts>
+  </Appender>
+
+  <Appender name="FileAppender" level="All" source="AlipayNotify"
+          type="Lib4Net.Logs.Appenders.FileAppender">
+    <param name="File" value="~/logs\%sr\%l\%date.log"/>
+    <param name="DateFormat" value="YYYYMMddhhmmss"/>
+    <param name="MaxFileSize" value="1M"/>
+    <layouts>
+      <layout level="Fatal">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br%e%br%trace%br</layout>
+      <layout level="Error">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br%e%br%trace%br</layout>
+      <layout level="Debug">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br</layout>
+      <layout level="Info">[%yy-%mm-%dd %h:%mi:%s:%fff][%sr] %message%br</layout>
+    </layouts>
+  </Appender>
+
+  <Appender name="FileAppender" level="All" source="AlipayRefund"
+          type="Lib4Net.Logs.Appenders.FileAppender">
+    <param name="File" value="~/logs\%sr\%l\%date.log"/>
+    <param name="DateFormat" value="YYYYMMddhhmmss"/>
+    <param name="MaxFileSize" value="1M"/>
+    <layouts>
+      <layout level="Fatal">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br%e%br%trace%br</layout>
+      <layout level="Error">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br%e%br%trace%br</layout>
+      <layout level="Debug">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br</layout>
+      <layout level="Info">[%yy-%mm-%dd %h:%mi:%s:%fff][%sr] %message%br</layout>
+    </layouts>
+  </Appender>
+
+  <Appender name="FileAppender" level="All" source="HWMobileQuery"
+       type="Lib4Net.Logs.Appenders.FileAppender">
+    <param name="File" value="~/logs\%sr\%l\%date.log"/>
+    <param name="DateFormat" value="YYYYMMddhhmmss"/>
+    <param name="MaxFileSize" value="1M"/>
+    <layouts>
+      <layout level="Fatal">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br%e%br%trace%br</layout>
+      <layout level="Error">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br%e%br%trace%br</layout>
+      <layout level="Debug">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br</layout>
+      <layout level="Info">[%yy-%mm-%dd %h:%mi:%s:%fff][%sr] %message%br</layout>
+    </layouts>
+  </Appender>
+  
+  <Appender name="FileAppender" level="All" source="HWPayrequest"
+        type="Lib4Net.Logs.Appenders.FileAppender">
+    <param name="File" value="~/logs\%sr\%l\%date.log"/>
+    <param name="DateFormat" value="YYYYMMddhhmmss"/>
+    <param name="MaxFileSize" value="1M"/>
+    <layouts>
+      <layout level="Fatal">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br%e%br%trace%br</layout>
+      <layout level="Error">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br%e%br%trace%br</layout>
+      <layout level="Debug">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br</layout>
+      <layout level="Info">[%yy-%mm-%dd %h:%mi:%s:%fff][%sr] %message%br</layout>
+    </layouts>
+  </Appender>
+
+  <Appender name="FileAppender" level="All" source="HWQueryPayState"
+        type="Lib4Net.Logs.Appenders.FileAppender">
+    <param name="File" value="~/logs\%sr\%l\%date.log"/>
+    <param name="DateFormat" value="YYYYMMddhhmmss"/>
+    <param name="MaxFileSize" value="1M"/>
+    <layouts>
+      <layout level="Fatal">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br%e%br%trace%br</layout>
+      <layout level="Error">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br%e%br%trace%br</layout>
+      <layout level="Debug">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br</layout>
+      <layout level="Info">[%yy-%mm-%dd %h:%mi:%s:%fff][%sr] %message%br</layout>
+    </layouts>
+  </Appender>
+  
+  <Appender name="FileAppender" level="All" source="HWGetOrderDetail"
+        type="Lib4Net.Logs.Appenders.FileAppender">
+    <param name="File" value="~/logs\%sr\%l\%date.log"/>
+    <param name="DateFormat" value="YYYYMMddhhmmss"/>
+    <param name="MaxFileSize" value="1M"/>
+    <layouts>
+      <layout level="Fatal">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br%e%br%trace%br</layout>
+      <layout level="Error">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br%e%br%trace%br</layout>
+      <layout level="Debug">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br</layout>
+      <layout level="Info">[%yy-%mm-%dd %h:%mi:%s:%fff][%sr] %message%br</layout>
+    </layouts>
+  </Appender>
+
+  <Appender name="FileAppender" level="All" source="HWCodeHelper"
+      type="Lib4Net.Logs.Appenders.FileAppender">
+    <param name="File" value="~/logs\%sr\%l\%date.log"/>
+    <param name="DateFormat" value="YYYYMMddhhmmss"/>
+    <param name="MaxFileSize" value="1M"/>
+    <layouts>
+      <layout level="Fatal">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br%e%br%trace%br</layout>
+      <layout level="Error">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br%e%br%trace%br</layout>
+      <layout level="Debug">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br</layout>
+      <layout level="Info">[%yy-%mm-%dd %h:%mi:%s:%fff][%sr] %message%br</layout>
+    </layouts>
+  </Appender>
+
+  <Appender name="FileAppender" level="All" source="HWQueryByPhone"
+    type="Lib4Net.Logs.Appenders.FileAppender">
+    <param name="File" value="~/logs\%sr\%l\%date.log"/>
+    <param name="DateFormat" value="YYYYMMddhhmmss"/>
+    <param name="MaxFileSize" value="1M"/>
+    <layouts>
+      <layout level="Fatal">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br%e%br%trace%br</layout>
+      <layout level="Error">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br%e%br%trace%br</layout>
+      <layout level="Debug">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br</layout>
+      <layout level="Info">[%yy-%mm-%dd %h:%mi:%s:%fff][%sr] %message%br</layout>
+    </layouts>
+  </Appender>
+  
+  <Appender name="FileAppender" level="All" source="18EsalseRefund"
+       type="Lib4Net.Logs.Appenders.FileAppender">
+    <param name="File" value="~/logs\%sr\%l\%date.log"/>
+    <param name="DateFormat" value="YYYYMMddhhmmss"/>
+    <param name="MaxFileSize" value="1M"/>
+    <layouts>
+      <layout level="Fatal">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br%e%br%trace%br</layout>
+      <layout level="Error">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br%e%br%trace%br</layout>
+      <layout level="Debug">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br</layout>
+      <layout level="Info">[%yy-%mm-%dd %h:%mi:%s:%fff][%sr] %message%br</layout>
+    </layouts>
+  </Appender>
+
+  <Appender name="FileAppender" level="All" source="EsalseNotify"
+       type="Lib4Net.Logs.Appenders.FileAppender">
+    <param name="File" value="~/logs\%sr\%l\%date.log"/>
+    <param name="DateFormat" value="YYYYMMddhhmmss"/>
+    <param name="MaxFileSize" value="1M"/>
+    <layouts>
+      <layout level="Fatal">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br%e%br%trace%br</layout>
+      <layout level="Error">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br%e%br%trace%br</layout>
+      <layout level="Debug">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br</layout>
+      <layout level="Info">[%yy-%mm-%dd %h:%mi:%s:%fff][%sr] %message%br</layout>
+    </layouts>
+  </Appender>
+
+  <Appender name="FileAppender" level="All" source="JSYHProductQuery"
+       type="Lib4Net.Logs.Appenders.FileAppender">
+    <param name="File" value="~/logs\%sr\%l\%date.log"/>
+    <param name="DateFormat" value="YYYYMMddhhmmss"/>
+    <param name="MaxFileSize" value="1M"/>
+    <layouts>
+      <layout level="Fatal">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br%e%br%trace%br</layout>
+      <layout level="Error">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br%e%br%trace%br</layout>
+      <layout level="Debug">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br</layout>
+      <layout level="Info">[%yy-%mm-%dd %h:%mi:%s:%fff][%sr] %message%br</layout>
+    </layouts>
+  </Appender>
+
+  <Appender name="FileAppender" level="All" source="JSYHBookOrder"
+       type="Lib4Net.Logs.Appenders.FileAppender">
+    <param name="File" value="~/logs\%sr\%l\%date.log"/>
+    <param name="DateFormat" value="YYYYMMddhhmmss"/>
+    <param name="MaxFileSize" value="1M"/>
+    <layouts>
+      <layout level="Fatal">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br%e%br%trace%br</layout>
+      <layout level="Error">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br%e%br%trace%br</layout>
+      <layout level="Debug">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br</layout>
+      <layout level="Info">[%yy-%mm-%dd %h:%mi:%s:%fff][%sr] %message%br</layout>
+    </layouts>
+  </Appender>
+
+  <Appender name="FileAppender" level="All" source="JSYHPayNotify"
+       type="Lib4Net.Logs.Appenders.FileAppender">
+    <param name="File" value="~/logs\%sr\%l\%date.log"/>
+    <param name="DateFormat" value="YYYYMMddhhmmss"/>
+    <param name="MaxFileSize" value="1M"/>
+    <layouts>
+      <layout level="Fatal">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br%e%br%trace%br</layout>
+      <layout level="Error">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br%e%br%trace%br</layout>
+      <layout level="Debug">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br</layout>
+      <layout level="Info">[%yy-%mm-%dd %h:%mi:%s:%fff][%sr] %message%br</layout>
+    </layouts>
+  </Appender>
+  
+  <Appender name="FileAppender" level="All" source="JSYHRefund"
+       type="Lib4Net.Logs.Appenders.FileAppender">
+    <param name="File" value="~/logs\%sr\%l\%date.log"/>
+    <param name="DateFormat" value="YYYYMMddhhmmss"/>
+    <param name="MaxFileSize" value="1M"/>
+    <layouts>
+      <layout level="Fatal">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br%e%br%trace%br</layout>
+      <layout level="Error">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br%e%br%trace%br</layout>
+      <layout level="Debug">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br</layout>
+      <layout level="Info">[%yy-%mm-%dd %h:%mi:%s:%fff][%sr] %message%br</layout>
+    </layouts>
+  </Appender>
+
+  <Appender name="FileAppender" level="All" source="JSYHOrderList"
+     type="Lib4Net.Logs.Appenders.FileAppender">
+    <param name="File" value="~/logs\%sr\%l\%date.log"/>
+    <param name="DateFormat" value="YYYYMMddhhmmss"/>
+    <param name="MaxFileSize" value="1M"/>
+    <layouts>
+      <layout level="Fatal">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br%e%br%trace%br</layout>
+      <layout level="Error">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br%e%br%trace%br</layout>
+      <layout level="Debug">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br</layout>
+      <layout level="Info">[%yy-%mm-%dd %h:%mi:%s:%fff][%sr] %message%br</layout>
+    </layouts>
+  </Appender>
+
+</Lib4NetLog>

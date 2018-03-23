@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Messages>
+  <ErrorCode>
+    <Item Code="100" Message="恭喜，操作成功" />    
+    
+  </ErrorCode>
+</Messages>

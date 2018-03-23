@@ -1,0 +1,49 @@
+﻿.pagination {
+            font-size: 80%;
+        }
+        
+.pagination a {
+    text-decoration: none;
+	border: solid 1px #AAE;
+	color: #15B;
+	cursor:pointer;
+	
+}
+
+.pagination a, .pagination span {
+    display: block;
+    float: left;
+    padding: 0.3em 0.5em;
+    margin-right: 5px;
+	margin-bottom: 5px;
+	min-width:1em;
+	text-align:center;
+}
+
+.pagination .current {
+    background: #26B;
+    color: #fff;
+	border: solid 1px #AAE;
+}
+
+.pagination .current.prev, .pagination .current.next{
+	color:#999;
+	border-color:#999;
+	background:#fff;
+	position: relative;
+}
+/***??????***/
+.message_btn_p{ position:absolute; height:25px; width:160px; display:block; top:44px;right:10px;}
+.pending_mark{background:url("/Content/images/chuli_icon.png") no-repeat ;display:inline-block;height:15px;margin-right:8px;padding-left:14px; line-height:15px;color:#e57a01;}
+.message_tab{}
+.message_tab .menu{ padding-left:10px;}
+.message_tab .item,
+.message_tab .tab_til,
+.message_tab .item_hover,
+.message_tab .tab_til_hover{background:url("/Content/images/message_tab_icon.gif") no-repeat;}
+.message_tab .item,
+.message_tab .item_hover{background-position:0 -53px;float:left; height:24px; line-height:24px;}
+.message_tab .tab_til,
+.message_tab .tab_til_hover{ background-position:right -79px; display:inline-block; margin-left:6px; margin-right:5px; padding-right:5px; color:#555;}
+.message_tab .item_hover{background-position:0 0;}
+.message_tab .tab_til_hover{background-position:right -25px; color:#3d73ed;}

@@ -1,0 +1,521 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F260EBB8-7096-4267-A9A5-866FB59E998E}</ProjectGuid>
+    <ProjectTypeGuids>{E53F8FEA-EAE0-44A6-8774-FFD645390401};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ADSystem.API</RootNamespace>
+    <AssemblyName>ADSystem.API</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <MvcProjectUpgradeChecked>true</MvcProjectUpgradeChecked>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AopSdk, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\AopSdk.dll</HintPath>
+    </Reference>
+    <Reference Include="CCBRSA, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>JSYHServer\dll\CCBRSA.dll</HintPath>
+    </Reference>
+    <Reference Include="hyper_redis_dotnet">
+      <HintPath>..\..\..\..\..\..\..\ClassLibrary\hyper_redis_dotnet.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Core, Version=0.44.0.5, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>JSYHServer\dll\IKVM.OpenJDK.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Security, Version=0.44.0.5, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>JSYHServer\dll\IKVM.OpenJDK.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.Runtime, Version=0.44.0.5, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>JSYHServer\dll\IKVM.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Lib4Net4.Core">
+      <HintPath>..\..\..\..\..\..\..\ClassLibrary\Lib4Net4.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Lib4Net4.Framework">
+      <HintPath>..\..\..\..\..\..\..\ClassLibrary\Lib4Net4.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\..\..\..\..\..\..\ClassLibrary\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\ClassLibrary\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Oracle.DataAccess, Version=2.111.7.20, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=x86" />
+    <Reference Include="Oracle.ManagedDataAccess, Version=4.121.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\ClassLibrary\Oracle.ManagedDataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="SecurityUtil">
+      <HintPath>..\PayComon\signLib\SecurityUtil.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web.WebPages" />
+    <Reference Include="System.Web.Helpers" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="18EsalseNotify.ashx.cs">
+      <DependentUpon>18EsalseNotify.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="18EsalseRefund.ashx.cs">
+      <DependentUpon>18EsalseRefund.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="AlipayNotify.ashx.cs">
+      <DependentUpon>AlipayNotify.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="AlipayRefund.ashx.cs">
+      <DependentUpon>AlipayRefund.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="ApiHelper.cs" />
+    <Compile Include="CheckCode.cs" />
+    <Compile Include="HWServer\CodeHelper.ashx.cs">
+      <DependentUpon>CodeHelper.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="DynamicJson.cs" />
+    <Compile Include="HWServer\GetOrderDetail.ashx.cs">
+      <DependentUpon>GetOrderDetail.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="HWServer\GetOrderList.ashx.cs">
+      <DependentUpon>GetOrderList.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="HWServer\HttpHelper.cs" />
+    <Compile Include="HWServer\MobileQuery.ashx.cs">
+      <DependentUpon>MobileQuery.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="HWServer\Model\HWOrder.cs" />
+    <Compile Include="HWServer\Model\OrderMain.cs" />
+    <Compile Include="HWServer\Model\PageInfo.cs" />
+    <Compile Include="HWServer\Model\UpChannelConfig.cs" />
+    <Compile Include="HWServer\PaPayNotify.ashx.cs">
+      <DependentUpon>PaPayNotify.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="HWServer\PayRequestHandler.ashx.cs">
+      <DependentUpon>PayRequestHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="HWServer\QueryByPhone.ashx.cs">
+      <DependentUpon>QueryByPhone.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="HWServer\QueryPayState.ashx.cs">
+      <DependentUpon>QueryPayState.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="HWServer\RefundQuery.ashx.cs">
+      <DependentUpon>RefundQuery.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="HWServer\Server.cs" />
+    <Compile Include="JSYHServer\server\BookOrder.ashx.cs">
+      <DependentUpon>BookOrder.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="JSYHServer\server\Index.ashx.cs">
+      <DependentUpon>Index.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="JSYHServer\server\LZFPayNotify.ashx.cs">
+      <DependentUpon>LZFPayNotify.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="JSYHServer\server\LZFRefund.ashx.cs">
+      <DependentUpon>LZFRefund.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="JSYHServer\server\ProductQuery.ashx.cs">
+      <DependentUpon>ProductQuery.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="JSYHServer\server\Query.ashx.cs">
+      <DependentUpon>Query.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="JSYHServer\server\TCPHelper.cs" />
+    <Compile Include="model\QueryAccountResult.cs" />
+    <Compile Include="model\RevOrderResult.cs" />
+    <Compile Include="NotifyDataModel.cs" />
+    <Compile Include="OrderRequest.ashx.cs">
+      <DependentUpon>OrderRequest.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RedisHelper.cs" />
+    <Compile Include="RefundMoney.ashx.cs">
+      <DependentUpon>RefundMoney.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="SqlHelper.cs" />
+    <Compile Include="WxApplyRefund.ashx.cs">
+      <DependentUpon>WxApplyRefund.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="WxPayNotify.ashx.cs">
+      <DependentUpon>WxPayNotify.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="WxRefundNotify.ashx.cs">
+      <DependentUpon>WxRefundNotify.ashx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="config\Lib4NetLog.xml" />
+    <Content Include="hwFAQ.html" />
+    <Content Include="hworderdetail.html" />
+    <Content Include="hwpay.html" />
+    <Content Include="hwpayment.html" />
+    <Content Include="hwquery.html" />
+    <Content Include="HWServer\css\FAQ.css" />
+    <Content Include="HWServer\images\activity.jpg" />
+    <Content Include="HWServer\images\activity_2.png" />
+    <Content Include="HWServer\images\tehui.png" />
+    <Content Include="HWServer\images\tuijian.png" />
+    <Content Include="HWServer\images\wx.png" />
+    <Content Include="HWServer\images\zfb.png" />
+    <Content Include="hwwap\activity.html" />
+    <Content Include="hwwap\hwFAQ.html" />
+    <Content Include="hwwap\hwpayment.html" />
+    <Content Include="hwwap\hwwapslowpay.html" />
+    <Content Include="hwwap\hwwapslowpay.js" />
+    <Content Include="hwwap\images\left_back.png" />
+    <Content Include="hwwap\images\logo.png" />
+    <Content Include="hwwap\images\phone.png" />
+    <Content Include="hwwap\images\top.png" />
+    <Content Include="hwwap\recharge\js\wappay.js" />
+    <Content Include="hwwap\recharge\js\wappayment.js" />
+    <Content Include="hwwap\recharge\js\waprechareflow.js" />
+    <Content Include="hwwap\recharge\js\wapquery.js" />
+    <Content Include="hwwap\recharge\wappay.html" />
+    <Content Include="hwwap\recharge\wappayment.html" />
+    <Content Include="hwwap\recharge\wapquery.html" />
+    <Content Include="hwwap\recharge\waprechareflow.html" />
+    <Content Include="img\jt.png" />
+    <Content Include="img\dataNull.png" />
+    <Content Include="img\th.png" />
+    <Content Include="img\tj.png" />
+    <Content Include="img\WX.png" />
+    <Content Include="img\ZFB.png" />
+    <Content Include="JSYHServer\dll\CCBRSA.dll" />
+    <Content Include="JSYHServer\dll\IKVM.OpenJDK.Core.dll" />
+    <Content Include="JSYHServer\dll\IKVM.OpenJDK.Security.dll" />
+    <Content Include="JSYHServer\dll\IKVM.Runtime.dll" />
+    <Content Include="JSYHServer\html\activity.html" />
+    <Content Include="JSYHServer\html\error.html" />
+    <Content Include="JSYHServer\html\help_tip.png" />
+    <Content Include="JSYHServer\html\flow.html" />
+    <Content Include="JSYHServer\html\jt.png" />
+    <Content Include="JSYHServer\html\oldhome.html" />
+    <Content Include="JSYHServer\html\home.html" />
+    <Content Include="JSYHServer\html\query.html" />
+    <Content Include="JSYHServer\html\flow.js" />
+    <Content Include="JSYHServer\html\success.html" />
+    <Content Include="JSYHServer\html\left_back.png" />
+    <Content Include="js\common.js" />
+    <Content Include="js\hwlogin.js" />
+    <Content Include="js\jquery-1.12.4.min.js" />
+    <Content Include="js\recharge_flow.js" />
+    <Content Include="hwrechareflow.html" />
+    <Content Include="HWServer\css\bootstrap.min.css" />
+    <Content Include="HWServer\css\font-awesome.min.css" />
+    <Content Include="HWServer\css\mdb.min.css" />
+    <Content Include="HWServer\css\orderList.css" />
+    <Content Include="HWServer\font\fontawesome-webfont.svg" />
+    <Content Include="HWServer\font\glyphicons-halflings-regular.svg" />
+    <Content Include="img\lightbox\default-skin.png" />
+    <Content Include="img\lightbox\default-skin.svg" />
+    <Content Include="img\lightbox\preloader.gif" />
+    <Content Include="img\overlays\01.png" />
+    <Content Include="img\overlays\02.png" />
+    <Content Include="img\overlays\03.png" />
+    <Content Include="img\overlays\04.png" />
+    <Content Include="img\overlays\05.png" />
+    <Content Include="img\overlays\06.png" />
+    <Content Include="img\overlays\07.png" />
+    <Content Include="img\overlays\08.png" />
+    <Content Include="img\overlays\09.png" />
+    <Content Include="img\svg\arrow_left.svg" />
+    <Content Include="img\svg\arrow_right.svg" />
+    <Content Include="js\bootstrap.min.js" />
+    <Content Include="js\jquery.min.js" />
+    <Content Include="js\LordOrder.js" />
+    <Content Include="js\mdb.min.js" />
+    <Content Include="js\popper.min.js" />
+    <Content Include="slowpage\activity.html" />
+    <Content Include="slowpage\backgroud.jpg" />
+    <Content Include="slowpage\backgroud1.png" />
+    <Content Include="slowpage\backgroud12.jpg" />
+    <Content Include="slowpage\btn.png" />
+    <Content Include="slowpage\hwpayment.html" />
+    <Content Include="slowpage\hwslowpay.html" />
+    <Content Include="testPingAn.htm" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="oldhwrechareflow.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="OrderRequest.ashx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common Layer\ZDSystem.Entity\ZDSystem.Entity.csproj">
+      <Project>{BF4BE8ED-1502-464D-8341-F260356A7324}</Project>
+      <Name>ZDSystem.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PayComon\PayComon.csproj">
+      <Project>{E1CD5415-644A-43EF-A6D3-B3A2182DF0AF}</Project>
+      <Name>PayComon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Service Layer\ZDSystem.Model\ZDSystem.Model.csproj">
+      <Project>{7CEE363C-E0F9-427B-988B-59955643469B}</Project>
+      <Name>ZDSystem.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Service Layer\ZDSystem.UserService\ZDSystem.UserService.csproj">
+      <Project>{AE9A8857-B524-41C9-B40E-C3C93B2865C6}</Project>
+      <Name>ZDSystem.UserService</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="RefundMoney.ashx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="18EsalseNotify.ashx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="WeUI\jquery-weui.min.css" />
+    <Content Include="WeUI\jquery.min.js" />
+    <Content Include="WeUI\jquery-weui.min.js" />
+    <Content Include="WeUI\weui.min.css" />
+    <Content Include="WxPayNotify.ashx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="WxRefundNotify.ashx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="WxApplyRefund.ashx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AlipayNotify.ashx" />
+    <Content Include="AlipayRefund.ashx" />
+    <Content Include="HWServer\PayRequestHandler.ashx" />
+    <Content Include="HWServer\MobileQuery.ashx" />
+    <Content Include="HWServer\GetOrderList.ashx" />
+    <Content Include="18EsalseRefund.ashx" />
+    <None Include="certs\zdws\apiclient_cert.p12" />
+    <Content Include="HWServer\CodeHelper.ashx" />
+    <None Include="HWServer\cert\apiclient_cert.p12" />
+    <Content Include="HWServer\QueryPayState.ashx" />
+    <Content Include="HWServer\GetOrderDetail.ashx" />
+    <Content Include="JSYHServer\server\BookOrder.ashx" />
+    <Content Include="JSYHServer\server\LZFPayNotify.ashx" />
+    <Content Include="JSYHServer\server\ProductQuery.ashx" />
+    <Content Include="JSYHServer\server\Index.ashx" />
+    <Content Include="JSYHServer\server\LZFRefund.ashx" />
+    <Content Include="JSYHServer\server\Query.ashx" />
+    <Content Include="HWServer\RefundQuery.ashx" />
+    <Content Include="HWServer\PaPayNotify.ashx" />
+    <Content Include="HWServer\QueryByPhone.ashx" />
+    <None Include="PayConfig\apiclient_cert.p12" />
+    <None Include="HWServer\font\fontawesome-webfont.eot" />
+    <None Include="HWServer\font\fontawesome-webfont.ttf" />
+    <None Include="HWServer\font\fontawesome-webfont.woff" />
+    <None Include="HWServer\font\fontawesome-webfont.woff2" />
+    <None Include="HWServer\font\FontAwesome.otf" />
+    <None Include="HWServer\font\glyphicons-halflings-regular.eot" />
+    <None Include="HWServer\font\glyphicons-halflings-regular.ttf" />
+    <None Include="HWServer\font\glyphicons-halflings-regular.woff" />
+    <None Include="HWServer\font\roboto\Roboto-Bold.eot" />
+    <None Include="HWServer\font\roboto\Roboto-Bold.ttf" />
+    <None Include="HWServer\font\roboto\Roboto-Bold.woff" />
+    <None Include="HWServer\font\roboto\Roboto-Bold.woff2" />
+    <None Include="HWServer\font\roboto\Roboto-Light.eot" />
+    <None Include="HWServer\font\roboto\Roboto-Light.ttf" />
+    <None Include="HWServer\font\roboto\Roboto-Light.woff" />
+    <None Include="HWServer\font\roboto\Roboto-Light.woff2" />
+    <None Include="HWServer\font\roboto\Roboto-Medium.eot" />
+    <None Include="HWServer\font\roboto\Roboto-Medium.ttf" />
+    <None Include="HWServer\font\roboto\Roboto-Medium.woff" />
+    <None Include="HWServer\font\roboto\Roboto-Medium.woff2" />
+    <None Include="HWServer\font\roboto\Roboto-Regular.eot" />
+    <None Include="HWServer\font\roboto\Roboto-Regular.ttf" />
+    <None Include="HWServer\font\roboto\Roboto-Regular.woff" />
+    <None Include="HWServer\font\roboto\Roboto-Regular.woff2" />
+    <None Include="HWServer\font\roboto\Roboto-Thin.eot" />
+    <None Include="HWServer\font\roboto\Roboto-Thin.ttf" />
+    <None Include="HWServer\font\roboto\Roboto-Thin.woff" />
+    <None Include="HWServer\font\roboto\Roboto-Thin.woff2" />
+    <None Include="img\overlays\04.png~ecacfc5c730e25dcad92fe8f4a80cba6c23a4b6b" />
+    <None Include="img\overlays\04.png~HEAD" />
+    <None Include="HWServer\sass\mdb.scss" />
+    <None Include="HWServer\sass\mdb\free\data\_colors.scss" />
+    <None Include="HWServer\sass\mdb\free\data\_functions.scss" />
+    <None Include="HWServer\sass\mdb\free\data\_mixins.scss" />
+    <None Include="HWServer\sass\mdb\free\data\_prefixer.scss" />
+    <None Include="HWServer\sass\mdb\free\data\_variables-b4.scss" />
+    <None Include="HWServer\sass\mdb\free\data\_variables.scss" />
+    <None Include="HWServer\sass\mdb\free\_animations.scss" />
+    <None Include="HWServer\sass\mdb\free\_badge.scss" />
+    <None Include="HWServer\sass\mdb\free\_breadcrumb.scss" />
+    <None Include="HWServer\sass\mdb\free\_buttons.scss" />
+    <None Include="HWServer\sass\mdb\free\_cards-basic.scss" />
+    <None Include="HWServer\sass\mdb\free\_carousel-basic.scss" />
+    <None Include="HWServer\sass\mdb\free\_collapse.scss" />
+    <None Include="HWServer\sass\mdb\free\_deprecated.scss" />
+    <None Include="HWServer\sass\mdb\free\_dropdowns.scss" />
+    <None Include="HWServer\sass\mdb\free\_footer.scss" />
+    <None Include="HWServer\sass\mdb\free\_forms-basic.scss" />
+    <None Include="HWServer\sass\mdb\free\_global.scss" />
+    <None Include="HWServer\sass\mdb\free\_helpers.scss" />
+    <None Include="HWServer\sass\mdb\free\_jumbotron.scss" />
+    <None Include="HWServer\sass\mdb\free\_list-group.scss" />
+    <None Include="HWServer\sass\mdb\free\_masks.scss" />
+    <None Include="HWServer\sass\mdb\free\_modals.scss" />
+    <None Include="HWServer\sass\mdb\free\_msc.scss" />
+    <None Include="HWServer\sass\mdb\free\_navbar.scss" />
+    <None Include="HWServer\sass\mdb\free\_pagination.scss" />
+    <None Include="HWServer\sass\mdb\free\_progress.scss" />
+    <None Include="HWServer\sass\mdb\free\_tables.scss" />
+    <None Include="HWServer\sass\mdb\free\_typography.scss" />
+    <None Include="HWServer\sass\mdb\free\_waves.scss" />
+    <None Include="HWServer\sass\mdb\pro\date_picker\_default.date.scss" />
+    <None Include="HWServer\sass\mdb\pro\date_picker\_default.scss" />
+    <None Include="HWServer\sass\mdb\pro\date_picker\_default.time.scss" />
+    <None Include="HWServer\sass\mdb\pro\sections\_blog.scss" />
+    <None Include="HWServer\sass\mdb\pro\sections\_contacts.scss" />
+    <None Include="HWServer\sass\mdb\pro\sections\_features.scss" />
+    <None Include="HWServer\sass\mdb\pro\sections\_magazine.scss" />
+    <None Include="HWServer\sass\mdb\pro\sections\_pricing.scss" />
+    <None Include="HWServer\sass\mdb\pro\sections\_projects.scss" />
+    <None Include="HWServer\sass\mdb\pro\sections\_social.scss" />
+    <None Include="HWServer\sass\mdb\pro\sections\_team.scss" />
+    <None Include="HWServer\sass\mdb\pro\sections\_templates.scss" />
+    <None Include="HWServer\sass\mdb\pro\sections\_testimonials.scss" />
+    <None Include="HWServer\sass\mdb\pro\_animations-pro.scss" />
+    <None Include="HWServer\sass\mdb\pro\_autocomplete.scss" />
+    <None Include="HWServer\sass\mdb\pro\_blog.scss" />
+    <None Include="HWServer\sass\mdb\pro\_buttons-pro.scss" />
+    <None Include="HWServer\sass\mdb\pro\_cards-pro.scss" />
+    <None Include="HWServer\sass\mdb\pro\_carousels-pro.scss" />
+    <None Include="HWServer\sass\mdb\pro\_charts-pro.scss" />
+    <None Include="HWServer\sass\mdb\pro\_checkbox.scss" />
+    <None Include="HWServer\sass\mdb\pro\_chips.scss" />
+    <None Include="HWServer\sass\mdb\pro\_deprecated.scss" />
+    <None Include="HWServer\sass\mdb\pro\_dropdowns-pro.scss" />
+    <None Include="HWServer\sass\mdb\pro\_ecommerce.scss" />
+    <None Include="HWServer\sass\mdb\pro\_file-input.scss" />
+    <None Include="HWServer\sass\mdb\pro\_forms-pro.scss" />
+    <None Include="HWServer\sass\mdb\pro\_input-group.scss" />
+    <None Include="HWServer\sass\mdb\pro\_light-box.scss" />
+    <None Include="HWServer\sass\mdb\pro\_material-select.scss" />
+    <None Include="HWServer\sass\mdb\pro\_msc.scss" />
+    <None Include="HWServer\sass\mdb\pro\_navbars-pro.scss" />
+    <None Include="HWServer\sass\mdb\pro\_parallax.scss" />
+    <None Include="HWServer\sass\mdb\pro\_progress.scss" />
+    <None Include="HWServer\sass\mdb\pro\_radio.scss" />
+    <None Include="HWServer\sass\mdb\pro\_range.scss" />
+    <None Include="HWServer\sass\mdb\pro\_scrollbar.scss" />
+    <None Include="HWServer\sass\mdb\pro\_scrollspy.scss" />
+    <None Include="HWServer\sass\mdb\pro\_sections.scss" />
+    <None Include="HWServer\sass\mdb\pro\_side-nav.scss" />
+    <None Include="HWServer\sass\mdb\pro\_skins.scss" />
+    <None Include="HWServer\sass\mdb\pro\_social-buttons.scss" />
+    <None Include="HWServer\sass\mdb\pro\_stepper.scss" />
+    <None Include="HWServer\sass\mdb\pro\_switch.scss" />
+    <None Include="HWServer\sass\mdb\pro\_tabs.scss" />
+    <None Include="HWServer\sass\mdb\pro\_toasts.scss" />
+    <None Include="HWServer\sass\mdb\pro\_variables-pro.scss" />
+    <None Include="HWServer\sass\mdb\_custom.scss" />
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>30264</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

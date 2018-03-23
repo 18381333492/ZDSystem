@@ -1,0 +1,319 @@
+﻿<!DOCTYPE>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>流量充值</title>
+    <!-- 引入 WeUI -->
+    <link rel="stylesheet" href="//cdn.bootcss.com/weui/1.1.1/style/weui.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/jquery-weui/1.0.1/css/jquery-weui.min.css">
+    <script src="//cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/jquery-weui/1.0.1/js/jquery-weui.min.js"></script>
+    <script src="/js/common.js" type="text/javascript"></script>
+    <script src="flow.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            // $.showLoading("支付请求中");
+            var res = localStorage.getItem("recharge_mobile");
+            if (res) $('.weui-icon-clear').show();
+            $("input[name=mobile]").val(res);
+            value = $("input[name=mobile]").val().replace(/\D/g, '');
+            if (!client.regex.isEmpty(value)) {
+                if (!client.regex.isPhone(value)) {
+                    initDefalutProduct();
+                    defalult_style();
+                } else {
+                    LoadMobile(value);
+                }
+            } else {
+                initDefalutProduct();
+                defalult_style();
+            }
+
+            $("#nav_direcharge").click(function (e) {
+                var index = $(this).index();
+                $(this).addClass("weui-bar__item--on").siblings().removeClass("weui-bar__item--on");
+                $('.weui-tab__bd .weui-tab__bd-item').eq(index).addClass("weui-tab__bd-item--active").siblings().removeClass("weui-tab__bd-item--active");
+                var value = $("input[name=mobile]").val();
+                if (!client.regex.isEmpty(value)) {
+                    if (!client.regex.isPhone(value.replace(/\D/g, ''))) {
+                        initDefalutProduct();
+                        defalut_dre_click_style();
+                    } else {
+                        initDireDetailsTab(4);
+                        dre_click_style();
+                    }
+                } else {
+                    initDefalutProduct();
+                    defalut_dre_click_style();
+                }
+            });
+
+            $("#nav_gratia").click(function () {
+                var index = $(this).index();
+                $(this).addClass("weui-bar__item--on").siblings().removeClass("weui-bar__item--on");
+                $('.weui-tab__bd .weui-tab__bd-item').eq(index).addClass("weui-tab__bd-item--active").siblings().removeClass("weui-tab__bd-item--active");
+                var value = $("input[name=mobile]").val();
+                if (!client.regex.isEmpty(value)) {
+                    if (!client.regex.isPhone(value.replace(/\D/g, ''))) {
+                        initDefalutProduct();
+                        defalut_gra_click_style();
+                    } else {
+                        initGraDetailsTab(4);
+                        gra_click_style();
+                    }
+                } else {
+                    initDefalutProduct();
+                    defalut_gra_click_style();
+                }
+            });
+
+            //输入手机号码效果的切换
+            $('input[name=mobile]').on("keyup", function (e) {
+                var value = $(this).val();
+                if (e.keyCode != 8) {
+                    if (value.length == 4 || value.length == 9) {
+                        var i = value.length;
+                        value = client.string.insert(value, i - 1, " ");
+                        $(this).val(value);
+                    }
+                }
+                else {
+                    if (value.length == 9 || value.length == 4)
+                        value = $(this).val(value.trim());
+                    if (value.length < 13) {
+                        //关闭效果    
+                        $('#tip').val("移动 联通 电信");
+                        $('#tip').css("color", "#CACACA");
+                        initDefalutProduct();
+                        if ($('.weui-bar__item--on').index() == 0) {
+                            defalut_dre_click_style();
+                        } else {
+                            defalut_gra_click_style();
+                        }
+                    }
+                    if ($('ul').hasClass("able_ul")) {
+                        $('ul').removeClass("able_ul").addClass("unable_ul");
+                    }
+                }
+            });
+
+            //样式的切换
+            $('input[name=mobile]').on("input", function () {
+                var value = $(this).val();
+                if (value.length > 0) $('.weui-icon-clear').show();
+                if (!$(this).hasClass("mobile_focus")) {
+                    $(this).addClass("mobile_focus");
+                }
+                if (value.length == 0) {
+                    $(this).removeClass("mobile_focus");
+                }
+                if (value.length == 13) {
+                    $(this).blur(); //失去焦点
+                    value = value.replace(/\D/g, '');
+                    //判断检查号码的区段
+                    if (client.regex.isPhone(value)) {
+                        LoadMobile(value);
+                    }
+                    else {
+                        setTimeout(function () {
+                            $.toast("手机号码格式错误", "text");
+                        }, 500);
+                    }
+                }
+            });
+
+            //清除输入框的值
+            $('.weui-icon-clear').on("click", function () {
+                $('input[name=mobile]').val('');
+                $('input[name=mobile]').removeClass("mobile_focus");
+                $(this).hide();
+                //关闭效果    
+                $('#tip').val("移动 联通 电信");
+                $('#tip').css("color", "#ccc");
+                initDefalutProduct();
+                if ($('.weui-bar__item--on').index() == 0) {
+                    defalut_dre_click_style();
+                } else {
+                    defalut_gra_click_style();
+                }
+
+                $('input[name=mobile]').focus();
+            });
+
+            //返回上级页面
+            $('.header img').on("click", function () {
+                history.back();
+            });
+
+        });
+    </script>
+    <style type="text/css">
+        .nav_show_line{ border-bottom:2px solid #09b6f2; color:#09b6f2;}
+.nav_hide_line{ border-bottom:0px solid #09b6f2; color:black;}
+.nav_defalut_show_line{ border-bottom:2px solid black; color:black;}
+.nav_defalut_hide_line{ border-bottom:0px solid black; color:black;}
+        img
+        {
+            height: 30px;
+    width: 30px;}
+        .face_name
+        {
+            color: Black;
+        }
+        
+        .show_detail_btn
+        {
+            float: left;
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+            margin-left: 6px;
+            margin-top: 0px;
+        }
+        .main_list
+        {
+            margin-left: 14px;
+            margin-top: 5px;
+            padding-bottom: 16px;
+        }
+        .details_info
+        {
+            font-size: 14px;
+        }
+        .details_info_des
+        {
+            color: #767676;
+            font-size: 12px;
+        }
+        .details_info_btn
+        {
+            width: 60px;
+            height: 33px;
+            font-size: 12px;
+            color: #09b6f2;
+        }
+        .details_info_btn:visited {color: #09b6f2;} 
+        .details_info_btn:hover {color: #09b6f2;} 
+        .details_info_btn:active {color: #09b6f2;} 
+        
+        .product_group
+        {
+            margin-top: 0px;
+            padding-top: 0px;
+        }
+        .weui-cells::before
+        {
+            border: none;
+        }
+        .weui-cells
+        {
+            margin-top: 0px;
+        }
+        .details_info img
+        {
+            height: 20px;
+            width: 45px;
+        }
+        .mobile_focus{
+            font-weight:600;
+        }    
+        
+        :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+            color: #09b6f2; opacity:1; 
+        }
+
+        ::-moz-placeholder { /* Mozilla Firefox 19+ */
+            color: #09b6f2;opacity:1;
+        }
+
+        input:-ms-input-placeholder{
+            color:#09b6f2;opacity:1;
+        }
+
+        input::-webkit-input-placeholder{
+            color: #09b6f2;opacity:1;
+        }
+        
+          /*--新增--*/
+        .header
+        {
+            width:100%;
+            height:44px;
+            background-color:#09b6f2;
+            position:fixed;
+            top:0;
+            text-align:center;
+            font-size:18px;
+            color:White;
+            line-height:44px;
+            z-index:1000;
+        }  
+    </style>
+</head>
+<body ontouchstart style="background-color: white;">
+   <div class="header">
+       <!-- <img src="left_back.png" style="position: absolute;left: 8px;top: 6px; width:32px; height:32px;" />-->
+        流量充值
+   </div>
+    <div class="weui-cells weui-cells_form" style="position: absolute;top:44px;z-index:100">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <input class="weui-input mobile_blur" type="tel" name="mobile" maxlength="13" placeholder="请输入手机号码"
+                    style="height: 30px; font-size: 21px;width:90%">
+                <a class="weui-icon-clear" style="display: inline-block;margin: auto;margin-bottom: 5px; display:none"></a>
+                <input class="weui-input" id="tip" type="text" style="height: 18px; font-size: 14px;
+                    color: #cacaca;" readonly="readonly" value="移动 联通 电信">
+            </div>
+        </div>
+    </div>
+    <div class="weui-tab">
+        <div class="weui-navbar" style=" top:112px;">
+           <a class="weui-navbar__item weui-bar__item--on" id="nav_direcharge">直充流量包</a>
+           <a class="weui-navbar__item" id="nav_gratia">特惠流量包</a>
+        </div>
+        <div class="weui-tab__bd" style=" padding-top:164px;">
+            <div id="dire_tab" class="weui-tab__bd-item weui-tab__bd-item--active">
+              
+            </div>
+            <div id="gra_tab" class="weui-tab__bd-item">
+
+            </div>
+        </div>
+        <div class="hw_bottom" style="font-size: 12px;padding-top: 3px;
+               color: #0B346E; text-align: center;width: 100%; z-index:0">
+              <a  href="query.html">充值记录</a>
+             <div style="margin-bottom: 0px;">
+            <a style="display: inline-block; color: #91989F;">©此服务由千行你我科技提供
+            <img id="help_tip" align="absmiddle"; src="help_tip.png" style="width:18px;height: 18px;margin-bottom: 3.5px" /></a>
+            </div>
+             </div>
+
+    </div>
+    <!--bottom-->
+</body>
+</html>
+<script type="text/javascript">
+    //提示框的弹出
+    $('#help_tip').on("click", function () {
+        var content = [];
+        content.push('<span style="height:66px;line-height:22px;padding-left:30px">1.话费充值成功后一般30分钟内可入账，月初/月末高峰可能出现延迟</span>');
+        content.push("<br>");
+        content.push('<span style="height:66px;line-height:22px;padding-left:30px">2.长时间后确认查询到未到账,请联系客服,客服会在第一时间为您查询</span>');
+        content.push("<div style='color:black;font-weight:600;text-align: left;margin-bottom:8px;padding-left: 7px;margin-top: 5px'>客服联系方式</div>");
+        content.push("<span>客服QQ:<a style='color:#09b6f2;font-size:16px'>2602661296</a></span><br/>");
+        content.push('<p style="height: 5px"></p>');
+        content.push("<span>客服电话:<a href='tel:18774376622' style='color:#09b6f2;font-size:16px'>18774376622</a></span>");
+        content.push("<div style='color:black;font-weight:600;text-align: left;margin-bottom:8px;padding-left: 7px;margin-top: 5px'>客服在线时间</div>");
+        content.push('<div>')
+        content.push("<span>工作日：上午8:00-23:00 <br/></span>");
+        content.push("<span>周末和法定节假日：8:00-23:00</span>");
+        content.push('</div>')
+        $.modal({
+            title: "<span style='color:#09b6f2;font-size:18px;'>温馨提示</span>",
+            text: content.join(''),
+            buttons: [
+                 { text: "<span style='color:#09b6f2;font-size:16px;'>我知道了</span>"}]
+        });
+    });
+</script>

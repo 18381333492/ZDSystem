@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UrlMappings>
+  <UrlGroup name="/index">
+    <url title="充值订单查询" name="^/index([\w/]*)$"/>
+  </UrlGroup>
+  <UrlGroup name="*">
+    <url name="^/404.html$"/>
+    <url title="index" name="^/system/index"/>
+    <url title="index" name="^$"/>
+    <url title="index" name="^/$"/>
+    <url title="抱歉，出错啦" name="^/shared/error"/>
+    <url title="AJAX异步操作" name="^/userajax/([\w/]*)$"/>
+    <url title="操作成功" name="^/shared([\w/]*)$"/>
+    <url title="帮助中心" name="^/help([\w/]*)$"/>
+  </UrlGroup>
+  <UrlGroup name="/UpChannelConfig/Index">
+    <url title="上游配置展示" name="^/UpChannelConfig/Index([\w/]*)$"/>
+    <url title="删除" name="^/UpChannelConfig/Delete([\w/]*)$"/>
+    <url title="编辑" name="^/UpChannelConfig/Item([\w/]*)$"/>
+  </UrlGroup>
+  <UrlGroup name="/OrderMain/Index">
+    <url title="订单查询" name="^/OrderMain/Index([\w/]*)$"/>
+    <url title="订单详情" name="^/OrderMain/Details([\w/]*)$"/>
+  </UrlGroup>
+  <UrlGroup name="/OrderDelivery/Index">
+    <url title="发货查询" name="^/OrderDelivery/Index([\w/]*)$"/>
+    <url title="发货详情" name="^/OrderDelivery/Details([\w/]*)$"/>
+  </UrlGroup>
+  <UrlGroup name="/OrderRefund/Index">
+    <url title="订单退款" name="^/OrderRefund/Index([\w/]*)$"/>
+  </UrlGroup>
+  <UrlGroup name="/ReceiptFundRecord/Index">
+    <url title="收款账户资金变动" name="^/ReceiptFundRecord/Index([\w/]*)$"/>
+  </UrlGroup>
+  <UrlGroup name="/ReceiptAccountInfo/Index">
+    <url title="收款账户信息" name="^/ReceiptAccountInfo/Index([\w/]*)$"/>
+    <url title="收款账户信息编辑" name="^/ReceiptAccountInfo/Edit([\w/]*)$"/>
+    <url title="收款账户信息删除" name="^/ReceiptAccountInfo/Delete([\w/]*)$"/>
+    <url title="收款账户提现" name="^/ReceiptAccountInfo/Draw([\w/]*)$"/>
+    <url title="收款账户统计" name="^/ReceiptAccountInfo/AccountCount([\w/]*)$"/>
+    <url title="收款账户统计(运营管理)" name="^/ReceiptAccountInfo/AccountCountBusiness([\w/]*)$"/>
+    <url title="导出报表(运营管理)" name="^/ReceiptAccountInfo/Export([\w/]*)$"/>
+  </UrlGroup>
+
+  <UrlGroup name="/OperateLog/Index">
+    <url title="操作日志" name="^/OperateLog/Index([\w/]*)$"/>
+  </UrlGroup>
+  <UrlGroup name="/SysDictionary/Index">
+    <url title="数据字典" name="^/SysDictionary/Index([\w/]*)$"/>
+    <url title="编辑" name="^/SysDictionary/Item([\w/]*)$"/>
+    <url title="删除" name="^/SysDictionary/delete([\w/]*)$"/>
+  </UrlGroup>
+  <UrlGroup name="/ZdCouponUsed/Index">
+    <url title="已用优惠券" name="^/ZdCouponUsed/Index([\w/]*)$"/>
+  </UrlGroup>
+  <UrlGroup name="/ManualReview/OrderReview">
+    <url title="订单审核" name="^/ManualReview/OrderReview([\w/]*)$"/>
+    <url title="保存订单审核结果" name="^/ManualReview/OrderManaul([\w/]*)$"/>
+    <url title="订单发货审核" name="^/ManualReview/OrderShipReview([\w/]*)$"/>
+    <url title="保存订单发货审核结果" name="^/ManualReview/OrderShipManaul([\w/]*)$"/>
+  </UrlGroup>
+  <UrlGroup name="/DownChannel/Index">
+    <url title="下游渠道" name="^/DownChannel/Index([\w/]*)$"/>
+    <url title="删除 " name="^/DownChannel/delete([\w/]*)$"/>
+    <url title="编辑" name="^/DownChannel/Item([\w/]*)$"/>
+  </UrlGroup>
+  <UrlGroup name="/OrderMain/SimpleOrderQuery">
+    <url title="简单订单查询" name="^/OrderMain/SimpleOrderQuery([\w/]*)$"/>
+  </UrlGroup>
+  <UrlGroup name="/DailyAccountSnapshot/Index">
+    <url title="商户交易日报" name="^/DailyAccountSnapshot/Index([\w/]*)$"/>
+  </UrlGroup>
+</UrlMappings>

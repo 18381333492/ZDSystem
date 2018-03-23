@@ -1,0 +1,37 @@
+﻿/* =======================
+ * jquery.select1.0 的样式
+ * =======================
+ */
+
+.js-sSelect 
+{
+    display:inline-block;    /* for IE6、7 */
+    *display:inline;
+    *vertical-align:middle;
+    zoom:1;
+    }
+.js-sSelect_selectedTxt {
+    background: url(icon_more.gif) no-repeat scroll right center #FFFFFF;
+    border-top: 1px solid #87ABB9 ;border-left:1px solid #87ABB9;
+    border-right: 1px solid #E0E1E3 ;border-bottom:1px solid #E0E1E3 ;
+    cursor: pointer;
+}
+.js-sSelect_selectedTxt-hover{background-image: url(icon_more_hover.gif);}
+.js-sSelect_input{border: 0 none;height: 20px;line-height: 20px;padding-left: 8px;color: #000000;background-color:#FFF;} /*文本框*/
+.js-sSelect_optContainer {
+    border: #CCC 1px solid; background-color:#FFF;
+    display: none;overflow-x:hidden;overflow-y:auto;
+    _overflow-y:auto !important;
+}
+.js-l-sSelect_optContainer{
+    z-index: 9999; position: absolute;top: 16px;left: 0px;
+}
+.js-sSelect_option {height: 20px;line-height: 20px;padding-left: 8px;}
+.js-sSelect_option-selected 
+{
+    background-color: #e7f2fa;
+}
+.js-sSelect_option-hover {
+    background-color: #336699; 
+    color:#FFF;
+}

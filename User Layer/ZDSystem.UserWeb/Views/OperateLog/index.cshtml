@@ -1,0 +1,107 @@
+﻿@model ZDSystem.Model.OperateLogListModel
+@{
+    ViewBag.Title = "操作日志";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+    function MRCenterMsg() {
+        this.bind = function () {
+            $.paging.config.form = "#conditionForm";
+            $.paging.bind();
+            $("#ddlps").val($("#ps").val());
+            $("#ddlps").change(function () {
+                $("#ps").val($(this).val());
+            });
+            $(".list_submit").click(function () {
+                $.paging.submit();
+            });
+        }
+    }
+
+    $(function () {
+        var user = new MRCenterMsg();
+        user.bind();
+    });    
+</script>
+<div class="channel_list">
+    <form method="get" id="conditionForm">
+    <div class="con_search_box clearfix">
+        <p class="sc_p">
+            创建时间:
+            <input class="list_input Wdate" type="text" name="s" id="s" onclick="WdatePicker({maxDate:'#F{$dp.$D(\'e\')||\'%y-%M-%d\'}',minDate:'#F{$dp.$D(\'e\',{M:-1})}'});" />至
+            <input class="list_input Wdate" type="text" name="e" id="e" onclick="WdatePicker({maxDate:'#F{$dp.$D(\'s\',{M:1})||\'%y-%M-%d\'}',minDate:'#F{$dp.$D(\'s\')}'});" />
+        </p>
+        <p class="sc_p">
+            订单号:
+            <input class="widthinput" type="text" name="OrderNo" maxlength="50" style="width: 90px;" />
+        </p>
+        <p class="sc_p">
+            <input class="list_submit" type="button" />
+        </p>
+    </div>
+    <input type="hidden" value="0" name="pi" id="pi" />
+    <input type="hidden" value="10" name="ps" id="ps" />
+    <input type="hidden" value="@Model.TotalCount" id="count" />
+    </form>
+    <div>
+    </div>
+    <div class="list_content" id="divshelflist">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>
+                        编号
+                    </th>
+                    <th>
+                        订单号
+                    </th>
+                    <th>
+                        备注
+                    </th>
+                    <th>
+                        操作人
+                    </th>
+                    <th>
+                        创建时间
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (ZDSystem.Entity.MOperateLog item in Model.List)
+                {
+                    <tr>
+                        <td>
+                            @item.LogId
+                        </td>
+                        <td>
+                            @item.OrderNo
+                        </td>
+                        <td>
+                            @item.Content
+                        </td>
+                        <td>
+                            @item.Operator
+                        </td>
+                        <td>
+                            @item.CreateTime
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="list_number">
+            共 @Model.TotalCount 条记录 | 每页显示:
+            <select id="ddlps">
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+            </select>
+            条
+        </div>
+        <div id="pager" class="list_pager">
+        </div>
+        <div style="clear: both;">
+        </div>
+    </div>
+</div>

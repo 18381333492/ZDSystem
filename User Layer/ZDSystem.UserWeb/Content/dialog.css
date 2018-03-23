@@ -1,0 +1,37 @@
+﻿body{color: #2B2B2B;
+    font: 12px/1.5 tahoma,arial,宋体;}
+
+/*+++ 弹出框整体  ++++*/
+.popup_window_con{font-size:12px;padding:10px 0px 30px 40px;line-height:40px;} 
+.popup_window_con table{margin:0; padding:0;}
+.pop_td_name{text-align: right;font-weight: normal; color:#055586;}
+.pop_td_con{position:relative;display:block; margin-right:10px;}
+
+/*select样式*/
+.pop_sel{padding:4px 1px; width:209px;border:1px solid #7f9db9;}
+
+/*text样式*/
+.pop_box_type{padding-left:5px;padding-right:2px;font-size:12px;height:23px;line-height:23px; width:200px;border: 1px solid #7f9db9;}
+
+/*textarea样式*/
+.pop_textarea_til{ line-height:24px;}
+.pop_textarea{padding-top:5px;width:202px;height:50px; font-size:12px; padding-left:5px;border: 1px solid #7f9db9;}
+
+
+
+/*提示信息*/
+.pop_user_prompt{color:#aaa;display:block;height:23px;top:9px;left:5px;position:absolute; line-height:23px;}
+
+/***错误信息***/
+input.pop_error,
+textarea.pop_error{border: 1px solid #f6b565; color:Red;}
+span.pop_error{left:0;top:32px;background:url(/content/Images/msg_bg.png) no-repeat 5px 4px #ffffeb;line-height:20px;width:179px;border:1px solid #f6b565;display:block;position:absolute;color:#666;padding:2px 0 2px 28px; font-family:宋体; z-index:1;}
+.td_txtarea .pop_error{top:57px;}
+.td_txtarea span.pop_user_prompt{top:5px;}
+/***星号样式***/
+.asterisk{ color:Red; font-family:宋体; margin-right:5px;}
+
+/**单复选框居中**/
+input.frame_middle{vertical-align: -2px;_vertical-align: -1px;margin-right: 2px;}
+
+.w700{width:700px;}

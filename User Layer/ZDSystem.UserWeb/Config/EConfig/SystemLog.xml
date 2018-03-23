@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<config>
+  <table name="System_Log">
+    <fields>
+      <field pname="LogId" name="Log_Id" label="编号"/>
+      <field pname="ObjectName" name="Object_Name" label="对象名称"/>
+      <field pname="Content" name="Content" label="内容"/>
+      <field pname="CreateTime" name="Create_Time" label="创建时间"/>
+      <field pname="TraceInfo" name="TRACE_INFO" label="堆栈信息"/>
+    </fields>
+  </table>
+  <template>
+    <item name="getList">
+      <sql>
+        <![CDATA[
+          select * from System_Log  where 1=1
+        ]]>
+      </sql>
+    </item>
+    <item name="getCount">
+      <sql>
+        <![CDATA[
+          select count(*) from System_Log  where 1=1
+        ]]>
+      </sql>
+    </item>
+  </template>
+</config>

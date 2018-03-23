@@ -1,0 +1,63 @@
+﻿.FAQ
+{
+    font-family: 'Microsoft YaHei';
+    width: 95%;
+    margin: 0 auto;
+}
+
+p
+{
+    margin: 0;
+    margin-top: 0.08rem;
+}
+
+.FAQ ul
+{
+    list-style: none;
+    padding: 0;
+}
+
+.FAQ ul li
+{
+    padding-left: 0.6rem;
+    padding-right: 0.6rem;
+    border-bottom: 1px solid #eee;
+}
+
+.FAQ .tit
+{
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    line-height: 2rem;
+    font-size: 0.9rem;
+    font-weight: 400;
+    border-bottom: 1px solid #eee;
+    position: relative;
+}
+
+.FAQ .conten
+{
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+    font-size: 0.8rem;
+    line-height: 1.2rem;
+    color: #F75C2F;
+    display: none;
+}
+
+.btn
+{
+    color: #F75C2F;
+    border: 0.08rem solid #F75C2F;
+    font-weight: 400;
+    padding: 0.47rem 1.19rem;
+}
+
+li i
+{
+    font-size: 3rem;
+    position: absolute;
+    right: 0;
+    top: 15px;
+    margin-right: 20px;
+}

@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3F302949-4B5F-4E73-BF28-3A9EF4090419}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ZDSystem.DBAccess</RootNamespace>
+    <AssemblyName>ZDSystem.DBAccess</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Lib4Net4.Core">
+      <HintPath>..\..\..\..\..\..\..\..\ClassLibrary\Lib4Net4.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Lib4Net4.Framework">
+      <HintPath>..\..\..\..\..\..\..\..\ClassLibrary\Lib4Net4.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DailyAccountSnapshotDataAccess.cs" />
+    <Compile Include="DownChannelDataAccess.cs" />
+    <Compile Include="OperateLogDataAccess.cs" />
+    <Compile Include="OrderDeliveryDataAccess.cs" />
+    <Compile Include="OrderMainDataAccess.cs" />
+    <Compile Include="OrderRefundDataAccess.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="OrderNotifyDataAccess.cs" />
+    <Compile Include="ReceiptAccountInfoDataAccess.cs" />
+    <Compile Include="ReceiptFundRecordDataAccess.cs" />
+    <Compile Include="SysDictionaryDataAccess.cs" />
+    <Compile Include="SystemLogDataAccess.cs" />
+    <Compile Include="UpChannelConfigDataAccess.cs" />
+    <Compile Include="ZdCouponUsedDataAccess.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common Layer\ZDSystem.Entity\ZDSystem.Entity.csproj">
+      <Project>{BF4BE8ED-1502-464D-8341-F260356A7324}</Project>
+      <Name>ZDSystem.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common Layer\ZDSystem.Interfaces\ZDSystem.Interfaces.csproj">
+      <Project>{E454D93D-E193-4CDA-BC73-668644E32C09}</Project>
+      <Name>ZDSystem.Interfaces</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

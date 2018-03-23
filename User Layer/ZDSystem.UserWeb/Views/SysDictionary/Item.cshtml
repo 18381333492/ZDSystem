@@ -1,0 +1,86 @@
+﻿@model ZDSystem.Model.SysDictionaryItemModel
+@{
+    Layout = null;
+}
+@*<link href="/Content/jquery.select.debug.css" rel="stylesheet" type="text/css" />
+<script src="/Scripts/plugin.chinese.to.pinyin.js" type="text/javascript"></script>
+<script src="/Scripts/jquery.select.debug.js" type="text/javascript"></script>*@
+<script src="/Scripts/Calendar/WdatePicker.js" type="text/javascript"></script>
+<script src="/Scripts/popDialog.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function () {
+        //        $('#OptionalInfo').hide();
+        //        $("#mainForm").find('select').sSelect();
+        //        $('#open').click(function () {
+        //            if ($('#OptionalInfo').is(':hidden')) {
+        //                $('#open').attr('class', 'up_btn');
+        //                $('#OptionalInfo').show();
+        //            } else {
+        //                $('#open').attr('class', 'unfold_btn');
+        //                $('#OptionalInfo').hide();
+        //            }
+        //        });
+
+        $('#mainForm').validate({
+            errorClass: "error",
+            focusInvalid: true,
+            submitHandler: function (form) {
+
+                var data = $("#mainForm").serialize();
+                $.ajax({
+                    type: "post",
+                    data: data,
+                    url: "/SysDictionary/Item",
+                    success: function (data) {
+                        var res = $.parseJSON(data);
+                        if (res.Status) {
+                            art.dialog.tips('保存成功');
+                            return true;
+                        }
+                        else {
+                            alert(res.Message);
+                        }
+                    },
+                    error: function () {
+                        alert("操作失败，请重试");
+                    }
+                });
+            },
+            rules: {
+                name: { required: true },
+                value: { required: true },
+                type: { required: true }
+            }
+        });
+    });
+
+</script>
+<form id="mainForm" method="post">
+<input type="hidden" value="@Model.Id" name="__id" />
+<table>
+    <tr>
+        <td>
+            <em class="required">*</em>名称:
+        </td>
+        <td>
+            <input type="text" class="widthinput" id="name" name="name" value="@Model.CurrentModel.Name" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <em class="required">*</em>值:
+        </td>
+        <td>
+            <input type="text" class="widthinput" id="value" name="value" value="@Model.CurrentModel.Value" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <em class="required">*</em>类型:
+        </td>
+        <td>
+            <input type="text" class="widthinput" id="type" name="type" value="@Model.CurrentModel.Type" />
+        </td>
+    </tr>
+</table>
+</form>

@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>   
+    <meta charset="utf-8">  
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no"> 
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <script type="text/javascript">
+        //百度访问统计
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?f39018510c5071b841c6054f67f1a92b";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+
+        function body_init() {
+            var eles = document.getElementsByClassName("baidu");
+            for (var i = 0, len = eles.length; i < len; i++) {
+                var act = eles[i].getAttribute("opt") || 'unkown';
+                eles[i].addEventListener("click", function () {
+                    console.log("百度统计到你了：", act);
+                    _hmt.push(['_trackEvent', act, 'click', window.location.href]);
+                });
+            }
+            document.body.addEventListener('touchstart', function () { });
+        }
+
+        function MBC_PAY(p) {
+            var phontType = document.getElementById("currentPhoneType").value;
+            if (phontType == "iPhoneOS") {
+                //ios 系统调用支付
+                //新版
+                window.location = "mbspay://direct?" + p;
+            } else {
+                //新版
+                if (mbspay) {
+                    mbspay.directpay(p);
+                } else {
+                    window.location = "mbspay://direct?" + p;
+                }
+            }
+        }
+    </script>
+</head>
+<body onload="body_init()">
+    <input type="hidden" id="{{.xsrf_key}}" value="{{.xsrf_token}}">
+    <input type="hidden" id="currentPhoneType" value="{{.phone_type}}">
+    <input type="hidden" id="ccbUserID" value="{{.ccb_user_id}}">
+    <input type="hidden" id="apiURL" value="{{.api_url}}">
+    <input type="hidden" id="staticImageUrl" value="{{.static_image_url}}">
+    <input type="hidden" id="sessionID" value="{{.session_id}}">
+    <input type="hidden" id="hotLine" value="{{.consumer_hotline}}">
+    <input type="hidden" id="downChannelNo" value="{{.down_channel_no}}">
+    <app-root></app-root>
+    <script type="text/javascript" src="inline.bundle.js"></script>
+    <script type="text/javascript" src="polyfills.bundle.js"></script>
+    <script type="text/javascript" src="styles.bundle.js"></script>
+    <script type="text/javascript" src="vendor.bundle.js"></script>
+    <script type="text/javascript" src="main.bundle.js"></script>
+</body>
+</html>

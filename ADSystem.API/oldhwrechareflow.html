@@ -1,0 +1,258 @@
+﻿<!DOCTYPE>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>流量充值</title>
+    <!-- 引入 WeUI -->
+        <link href="/WeUI/weui.min.css" rel="stylesheet" type="text/css" />
+    <link href="/WeUI/jquery-weui.min.css" rel="stylesheet" type="text/css" />
+    <script src="/WeUI/jquery.min.js" type="text/javascript"></script>
+    <script src="/WeUI/jquery-weui.min.js" type="text/javascript"></script>
+    <script src="js/common.js" type="text/javascript"></script>
+    <script src="js/recharge_flow.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            var res = localStorage.getItem("recharge_mobile");
+            $("input[name=mobile]").val(res);
+            value = $("input[name=mobile]").val().replace(/\D/g, '');
+            if (!client.regex.isEmpty(value)) {
+                if (!client.regex.isPhone(value)) {
+                    initDefalutProduct();
+                    defalult_style();
+                } else {
+                    $('.weui-icon-clear').show();
+                    LoadMobile(value);
+                }
+            } else {
+                initDefalutProduct();
+                defalult_style();
+            }
+            $("#nav_direcharge").click(function () {
+                var index = $(this).index();
+                $(this).addClass("weui-bar__item--on").siblings().removeClass("weui-bar__item--on");
+                $('.weui-tab__bd .weui-tab__bd-item').eq(index).addClass("weui-tab__bd-item--active").siblings().removeClass("weui-tab__bd-item--active");
+                var value = $("input[name=mobile]").val();
+                if (!client.regex.isEmpty(value)) {
+                    if (!client.regex.isPhone(value.replace(/\D/g, ''))) {
+                        initDefalutProduct();
+                        defalut_dre_click_style();
+                    } else {
+                        initDireDetailsTab(4);
+                        dre_click_style();
+                    }
+                } else {
+                    initDefalutProduct();
+                    defalut_dre_click_style();
+                }
+
+            });
+            $("#nav_gratia").click(function () {
+                var index = $(this).index();
+                $(this).addClass("weui-bar__item--on").siblings().removeClass("weui-bar__item--on");
+                $('.weui-tab__bd .weui-tab__bd-item').eq(index).addClass("weui-tab__bd-item--active").siblings().removeClass("weui-tab__bd-item--active");
+                var value = $("input[name=mobile]").val();
+                if (!client.regex.isEmpty(value)) {
+                    if (!client.regex.isPhone(value.replace(/\D/g, ''))) {
+                        initDefalutProduct();
+                        defalut_gra_click_style();
+                    } else {
+                        initGraDetailsTab(4);
+                        gra_click_style();
+                    }
+                } else {
+                    initDefalutProduct();
+                    defalut_gra_click_style();
+                }
+
+            });
+
+            //清除输入框的值
+            $('.weui-icon-clear').on("click", function () {
+                $('input[name=mobile]').val('');
+                $('input[name=mobile]').removeClass("mobile_focus");
+                $(this).hide();
+                //关闭效果    
+                $('#tip').val("移动 联通 电信");
+                $('#tip').css("color", "#ccc");
+                initDefalutProduct();
+                if ($('.weui-bar__item--on').index() == 0) {
+                    defalut_dre_click_style();
+                } else {
+                    defalut_gra_click_style();
+                }
+                $('input[name=mobile]').focus();
+            });
+
+
+            //输入手机号码效果的切换
+            $('input[name=mobile]').on("keyup", function (e) {
+                var value = $(this).val();
+                if (e.keyCode != 8) {
+                    if (/^[0-9]*$/.test(value.substr(value.length - 1, 1))) {
+                        if (value.length == 4 || value.length == 9) {
+                            var i = value.length;
+                            value = client.string.insert(value, i - 1, " ");
+                            $(this).val(value);
+                        }
+                    }
+                    else {
+                        $(this).val(value.substr(0, value.length - 1));
+                        if ($(this).val().length == 0)
+                            $(this).removeClass("mobile_focus");
+                    }
+                }
+                else {
+                    if (value.length == 9 || value.length == 4)
+                        value = $(this).val(value.trim());
+                    if (value.length < 13) {
+                        //关闭效果    
+                        $('#tip').val("移动 联通 电信");
+                        $('#tip').css("color", "#CACACA");
+                        initDefalutProduct();
+                        if ($('.weui-bar__item--on').index() == 0) {
+                            defalut_dre_click_style();
+                        } else {
+                            defalut_gra_click_style();
+                        }
+                    }
+                    if ($('ul').hasClass("able_ul")) {
+                        $('ul').removeClass("able_ul").addClass("unable_ul");
+                    }
+                }
+            });
+
+            //样式的切换
+            $('input[name=mobile]').on("input", function () {
+                var value = $(this).val();
+                if (value.length > 0) $('.weui-icon-clear').show();
+                if (!$(this).hasClass("mobile_focus")) {
+                    $(this).addClass("mobile_focus");
+                }
+                if (value.length == 0) {
+                    $('.weui-icon-clear').hide()
+                    $(this).removeClass("mobile_focus");
+                }
+                if (value.replace(/\D/g, '').length > 0 && client.regex.isPhone(value.replace(/\D/g, ''))) {
+                    //如果直接赋值号码
+                    value = value.replace(/\D/g, '');
+                    value = client.string.insert(value, 3, ' ');
+                    value = client.string.insert(value, 8, ' ');
+                    $(this).val(value);
+                }
+                if (value.length == 13) {
+                    $(this).blur(); //失去焦点
+                    value = value.replace(/\D/g, '');
+                    //判断检查号码的区段
+                    if (client.regex.isPhone(value)) {
+                        LoadMobile(value);
+                    }
+                    else {
+                        setTimeout(function () {
+                            $.toast("手机号码格式错误", "text");
+                        }, 500);
+                    }
+                }
+            });
+
+            //判断号码区段
+
+        });
+    </script>
+    <style type="text/css">
+        .nav_show_line{ border-bottom:2px solid green; color:green;}
+.nav_hide_line{ border-bottom:0px solid green; color:black;}
+.nav_defalut_show_line{ border-bottom:2px solid black; color:black;}
+.nav_defalut_hide_line{ border-bottom:0px solid black; color:black;}
+        img
+        {
+            height: 30px;
+    width: 30px;}
+        p
+        {
+            color: Black;
+        }
+        
+        .show_detail_btn
+        {
+            float: left;
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+            margin-left: 6px;
+            margin-top: 0px;
+        }
+        .main_list
+        {
+            margin-left: 14px;
+            margin-top: 5px;
+            padding-bottom: 16px;
+        }
+        .details_info
+        {
+            font-size: 14px;
+        }
+        .details_info_des
+        {
+            color: #767676;
+            font-size: 12px;
+        }
+        .details_info_btn
+        {
+            width: 60px;
+            height: 33px;
+            font-size: 12px;
+            color: green;
+        }
+        
+        .product_group
+        {
+            margin-top: 0px;
+            padding-top: 0px;
+        }
+        .weui-cells::before
+        {
+            border: none;
+        }
+        .weui-cells
+        {
+            margin-top: 0px;
+        }
+        .details_info img
+        {
+            height: 20px;
+            width: 45px;
+        }
+        .mobile_focus{
+            font-weight:600;
+        }
+             
+    </style>
+</head>
+<body ontouchstart style="background-color: white;">
+    <div class="weui-cells weui-cells_form" style="margin-top: 0px; position:absolute;top:0px; z-index:100">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <input class="weui-input mobile_blur" type="tel" name="mobile" maxlength="13" placeholder="请输入手机号码"
+                    style="height: 30px; font-size: 21px;width:90%;">
+                <a class="weui-icon-clear" style="display: inline-block;margin: auto;margin-bottom: 5px; display:none"></a>
+                <input class="weui-input" id="tip" type="text" style="height: 18px; font-size: 14px;
+                    color: #cacaca;" readonly="readonly" value="移动 联通 电信">
+            </div>
+        </div>
+    </div>
+    <div class="weui-tab">
+        <div class="weui-navbar" style=" top:68px;">
+            <a class="weui-navbar__item weui-bar__item--on"  id="nav_direcharge">
+                直充流量包</a><a class="weui-navbar__item" id="nav_gratia">特惠流量包</a>
+        </div>
+        <div class="weui-tab__bd" style=" padding-top:120px;">
+            <div id="dire_tab" class="weui-tab__bd-item weui-tab__bd-item--active">
+              
+            </div>
+            <div id="gra_tab" class="weui-tab__bd-item">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

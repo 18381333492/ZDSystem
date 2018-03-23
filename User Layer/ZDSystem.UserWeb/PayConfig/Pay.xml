@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<PayConfigs>
+  <!--*******************微信支付相关的配置信息***********************-->
+  <TenPay name="微信支付">
+
+    <!--微信公众号唯一标识-->
+    <appid>wx094926e452737268</appid>
+
+    <!--商户号-->
+    <mch_id>1448512202</mch_id>
+
+    <!--密钥(key设置路径：微信商户平台(pay.weixin.qq.com)账户设置-API安全-密钥设置)-->
+    <key>HJHSJHFSUOUSF564564HJJJHHJSDSDSD</key>
+
+    <!--微信支付异步回调地址-->
+    <notify_url>http://t17m267950.imwork.net/Pay/notify</notify_url>
+
+    <!--微信支付同步通知地址-->
+    <return_url></return_url>
+
+    <!--证书存放路径-->
+    <SSLCERT_PATH>PayConfig\\apiclient_cert.p12</SSLCERT_PATH>
+    
+ </TenPay>
+
+  <!--*******************支付宝支付相关的配置信息***********************-->
+  <Alipay name="支付宝支付">
+
+    <!--支付宝分配给开发者的应用ID-->
+    <app_id>wx094926e452737268</app_id>
+
+    <!--密钥(key设置路径：微信商户平台(pay.weixin.qq.com)账户设置-API安全-密钥设置)-->
+    <key>HJHSJHFSUOUSF564564HJJJHHJSDSDSD</key>
+
+    <!--微信支付异步回调地址-->
+    <return_url>http://t17m267950.imwork.net/Pay/notify</return_url>
+
+    <!--微信支付同步通知地址-->
+    <async_url></async_url>
+
+    <!--证书存放路径-->
+    <SSLCERT_PATH>PayConfig\\apiclient_cert.p12</SSLCERT_PATH>
+
+  </Alipay>
+  
+</PayConfigs>

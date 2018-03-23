@@ -1,0 +1,236 @@
+﻿@model ZDSystem.Model.OrderMainListModel
+@{
+    ViewBag.Title = "订单表";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="/Scripts/Calendar/WdatePicker.js?ver=2" type="text/javascript"></script>
+<script src="/Scripts/jquery.pagination.js" type="text/javascript"></script>
+<script src="/Scripts/jquery.query.js" type="text/javascript"></script>
+<script src="/Scripts/jquery.paging.js" type="text/javascript"></script>
+<script type="text/javascript">
+    function MRCenterMsg() {
+        this.bind = function () {
+            $.paging.config.form = "#conditionForm";
+            $.paging.bind();
+            $("#ddlps").val($("#ps").val());
+            $("#ddlps").change(function () {
+                $("#ps").val($(this).val());
+            });
+            $(".list_submit").click(function () {
+                $.paging.submit();
+            });
+        }
+    }
+    function toggleHourChkBox(dp) {
+        if ($("#e").val() == getCurrentDate()) {
+            $("#h").parent().show().next('label').show();
+        } else {
+            $("#h").removeAttr("checked").parent().hide().next('label').hide();
+        }
+    }
+    $(function () {
+        var user = new MRCenterMsg();
+        user.bind();
+        toggleHourChkBox();
+        if (Request.QueryString("pi") && !Request.QueryString("h")) $("#h").removeAttr("checked");
+        else $("#h").attr("checked", "checked");
+    });
+    // 进行审核
+    function OrderManaul(id, title) {
+        debugger;
+        var html = $.ajax({ url: "/ManualReview/OrderManaul/" + id + "?" + Math.random(), async: false }).responseText;
+        art.dialog({
+            content: html,
+            title: title,
+            lock: true,
+            ok: function () {
+                $('#mainForm').submit();
+                return false;
+            },
+            okVal: "提交",
+            cancelVal: "取消",
+            cancel: true
+        });
+    }
+</script>
+<div class="channel_list">
+    <form method="get" id="conditionForm">
+    <div class="con_search_box clearfix">
+        <p class="sc_p">
+            时间:
+            <input class="list_input Wdate" type="text" name="s" id="s" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'%y-%M-%d'});" value="@DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd")"/>
+            -
+            <input class="list_input Wdate" type="text" name="t" id="e" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'s\')}',maxDate:'%y-%M-%d'});" value="@DateTime.Now.ToString("yyyy-MM-dd")"/>
+        </p>
+        <p class="sc_p">
+            订单状态:
+            @Html.DropDownList("OrderStatus", new SelectList(SysDictionaryService.Instance.GetDataListByType("OrderStatus"), "Value", "Name"), "--请选择--", new { style = " width:120px;" })
+        </p>
+        <p class="sc_p">
+            退款状态:
+            @Html.DropDownList("RefundState", new SelectList(SysDictionaryService.Instance.GetDataListByType("RefundStatus"), "Value", "Name"), "--请选择--", new { style = " width:120px;" })
+        </p>
+        <p class="sc_p">
+            支付状态:
+            @Html.DropDownList("PayStatus", new SelectList(SysDictionaryService.Instance.GetDataListByType("PayStatus"), "Value", "Name"), "--请选择--", new { style = " width:120px;" })
+        </p>
+        <p class="sc_p">
+            支付类型:
+            @Html.DropDownList("PayType", new SelectList(SysDictionaryService.Instance.GetDataListByType("PayType"), "Value", "Name"), "--请选择--", new { style = " width:120px;" })
+        </p>
+        <p class="sc_p">
+            <input class="frame_middle" id="checked1" type="radio" name="keytype" value="1" />
+            <label for="checked1">
+                订单号</label>
+            <input class="frame_middle" id="checked2" type="radio" name="keytype" value="2" />
+            <label for="checked2">
+                中大订单号</label>
+            <input type="radio" class="frame_middle" name="keytype" value="3" id="checked3" checked="checked" />
+            <label for="checked3">
+                账户</label>
+            <input type="radio" class="frame_middle" name="keytype" value="4" id="checked4" checked="checked" />
+            <label for="checked4">
+                面值</label>
+            <input class="sc_frame" style="width: 180px;" type="text" name="KeyWords" id="key"
+                value="" />
+        </p>
+        <p class="sc_p">
+            <input class="list_submit" type="button" />
+            @*            <input type="button" value="" class="export_btn hand" id="btnExport" />*@
+        </p>
+    </div>
+    <input type="hidden" value="0" name="pi" id="pi" />
+    <input type="hidden" value="10" name="ps" id="ps" />
+    <input type="hidden" value="@Model.TotalCount" id="count" />
+    </form>
+    <div>
+    </div>
+    <div class="list_content" id="divshelflist">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>
+                        下单时间
+                    </th>
+                    <th>
+                        订单号
+                    </th>
+                    <th>
+                        中大订单号
+                    </th>
+                    <th>
+                        产品名称
+                    </th>
+                    <th>
+                        产品编码
+                    </th>
+                    <th>
+                        充值账号
+                    </th>
+                    <th>
+                        充值面值
+                    </th>
+                    <th>
+                        支付金额
+                    </th>
+                    <th>
+                        支付类型
+                    </th>
+                    <th>
+                        充值类型
+                    </th>
+                    <th>
+                        订单状态
+                    </th>
+                    <th>
+                        支付状态
+                    </th>
+                    <th>
+                        退款状态
+                    </th>
+                    <th>
+                        中大订单时间
+                    </th>
+                    <th>
+                        完成时间
+                    </th>
+                    <th>
+                        操作
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (ZDSystem.Entity.MOrderMain item in Model.List)
+                {
+                    <tr>
+                        <td>
+                            @if (item.CreateTime.Value != null)
+                            {
+                                @item.CreateTime.Value.ToString("MM-dd HH:mm:ss")
+                            }
+                        </td>
+                        <td>
+                            <a href="/OrderMain/Details?id=@item.OrderNo" title="点击查看详情" target="_blank">@item.OrderNo</a>
+                        </td>
+                        <td>
+                            @item.PartnerOrderNo
+                        </td>
+                        <td>
+                            @item.ProductName
+                        </td>
+                        <td>
+                            @item.ProductId
+                        </td>
+                        <td>
+                            @item.Mobile
+                        </td>
+                        <td>
+                            @item.Face
+                        </td>
+                        <td>
+                            @item.Price
+                        </td>
+                        <td>
+                            @item.GetDataValue("PayTypeName")
+                        </td>
+                        <td>
+                            @item.GetDataValue("CardTypeName")
+                        </td>
+                        <td  @(item.OrderStatus == 90 ? "style=color:#ff6600" : "")>
+                            @item.GetDataValue("OrderStatusLabel")
+                        </td>
+                        <td>
+                            @item.GetDataValue("PayStatusLabel")
+                        </td>
+                        <td>
+                            @item.GetDataValue("RefundStatus")
+                        </td>
+                        <td>
+                            @item.ZdOrderTime
+                        </td>
+                        <td>
+                            @item.FinishTime
+                        </td>
+                        <td>
+                            <a href="javascript:void(0)" onclick="return OrderManaul('@item.OrderNo','审核')">审核</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="list_number">
+            共 @Model.TotalCount 条记录 | 每页显示:
+            <select id="ddlps">
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+            </select>
+            条
+        </div>
+        <div id="pager" class="list_pager">
+        </div>
+        <div style="clear: both;">
+        </div>
+    </div>
+</div>

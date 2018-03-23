@@ -1,0 +1,101 @@
+﻿@{
+    Layout = null;
+}
+<script src="/Scripts/Calendar/WdatePicker.js" type="text/javascript"></script>
+<script src="/Scripts/popDialog.js" type="text/javascript"></script>
+<script src="/Scripts/jquery.select.debug.js" type="text/javascript"></script>
+<link href="/Content/jquery.select.debug.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+    $(function () {
+        $('select').each(function () {
+            if ($(this).attr("id") == "ddlps") {
+                SelectHelper.init();
+            }
+            else {
+                if ($(this).css('display') == "none") {
+                }
+                else {
+                    $(this).sSelect();
+                }
+            }
+        });
+        $('select[name=Manaul]').change();
+        $('#mainForm').validate({
+            errorClass: "error",
+            focusInvalid: true,
+            submitHandler: function (form) {
+
+                var data = $("#mainForm").serialize();
+                $.ajax({
+                    type: "post",
+                    data: data,
+                    url: "/ManualReview/OrderManaul",
+                    success: function (data) {
+                        var res = $.parseJSON(data);
+                        if (res.Status) {
+                            art.dialog.tips('审核成功');
+                            $.paging.submit();
+                            return true;
+                        }
+                        else {
+                            alert(res.Message);
+                        }
+                    },
+                    error: function () {
+                        alert("操作失败，请重试");
+                    }
+                });
+            },
+            rules: {
+                name: { required: true },
+                value: { required: true },
+                type: { required: true }
+            }
+        });
+    });
+    function change(obj) {
+        var code = $(obj).val();
+        if (code == "1") {
+            $('#Remark').text('审核成功');
+        } else if (code == '2') {
+            $('#Remark').text('审核失败');
+        }
+    }
+</script>
+<form id="mainForm" method="post">
+<input type="hidden" value="@ViewBag.Id" name="__id" />
+<table>
+    <tr>
+        <td>
+            <em class="required">*</em>订单号:
+        </td>
+        <td>
+            <label>
+                @ViewBag.Id</label>
+        </td>
+    </tr>
+     <tr style="height: 10px;">
+    </tr>
+    <tr>
+        <td>
+            <em class="required">*</em>处理方式:
+        </td>
+        <td>
+            <select name="Manaul" onchange="change(this);">
+                <option value="1">成功</option>
+                <option value="2">失败</option>
+            </select>
+        </td>
+    </tr>
+    <tr style="height: 10px;">
+    </tr>
+    <tr>
+        <td>
+            <em class="required">*</em>备注:
+        </td>
+        <td>
+            <textarea name="Remark" rows="3" cols="20" id="Remark"></textarea>
+        </td>
+    </tr>
+</table>
+</form>

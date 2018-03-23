@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Lib4NetLog>
+  <Appender name="FileAppender" level="All" source="web"
+          type="Lib4Net.Logs.Appenders.FileAppender">
+    <param name="File" value="~/logs\%sr\%l\%date.log"/>
+    <param name="DateFormat" value="YYYYMMddhhmmss"/>
+    <param name="MaxFileSize" value="1M"/>
+    <layouts>
+      <layout level="Fatal">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br%e%br%trace%br</layout>
+      <layout level="Error">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br%e%br%trace%br</layout>
+      <layout level="Debug">[%yy-%mm-%dd %h:%mi:%s][%sr] %message%br</layout>
+      <layout level="Info">[%yy-%mm-%dd %h:%mi:%s:%fff][%sr] %message%br</layout>
+    </layouts>
+  </Appender>
+</Lib4NetLog>

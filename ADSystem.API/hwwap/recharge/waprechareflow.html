@@ -1,0 +1,222 @@
+﻿<!DOCTYPE>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>流量充值</title>
+    <!-- 引入 WeUI -->
+    <link href="/WeUI/weui.min.css" rel="stylesheet" type="text/css" />
+    <link href="/WeUI/jquery-weui.min.css" rel="stylesheet" type="text/css" />
+    <script src="/WeUI/jquery.min.js" type="text/javascript"></script>
+    <script src="/WeUI/jquery-weui.min.js" type="text/javascript"></script>
+    <style type="text/css">
+        .weui-cells:after {
+            right: 15px;
+            left:15px;
+        }
+        .detailinfo:before
+        {
+            right: 15px;
+            left:15px;
+        }
+        .weui-cell:before {
+            right: 15px;
+        }
+        .mobile_focus{
+            font-weight:600;
+        }
+        /*style的第一种样式*/
+        .able_ul{
+            list-style:none;
+            width:100%;
+        }
+        .able_ul li
+        {
+            position:relative;
+            float:left;
+            border:1px solid #FF4500;
+            height:60px;
+            text-align:center;
+            width:29.1%;
+            line-height:15px;
+            border-radius:5px;
+            margin-right:5%;
+            margin-bottom:10px;
+            color:#FF4500;
+        }
+        .able_ul li p{
+            margin-top:15px;
+        }
+        .able_ul li span{
+            font-size:10px;
+        }
+         .able_ul li img
+        {
+            position: absolute;
+            top: -5px;
+            right:-5px;
+            width: 44.8px;
+            height: 20px;
+        }
+        .unable_ul li img
+        {
+            position: absolute;
+            top: -5px;
+            right:-5px;
+            width: 44.8px;
+            height: 20px;
+            display:none
+        }
+        /*style的第二种样式*/
+        .unable_ul{
+            list-style:none;
+            width:100%;
+        }
+        .unable_ul li
+        {
+            position:relative;
+            float:left;
+            border:1px solid #CACACA;
+            height:60px;
+            text-align:center;
+            width:29.1%;
+            line-height:60px;
+            border-radius:5px;
+            margin-right:5%;
+            margin-bottom:10px;
+            color:#CACACA;
+        }
+        .unable_ul li span{
+            display:none;
+            font-size:10px;
+        }
+        ul li:nth-child(3n+0)
+        {
+          margin-right:0%;
+        }
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #FF4500; opacity:1; 
+}
+
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #FF4500;opacity:1;
+}
+
+input:-ms-input-placeholder{
+    color:#FF4500;opacity:1;
+}
+
+input::-webkit-input-placeholder{
+    color: #FF4500;opacity:1;
+}
+.selectItem
+{
+     background-color:#FF4500;
+}
+.selectItem span,.selectItem p
+{
+     color:#fff;
+}
+/*按钮的样式的重写*/
+.weui-btn
+{
+   padding:0px;
+   font-size: 13px;
+}
+.weui-btn_plain-primary
+{
+    color: #FF4500;
+    border: 1px solid #FF4500;
+}
+/*三角形的样式*/
+.icon_cash 
+{ 
+ background-color:#0cb6fa;
+ color:#fff;
+ font-size:12px; 
+ position: relative; 
+ display: inline-block;
+ height: 18px;
+ line-height: 18px;
+ padding:0 2px 0 2px;
+} 
+.icon_cash:before
+{ 
+content:""; 
+position: absolute; 
+right: 100%; 
+top: 4px; 
+width: 0; 
+height: 0; 
+border-top: 5px solid transparent; 
+border-right: 5px solid #0cb6fa; 
+border-bottom: 5px solid transparent; 
+border-left:5px solid  transparent;
+} 
+</style>    
+</head>
+<body ontouchstart style="background-color: white;">
+    <div class="weui-cells weui-cells_form" style="margin-top: 0px; position:absolute;top:0px; z-index:100">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <input class="weui-input mobile_blur" type="tel" name="mobile" maxlength="13" placeholder="请输入手机号码"
+                    style="height: 30px; font-size: 21px;width:90%;">
+                <a class="weui-icon-clear" style="display: inline-block;margin: auto;margin-bottom: 5px; display:none"></a>
+                <input class="weui-input" id="tip" type="text" style="height: 18px; font-size: 14px;
+                    color: #cacaca;" readonly="readonly" value="移动 联通 电信">
+            </div>
+        </div>
+        <div class="weui-cell" style="padding-bottom:0px;">
+            <div class="weui-cell__bd">
+                <div style="display: block; width: 100%">
+                    <ul class="unable_ul">
+                        <li> 
+                            <p>100M</p>
+                            <span></span> 
+                        </li>
+                        <li>
+                            <p>200M</p>
+                            <span></span> 
+                        </li>
+                        <li>
+                            <p>300M</p>
+                            <span></span> 
+                        </li>
+                        <li>
+                            <p>500M</p>
+                            <span></span> 
+                        </li>
+                        <li>
+                            <p>1G</p>
+                            <span></span> 
+                        </li>
+                        <li>
+                            <p>2G</p>
+                            <span></span> 
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="weui-cells weui-cells_form detailinfo" style="margin-top: 0px;">
+          <!--  <div class="weui-cell">
+                <div class="weui-cell__bd details_list">
+                    <div style=" float:left; width:85% ">
+                       <span style=" font-weight:500">0.02元</span>
+                        <span style="font-size:12px;color:#a1a1a1">原价:<del>3.00</del></span>
+                        &nbsp;<span class="icon_cash">月底失效，到帐后生效</span>
+                        <br />
+                       <span style=" font-size:12px; background-color:#FF4500;color:White; padding:2px 5px;border-radius:4px;">全国流量</span>
+                       <span style=" font-size:12px; color:#a1a1a1">月底失效，到帐后生效</span>
+                    </div>
+                    <div style=" float:right; width:15%; text-align:center; right:0px;">
+                        <a  class="weui-btn weui-btn_plain-primary">购 买</a>
+                    </div>
+                </div>
+            </div>-->
+        </div>
+   </div>
+</body>
+</html>
+<script src="/js/common.js" type="text/javascript"></script>
+<script src="js/waprechareflow.js" type="text/javascript"></script>

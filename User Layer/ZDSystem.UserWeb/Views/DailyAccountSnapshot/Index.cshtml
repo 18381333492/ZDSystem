@@ -1,0 +1,213 @@
+﻿@model ZDSystem.Model.DailyAccountSnapshotListModel
+@{
+    ViewBag.Title = "商户每日快照";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+    function MRCenterMsg() {
+        this.bind = function () {
+            $.paging.config.form = "#conditionForm";
+            $.paging.bind();
+            $("#ddlps").val($("#ps").val());
+            $("#ddlps").change(function () {
+                $("#ps").val($(this).val());
+            });
+            $(".list_submit").click(function () {
+                $.paging.submit();
+            });
+        }
+    }
+
+    $(function () {
+        var user = new MRCenterMsg();
+        user.bind();
+    });    
+</script>
+<div class="channel_list">
+    <form method="get" id="conditionForm">
+    <div class="con_search_box clearfix">
+        <p class="sc_p">
+            交易日期:
+            <input class="list_input Wdate" type="text" name="s" id="s" onclick=" WdatePicker({ dateFmt: 'yyyy-MM-dd', maxDate: '%y-%M-%d' }); " value="@DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd")"/>
+            -
+            <input class="list_input Wdate" type="text" name="e" id="e" onclick=" WdatePicker({ dateFmt: 'yyyy-MM-dd', minDate: '#F{$dp.$D(\'s\')}', maxDate: '%y-%M-%d' }); " value="@DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd")"/>
+        </p>
+        <p class="sc_p">
+            下游渠道:
+            @Html.DropDownList("DownChannelNo", new SelectList(DownChannelSerivce.Instance.GetDataList(), "DownChannelNo", "ChannelName"), "--请选择--", new { style = " width:120px;" })
+        </p>
+        <p class="sc_p">
+            支付方式:
+            @Html.DropDownList("PayType", new SelectList(SysDictionaryService.Instance.GetDataListByType("PayType"), "Value", "Name"), "--请选择--", new { style = " width:120px;" })
+        </p>
+        <p class="sc_p">
+            业务类型:
+            @Html.DropDownList("BusinessType", new SelectList(SysDictionaryService.Instance.GetDataListByType("BusinessType"), "Value", "Name"), "--请选择--", new { style = " width:120px;" })
+        </p>
+        <p class="sc_p">
+            <input class="list_submit" type="button" />
+        </p>
+    </div>
+    <input type="hidden" value="0" name="pi" id="pi" />
+    <input type="hidden" value="10" name="ps" id="ps" />
+    <input type="hidden" value="@Model.TotalCount" id="count" />
+    </form>
+    <div>
+    </div>
+    <div class="list_content" id="divshelflist">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>
+                        交易日期
+                    </th>
+                    <th>
+                        下游渠道
+                    </th>
+                    <th>
+                        业务类型
+                    </th>
+                    <th>
+                        支付方式
+                    </th>
+                    <th>
+                        总笔数
+                    </th>
+                    <th>
+                        总金额
+                    </th>
+                    <th>
+                        支付笔数
+                    </th>
+                    <th>
+                        支付金额
+                    </th>
+                    <th>
+                        优惠券金额
+                    </th>
+                    <th>
+                        支付手续费
+                    </th>
+                    <th>
+                        支付率
+                    </th>
+                    <th>
+                        退款笔数
+                    </th>
+                    <th>
+                        退款金额
+                    </th>
+                    <th>
+                        退款率
+                    </th>
+                    <th>
+                        亏损手续费
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (ZDSystem.Entity.MDailyAccountSnapshot item in Model.List)
+                {
+                    <tr>
+                        <td>
+                            @item.CreateTime.Value.ToString("yyyy-MM-dd")
+                        </td>
+                        <td>
+                            @item.GetDataValue("ChannelName")
+                        </td>
+                        <td>
+                            @item.GetDataValue("Business")
+                        </td>
+                        <td>
+                            @item.GetDataValue("Pay")
+                        </td>
+                        <td>
+                            @item.GetDataValue("allOrdCntr")
+                        </td>
+                        <td>
+                            @item.GetDataValue("SumAllPrice")
+                        </td>
+                        <td>
+                            @item.GetDataValue("sucOrderCntr")
+                        </td>
+                        <td>
+                            @item.GetDataValue("SucMoney")
+                        </td>
+                        <td>
+                            @item.GetDataValue("SucCoupon")
+                        </td>
+                        <td>
+                            @item.GetDataValue("SumSerFee")
+                        </td>
+                        <td>
+                            @(item.GetDataValue("PayProbability").ToString() + "%")
+                        </td>
+                        <td>
+                            @item.GetDataValue("SumRefOrdCntr")
+                        </td>
+                        <td>
+                            @item.GetDataValue("SumRefMoney")
+                        </td>
+                        <td>
+                            @(item.GetDataValue("RefundProbability").ToString() + "%")
+                        </td>
+                        <td>
+                            @item.GetDataValue("SumLossSer")
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    @if (Model.Statistics != null)
+                    {
+                        <td>
+                            总计:
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                            @Model.Statistics.GetDataValue("allOrdCntr")
+                        </td>
+                        <td>
+                            @Model.Statistics.GetDataValue("SumAllPrice")
+                        </td>
+                        <td>
+                            @Model.Statistics.GetDataValue("sucOrderCntr")
+                        </td>
+                        <td>
+                            @Model.Statistics.GetDataValue("SucMoney")
+                        </td>
+                        <td>
+                            @Model.Statistics.GetDataValue("SucCoupon")
+                        </td>
+                        <td>
+                            @Model.Statistics.GetDataValue("SumSerFee")
+                        </td>
+                        <td>
+                            @(Model.Statistics.GetDataValue("PayProbability").ToString() + "%")
+                        </td>
+                        <td>
+                            @Model.Statistics.GetDataValue("SumRefOrdCntr")
+                        </td>
+                        <td>
+                            @Model.Statistics.GetDataValue("SumRefMoney")
+                        </td>
+                        <td>
+                            @(Model.Statistics.GetDataValue("RefundProbability").ToString() + "%")
+                        </td>
+                        <td>
+                            @Model.Statistics.GetDataValue("SumLossSer")
+                        </td>
+                    }
+                </tr>
+            </tbody>
+        </table>
+        <div class="list_number">
+            共 @Model.TotalCount 条记录
+            <div style="clear: both;">
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,148 @@
+﻿@model ZDSystem.Model.UpChannelConfigItemModel
+@{
+    Layout = null;
+}
+<script src="/Scripts/Calendar/WdatePicker.js" type="text/javascript"></script>
+<script src="/Scripts/popDialog.js" type="text/javascript"></script>
+<style>
+    #mainForm input
+    {
+        min-width: 350px;
+    }
+</style>
+<script type="text/javascript">
+    $(function () {
+        $('#mainForm').validate({
+            errorClass: "error",
+            focusInvalid: true,
+            submitHandler: function (form) {
+
+                var data = $("#mainForm").serialize();
+                $.ajax({
+                    type: "post",
+                    data: data,
+                    url: "/UpChannelConfig/Item",
+                    success: function (data) {
+                        var res = $.parseJSON(data);
+                        if (res.Status) {
+                            art.dialog.tips('保存成功');
+                            if ($('#__id').val() != '') {
+                                location.reload();
+                            }
+                            return true;
+                        }
+                        else {
+                            alert(res.Message);
+                        }
+                    },
+                    error: function () {
+                        alert("操作失败，请重试");
+                    }
+                });
+            },
+            rules: {
+                ApiUid: { required: true },
+                ApiKey: { required: true },
+                RechargeUrl: { required: true },
+                QueryUrl: { required: true },
+                NotifyUrl: { required: true },
+                RechargeScript: { required: true },
+                QueryScript: { required: true },
+                notifyScript: { required: true }
+            }
+        });
+    });
+</script>
+<form id="mainForm" method="post">
+<input type="hidden" value="@Model.Id" name="__id" id="__id" />
+<table>
+    <tr>
+        <td>
+            下游渠道:
+        </td>
+        <td>
+            @Html.DropDownList("DChannelNo", new SelectList(DownChannelSerivce.Instance.GetDataList(), "DownChannelNo", "ChannelName", Model.CurrentModel.DownChannelNo), "--请选择--", new { style = " width:120px;" })
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <em class="required">*</em>接口id:
+        </td>
+        <td>
+            <input type="text" class="widthinput" name="ApiUid" value="@Model.CurrentModel.ApiUid" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <em class="required">*</em>接口Key:
+        </td>
+        <td>
+            <input type="text" class="widthinput" name="ApiKey" value="@Model.CurrentModel.ApiKey" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <em class="required">*</em>通知地址:
+        </td>
+        <td>
+            <input type="text" class="widthinput" name="NotifyUrl" value="@Model.CurrentModel.NotifyUrl" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <em class="required">*</em>充值地址:
+        </td>
+        <td>
+            <input type="text" class="widthinput" name="RechargeUrl" value="@Model.CurrentModel.RechargeUrl" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <em class="required">*</em>查询地址:
+        </td>
+        <td>
+            <input type="text" class="widthinput" name="QueryUrl" value="@Model.CurrentModel.QueryUrl" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <em class="required">*</em>充值脚本:
+        </td>
+        <td>
+            <input type="text" class="widthinput" name="RechargeScript" value="@Model.CurrentModel.RechargeScript" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <em class="required">*</em>查询脚本:
+        </td>
+        <td>
+            <input type="text" class="widthinput" name="QueryScript" value="@Model.CurrentModel.QueryScript" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <em class="required">*</em>通知脚本:
+        </td>
+        <td>
+            <input type="text" class="widthinput" name="NotifyScript" value="@Model.CurrentModel.NotifyScript" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            产品查询地址:
+        </td>
+        <td>
+            <input type="text" class="widthinput" name="ProductQueryUrl" value="@Model.CurrentModel.ProductQueryUrl" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            号段查询地址:
+        </td>
+        <td>
+            <input type="text" class="widthinput" name="MobileQueryUrl" value="@Model.CurrentModel.MobileQueryUrl" />
+        </td>
+    </tr>
+</table>
+</form>

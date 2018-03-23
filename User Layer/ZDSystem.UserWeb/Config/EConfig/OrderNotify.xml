@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<config>
+  <table name="Order_Notify">
+    <fields>
+      <field pname="NotifyId" name="Notify_Id" label="通知编号"/>
+      <field pname="OrderNo" name="Order_No" label="订单号"/>
+      <field pname="Status" name="Status" label="回调状态10:无需处理20:等待处理30:正在处理0:处理成功90:处理失败"/>
+      <field pname="NotifyUrl" name="Notify_Url" label="通知地址"/>
+      <field pname="LimitNotify" name="Limit_Notify" label="限制回调次数"/>
+      <field pname="RobotIp" name="Robot_Ip" label="机器IP"/>
+      <field pname="NotifyCntr" name="Notify_Cntr" label="回调次数"/>
+      <field pname="CreateTime" name="Create_Time" label="创建时间"/>
+      <field pname="NextTime" name="Next_Time" label="下次通知时间"/>
+      <field pname="FinishTime" name="Finish_Time" label="完成时间"/>
+      <field pname="NotifyType" name="Notify_Type" label="通知类型:1.支付,2.退款,3.充值"/>
+      <field pname="ResultMsg" name="Result_Msg" label="结果消息"/>
+      <field pname="DownChannelNo" name="Down_Channel_No" label="下游渠道"/>
+    </fields>
+  </table>
+  <template>
+    <item name="getNotifyDetialsByOrderNo">
+      <sql>
+        <![CDATA[
+          select   t.Notify_Id,
+                   t.order_no,
+                   t.status,
+                   t.notify_url,
+                   t.limit_notify,
+                   t.robot_ip,
+                   t.notify_cntr,
+                   t.create_time,
+                   t.next_time,
+                   t.finish_time,
+                   t.notify_type,
+                   t1.name StatusName ,
+                   t2.name NotifyTypeStatus
+                   from order_notify t
+                   left join sys_dictionary t1 on t.status = t1.value and t1.type ='NotifyStatus'
+                   left join sys_dictionary t2 on t.notify_type = t2.value and t2.type ='NotifyType'
+                   where {@t.OrderNo}
+        ]]>
+      </sql>
+    </item>
+    <item name="getCount">
+      <sql>
+        <![CDATA[
+          select count(*) from Order_Notify  where  {@t.CreateTime >= to_date($ST,'yyyy-MM-dd')}
+                                                        {&@t.CreateTime < to_date($ET,'yyyy-MM-dd')+1}
+                                                        {&@t.Status}
+                                                        {&@t.NotifyType}
+                                                        {&@t.OrderNo}
+                                                        {&@t.DownChannelNo}
+        ]]>
+      </sql>
+    </item>
+    <item name="getList">
+      <sql>
+        <![CDATA[
+              select t.*,
+                     t1.name NotifyTypeName,
+                     t2.name NotifyStatusName,
+                     dc.CHANNEL_NAME DChannelName
+                          from (select RID
+                                  from (select R.RID, rownum LineNum
+                                          from (select t.rowid RID
+                                                  from Order_Notify t
+                                                 where  {@t.CreateTime >= to_date($ST,'yyyy-MM-dd')}
+                                                        {&@t.CreateTime < to_date($ET,'yyyy-MM-dd')+1}
+                                                        {&@t.Status}
+                                                        {&@t.NotifyType}
+                                                        {&@t.OrderNo}
+                                                        {&@t.DownChannelNo}
+                                                 order by t.Create_Time desc) R
+                                         where rownum <= { :PS} * { :PI})
+                                 where LineNum > { :PS} * ({ :PI} - 1)) tab
+                         inner join Order_Notify t on t.rowid = tab.RID
+                         left join sys_dictionary t1 on t.notify_state = t1.value and t1.type = 'NotifyType'
+                         left join sys_dictionary t2 on t.notify_state = t2.value and t2.type = 'NotifyStatus'
+                         left join DOWN_CHANNEL dc on t.Down_Channel_No = dc.DOWN_CHANNEL_NO
+                         order by t.Create_Time desc
+        ]]>
+      </sql>
+    </item>
+  </template>
+</config>

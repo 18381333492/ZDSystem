@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<config>
+    <table name="ZD_COUPON_USED">
+        <fields>
+            <field pname="CouponId" name="Coupon_Id" label="优惠券id"/>
+            <field pname="CouponChannel" name="Coupon_Channel" label="优惠渠道"/>
+            <field pname="CouponPrice" name="Coupon_Price" label="优惠金额"/>
+            <field pname="OrderNo" name="Order_No" label="使用订单编号"/>
+            <field pname="UseTime" name="Use_Time" label="使用时间"/>
+            <field pname="DownOrderNo" name="Down_Order_No" label="下游订单号"/>
+        </fields>
+    </table>
+    <template>
+        <item name="getList">
+            <sql>
+                <![CDATA[
+                    select t.*
+                          from (select RID
+                                  from (select R.RID, rownum LineNum
+                                          from (select t.rowid RID
+                                                  from ZD_COUPON_USED t
+                                                 where {@t.OrderNo}
+                                                       {&@t.DownOrderNo}
+                                                       {&@t.CouponPrice}
+                                                       and {:ST}
+                                                       and {:ET}
+                                                 order by t.use_time desc) R
+                                         where rownum <= { :PS} * { :PI})
+                                 where LineNum > { :PS} * ({ :PI} - 1)) tab
+                         inner join ZD_COUPON_USED t on t.rowid = tab.RID
+                         order by t.use_time desc
+        ]]>
+            </sql>
+        </item>
+        <item name="getCount">
+            <sql>
+                <![CDATA[
+          select count(*) from ZD_COUPON_USED t where {@t.OrderNo}
+                                                       {&@t.DownOrderNo}
+                                                       {&@t.CouponPrice}
+                                                       and {:ST}
+                                                       and {:ET}
+        ]]>
+            </sql>
+        </item>
+    </template>
+</config>

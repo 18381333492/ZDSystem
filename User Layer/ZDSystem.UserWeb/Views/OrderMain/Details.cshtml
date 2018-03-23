@@ -1,0 +1,525 @@
+﻿@model ZDSystem.Model.OrderMainItemModel
+@using ZDSystem.Utility;
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="/Content/order_detail.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+    $(function () {
+        $(".tab_menu_bg li").each(function (i) {
+            $(this).mouseover(function () {
+                //如果他自己已经是焦点，就return
+                if ($(this).hasClass("li_selet")) {
+                    return;
+                }
+                else {
+                    var oldIndex = $(".tab_menu_bg li.li_selet").index();
+                    var newIndex = i;
+                    //先移除已经是焦点的li
+                    $(".tab_menu_bg li.li_selet").removeClass("li_selet").addClass("li_normal");
+                    //设置当前为已选中
+                    $(this).removeClass("li_normal").addClass("li_selet");
+                    var tabDivs = $("div[tag='tab']");
+                    tabDivs.eq(oldIndex).hide();
+                    tabDivs.eq(newIndex).show();
+                }
+            });
+        });
+    });
+
+</script>
+<div class="order_detail">
+    <div class="tab_menu_bg">
+        <ul>
+            <li class="li_selet clearfix"><span class="li_bg_left"></span><span class="li_bg_ceter hand">
+                订单详情</span><span class="li_bg_right"></span></li>
+            <li class="li_normal clearfix"><span class="li_bg_left"></span><span class="li_bg_ceter hand">
+                通知记录</span><span class="li_bg_right"></span></li>
+            <li class="li_normal clearfix"><span class="li_bg_left"></span><span class="li_bg_ceter hand">
+                发货记录</span><span class="li_bg_right"></span></li>
+        </ul>
+    </div>
+    <div class="detailed_content" tag="tab">
+        <table width="1000" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <td width="200" class="td_title">
+                    订单号：
+                </td>
+                <td width="300">
+                    @Model.CurrentModel.OrderNo.ToCustomerString()
+                </td>
+                <td width="200" class="td_title">
+                    中大订单号：
+                </td>
+                <td width="300">
+                    @Model.CurrentModel.PartnerOrderNo.ToCustomerString()
+                </td>
+            </tr>
+            <tr>
+                <td width="200" class="td_title">
+                    产品名称：
+                </td>
+                <td width="300">
+                    @Model.CurrentModel.ProductName.ToCustomerString()
+                </td>
+                <td width="200" class="td_title">
+                    产品编码：
+                </td>
+                <td width="300">
+                    @Model.CurrentModel.ProductId.ToCustomerString()
+                </td>
+            </tr>
+            <tr>
+                <td width="200" class="td_title">
+                    支付用户编号：
+                </td>
+                <td width="300">
+                    @Model.CurrentModel.PayUserId.ToCustomerString()
+                </td>
+                <td width="200" class="td_title">
+                    支付方流水号：
+                </td>
+                <td width="300">
+                    @Model.CurrentModel.PayFlowOrder.ToCustomerString()
+                </td>
+            </tr>
+            <tr>
+                <td width="200" class="td_title">
+                    充值账户：
+                </td>
+                <td width="300">
+                    @Model.CurrentModel.Mobile.ToCustomerString()
+                </td>
+                <td class="td_title">
+                    用户名：
+                </td>
+                <td>
+                    @Model.CurrentModel.Account.ToCustomerString()
+                </td>
+            </tr>
+            <tr>
+                <td class="td_title">
+                    充值面值 / 成功面值：
+                </td>
+                <td style="width: 350px; color: #ff6600">
+                    @Model.CurrentModel.Face.ToCustomerString() / @Model.CurrentModel.SucFace.ToCustomerString()
+                </td>
+                <td class="td_title">
+                    支付金额 / 支付手续费用：
+                </td>
+                <td style="width: 350px; color: #ff6600">
+                    @Model.CurrentModel.Price.ToCustomerString() / @Model.CurrentModel.ServiceFee.ToCustomerString()
+                </td>
+            </tr>
+            <tr>
+                <td width="200" class="td_title">
+                    真实ip：
+                </td>
+                <td width="300">
+                    @Model.CurrentModel.UserIp.ToCustomerString()
+                </td>
+                <td width="200" class="td_title">
+                    实际充值成本：
+                </td>
+                <td width="300">
+                    @Model.CurrentModel.NeedRecharge.ToCustomerString()
+                </td>
+            </tr>
+            <tr>
+                <td class="td_title">
+                    用户支付金额：
+                </td>
+                <td>
+                    @Model.CurrentModel.Price
+                </td>
+                <td class="td_title">
+                    优惠券金额：
+                </td>
+                <td>
+                    @Model.CurrentModel.Couponprice.ToCustomerString()
+                </td>
+            </tr>
+            <tr>
+                <td class="td_title">
+                    优惠券ID：
+                </td>
+                <td>
+                    @Model.CurrentModel.Couponid.ToCustomerString()
+                </td>
+                <td class="td_title">
+                    优惠券渠道：
+                </td>
+                <td>
+                    @Model.CurrentModel.Couponch.ToCustomerString()
+                </td>
+            </tr>
+            <tr>
+                <td class="td_title">
+                    支付类型：
+                </td>
+                <td style="width: 350px; color: #ff6600">
+                    @Model.CurrentModel.GetDataValue("PayTypeName").ToCustomerString()
+                </td>
+                <td class="td_title">
+                    充值类型：
+                </td>
+                <td style="width: 350px; color: #ff6600">
+                    @Model.CurrentModel.GetDataValue("CardTypeName").ToCustomerString()
+                </td>
+            </tr>
+            <tr>
+                <td class="td_title">
+                    流量类型：
+                </td>
+                <td>
+                    @Model.CurrentModel.FlowType.ToCustomerString()
+                </td>
+                <td class="td_title">
+                    订单状态：
+                </td>
+                <td style="width: 350px; color: #ff6600">
+                    @Model.CurrentModel.GetDataValue("OrderStatusLabel").ToCustomerString()
+                </td>
+            </tr>
+            <tr>
+                <td class="td_title">
+                    支付状态：
+                </td>
+                <td style="width: 350px; color: #ff6600">
+                    @Model.CurrentModel.GetDataValue("PayStatusLabel").ToCustomerString()
+                </td>
+                <td class="td_title">
+                    退款状态：
+                </td>
+                <td style="width: 350px; color: #ff6600">
+                    @Model.CurrentModel.GetDataValue("RefundStatus").ToCustomerString()
+                </td>
+            </tr>
+            <tr>
+                <td class="td_title">
+                    支付结果回调状态：
+                </td>
+                <td style="width: 350px; color: #ff6600">
+                    @Model.CurrentModel.GetDataValue("PayNotifyState").ToCustomerString()
+                </td>
+                <td class="td_title">
+                    订单结果回调状态：
+                </td>
+                <td style="width: 350px; color: #ff6600">
+                    @Model.CurrentModel.GetDataValue("OrderNotifyState").ToCustomerString()
+                </td>
+            </tr>
+            <tr>
+                <td class="td_title">
+                    收款账户编号：
+                </td>
+                <td>
+                    @Model.CurrentModel.ReceiptAccountId.Value.ToCustomerString()
+                </td>
+                <td class="td_title">
+                    错误消息：
+                </td>
+                <td>
+                    @Model.CurrentModel.ErrorMsg.ToCustomerString()
+                </td>
+            </tr>
+            <tr>
+                <td class="td_title">
+                    是否充值：
+                </td>
+                <td>
+                    @*@Model.CurrentModel.NeedRecharge.Value.ToCustomerString()*@
+                    @if (Model.CurrentModel.NeedRecharge == 0)
+                    {
+                        @("是")
+                    }
+                    else if (Model.CurrentModel.NeedRecharge == 1)
+                    {
+                        @("否")
+                    }
+                </td>
+                <td class="td_title">
+                    创建时间：
+                </td>
+                <td>
+                    @if (Model.CurrentModel.CreateTime != null)
+                    {
+                        @Model.CurrentModel.CreateTime.Value.ToCustomerString()
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td class="td_title">
+                    支付完成时间：
+                </td>
+                <td>
+                    @if (Model.CurrentModel.PayTime != null)
+                    {
+                        @Model.CurrentModel.PayTime.Value.ToCustomerString()
+                    }
+                </td>
+                <td class="td_title">
+                    中大订单时间：
+                </td>
+                <td>
+                    @if (Model.CurrentModel.ZdOrderTime != null)
+                    {
+                        @Model.CurrentModel.ZdOrderTime.Value.ToCustomerString()
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td class="td_title">
+                    完成时间：
+                </td>
+                <td>
+                    @if (Model.CurrentModel.FinishTime != null)
+                    {
+                        @Model.CurrentModel.FinishTime.Value.ToCustomerString()
+                    }
+                </td>
+                <td class="td_title">
+                    支付结果回调时间：
+                </td>
+                <td>
+                    @if (Model.CurrentModel.PayNotifyTime != null)
+                    {
+                        @Model.CurrentModel.PayNotifyTime.Value.ToCustomerString()
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td class="td_title">
+                    订单结果回调时间：
+                </td>
+                <td>
+                    @if (Model.CurrentModel.OrderNotifyTime != null)
+                    {
+                        @Model.CurrentModel.OrderNotifyTime.Value.ToCustomerString()
+                    }
+                </td>
+                <td class="td_title">
+                    退款时间：
+                </td>
+                <td>
+                    @if (Model.CurrentModel.RefundTime != null)
+                    {
+                        @Model.CurrentModel.RefundTime.Value.ToCustomerString()
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td class="td_title">
+                    下游渠道名称：
+                </td>
+                <td width="300">
+                    @Model.CurrentModel.GetDataValue("DownChannelName")
+                </td>
+                <td class="td_title">
+                </td>
+                <td width="300">
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="list_content" tag="tab" style="display: none">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <th width="" class="border0">
+                    通知编号
+                </th>
+                <th width="" class="border0">
+                    订单号
+                </th>
+                <th>
+                    通知地址
+                </th>
+                <th width="">
+                    回调状态
+                </th>
+                <th width="">
+                    通知类型
+                </th>
+                <th width="">
+                    回调次数
+                </th>
+                <th>
+                    限制回调次数
+                </th>
+                <th width="">
+                    机器人IP
+                </th>
+                <th width="">
+                    创建时间
+                </th>
+                <th width="">
+                    完成时间
+                </th>
+                <th width="">
+                    下次通知时间
+                </th>
+            </tr>
+            @foreach (ZDSystem.Entity.MOrderNotify item in ViewBag.NotifyList)
+            {
+                <tr>
+                    <td>
+                        @item.NotifyId.ToCustomerString()
+                    </td>
+                    <td>
+                        @item.OrderNo.ToCustomerString()
+                    </td>
+                    <td>
+                        @item.NotifyUrl.ToCustomerString()
+                    </td>
+                    <td>
+                        @item.GetDataValue("StatusName").ToCustomerString()
+                    </td>
+                    <td>
+                        @item.GetDataValue("NotifyTypeStatus").ToCustomerString()
+                    </td>
+                    <td>
+                        @item.NotifyCntr.ToCustomerString()
+                    </td>
+                    <td>
+                        @item.LimitNotify.ToCustomerString()
+                    </td>
+                    <td>
+                        @item.RobotIp.ToCustomerString()
+                    </td>
+                    <td>
+                        @if (item.CreateTime != null)
+                        {
+                            @item.CreateTime.Value.ToString("MM-dd HH:mm:ss").ToCustomerString()
+                        }
+                    </td>
+                    <td>
+                        @if (item.FinishTime != null)
+                        {
+                            @item.FinishTime.Value.ToString("MM-dd HH:mm:ss").ToCustomerString()
+                        }
+                    </td>
+                    <td>
+                        @if (item.NextTime != null)
+                        {
+                            @item.NextTime.Value.ToString("MM-dd HH:mm:ss").ToCustomerString()
+                        }
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+    <div class="list_content" tag="tab" style="display: none">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <th width="" class="border0">
+                    发货编号
+                </th>
+                <th width="230">
+                    订单号
+                </th>
+                <th width="">
+                    上游订单号
+                </th>
+                <th>
+                    状态
+                </th>
+                <th width="">
+                    查询状态
+                </th>
+                <th width="200">
+                    审核状态
+                </th>
+                <th width="">
+                    结果消息
+                </th>
+                <th width="">
+                    查询消息
+                </th>
+                <th width="">
+                    发货IP
+                </th>
+                <th width="">
+                    查询IP
+                </th>
+                <th width="">
+                    查询次数
+                </th>
+                <th width="">
+                    创建时间
+                </th>
+                <th width="">
+                    完成时间
+                </th>
+                <th width="">
+                    查询创建时间
+                </th>
+                <th width="">
+                    下次查询时间
+                </th>
+            </tr>
+            @foreach (ZDSystem.Entity.MOrderDelivery item in ViewBag.DeliveryList)
+            {
+                <tr>
+                    <td>
+                        @item.DeliveryId.ToCustomerString()
+                    </td>
+                    <td>
+                        @item.OrderNo.ToCustomerString()
+                    </td>
+                    <td>
+                        @item.UpOrderNo.ToCustomerString()
+                    </td>
+                    <td>
+                        @item.GetDataValue("StatusName").ToCustomerString()
+                    </td>
+                    <td>
+                        @item.GetDataValue("QueryStatusName").ToCustomerString()
+                    </td>
+                    <td>
+                        @item.GetDataValue("ManualStatusName").ToCustomerString()
+                    </td>
+                    <td>
+                        @item.ResultMsg.ToCustomerString()
+                    </td>
+                    <td>
+                        @item.QueryMsg.ToCustomerString()
+                    </td>
+                    <td>
+                        @item.RobotIp.ToCustomerString()
+                    </td>
+                    <td>
+                        @item.QueryIp.ToCustomerString()
+                    </td>
+                    <td>
+                        @item.QueryCntr.ToCustomerString()
+                    </td>
+                    <td>
+                        @if (item.CreateTime != null)
+                        {
+                            @item.CreateTime.Value.ToString("MM-dd HH:mm:ss").ToCustomerString()
+                        }
+                    </td>
+                    <td>
+                        @if (item.FinishTime != null)
+                        {
+                            @item.FinishTime.Value.ToString("MM-dd HH:mm:ss").ToCustomerString()
+                        }
+                    </td>
+                    <td>
+                        @if (item.QueryCreateTime != null)
+                        {
+                            @item.QueryCreateTime.Value.ToString("MM-dd HH:mm:ss").ToCustomerString()
+                        }
+                    </td>
+                    <td>
+                        @if (item.NextQueryTime != null)
+                        {
+                            @item.NextQueryTime.Value.ToString("MM-dd HH:mm:ss").ToCustomerString()
+                        }
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

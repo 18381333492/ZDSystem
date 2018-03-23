@@ -1,0 +1,66 @@
+﻿/* ===========================================
+ * 验证控件jquery.validate.debug.js 对应的样式
+ * ===========================================
+ */
+.vdt-ok, 
+.vdt-error,
+.vdt-info, 
+.vdt-label, 
+.vdt-label_for, 
+.vdt-text, 
+.vdt-select, 
+.vdt-file
+{
+    vertical-align: middle\9;
+    display: inline-block;
+    height: 25px;
+    line-height: 25px;
+}
+.vdt-ok
+{
+    background: url(succeed.png) no-repeat scroll 6px center transparent;
+    width: 25px;
+}
+
+.vdt-error,.vdt-info
+{
+    font-family: simsun\9; /*非宋体的英文数字和中文行高不同*/
+    color: #FF0000;
+    background: url(error.png) no-repeat scroll 6px center #FEEAE9;
+    margin-left:8px;
+    padding-left: 26px;
+    padding-right:8px;
+    border:1px solid #FC938F;
+    color:#000000;
+    height:23px;
+    line-height:23px\9;
+    _padding-top:2px; /*For IE6*/
+}
+.vdt-info
+{
+    color: #999;
+    padding-left:5px;
+    background-image:none;
+    background-color:Transparent;
+    border:0 none;
+}
+
+/*控件前面的label*/
+.vdt-label
+{
+    width: 100px;
+    text-align: right;
+    padding-right: 2px;
+}
+
+/*checkbox,radio的label for*/
+.vdt-label-for
+{
+    padding: 0 3px;
+}
+
+.vdt-radio, .vdt-checkbox, .vdt-textaera
+{
+    vertical-align: middle;
+    display: inline-block;
+}

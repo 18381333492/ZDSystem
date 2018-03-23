@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<config>
+  <table name="Operate_Log">
+    <fields>
+            <field pname="LogId" name="Log_Id" label="编号"/>
+            <field pname="OrderNo" name="Order_No" label="订单号"/>
+            <field pname="Content" name="Content" label="备注"/>
+            <field pname="Operator" name="Operator" label="操作人"/>
+            <field pname="CreateTime" name="Create_Time" label="创建时间"/>
+      </fields>
+  </table>
+  <template>
+    <item name="getList">
+      <sql>
+        <![CDATA[
+          SELECT t.log_id,
+                 t.order_no,
+                 t.content,
+                 t.operator,
+                 t.create_time
+                FROM (SELECT RID
+                        FROM (SELECT R.RID, ROWNUM LINENUM
+                                FROM (SELECT t.rowid RID
+                                        FROM Operate_Log t
+                                       WHERE {@t.CreateTime >= to_date($ST,'yyyy-MM-dd')}
+                                             {&@t.CreateTime < to_date($ET,'yyyy-MM-dd')+1}
+                                             {&@t.OrderNo}
+                                       order by t.log_id desc) R
+                               WHERE ROWNUM <= { :PS} * { :PI})
+                       WHERE LINENUM > { :PS} * ({ :PI} - 1)) TAB1
+               inner join Operate_Log t on t.rowid = TAB1.RID
+               order by t.log_id desc
+        ]]>
+      </sql>
+    </item>
+    <item name="getCount">
+      <sql>
+        <![CDATA[
+          select count(*) from Operate_Log t 
+                                       WHERE {@t.CreateTime >= to_date($ST,'yyyy-MM-dd')}
+                                             {&@t.CreateTime < to_date($ET,'yyyy-MM-dd')+1}
+                                             {&@t.OrderNo}
+        ]]>
+      </sql>
+    </item>
+  </template>
+</config>

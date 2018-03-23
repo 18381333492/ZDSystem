@@ -1,0 +1,201 @@
+﻿@model ZDSystem.Model.OrderDeliveryListModel
+@{
+    ViewBag.Title = "订单发货表";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+    function MRCenterMsg() {
+        this.bind = function () {
+            $.paging.config.form = "#conditionForm";
+            $.paging.bind();
+            $("#ddlps").val($("#ps").val());
+            $("#ddlps").change(function () {
+                $("#ps").val($(this).val());
+            });
+            $(".list_submit").click(function () {
+                $.paging.submit();
+            });
+        }
+    }
+
+    $(function () {
+        var user = new MRCenterMsg();
+        user.bind();
+    });    
+</script>
+<div class="channel_list">
+    <form method="get" id="conditionForm">
+    <div class="con_search_box clearfix">
+        <p class="sc_p">
+            创建时间:
+            <input class="list_input Wdate" type="text" name="s" id="s" onclick=" WdatePicker({ dateFmt: 'yyyy-MM-dd', maxDate: '%y-%M-%d' }); " value="@DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd")"/>
+            -
+            <input class="list_input Wdate" type="text" name="e" id="e" onclick=" WdatePicker({ dateFmt: 'yyyy-MM-dd', minDate: '#F{$dp.$D(\'s\')}', maxDate: '%y-%M-%d' }); " value="@DateTime.Now.ToString("yyyy-MM-dd")"/>
+        </p>
+        <p class="sc_p">
+            下游渠道:
+            @Html.DropDownList("DownChannelNo", new SelectList(DownChannelSerivce.Instance.GetDataList(), "DownChannelNo", "ChannelName"), "--请选择--", new { style = " width:120px;" })
+        </p>
+        <p class="sc_p">
+            发货状态:
+            @Html.DropDownList("Status", new SelectList(SysDictionaryService.Instance.GetDataListByType("DeliveryStatus"), "Value", "Name"), "--请选择--", new { style = " width:120px;" })
+        </p>
+        <p class="sc_p">
+            查询状态:
+            @Html.DropDownList("QueryStatus", new SelectList(SysDictionaryService.Instance.GetDataListByType("QueryStatus"), "Value", "Name"), "--请选择--", new { style = " width:120px;" })
+        </p>
+        <p class="sc_p">
+            <input class="frame_middle" id="checked3" type="radio" name="keytype" value="1" />
+            <label for="checked3">
+                订单号</label>
+            <input class="frame_middle" id="checked4" type="radio" name="keytype" value="2" />
+            <label for="checked4">
+                发货编号</label>
+            <input type="radio" class="frame_middle" name="keytype" value="3" id="checked5" checked="checked" /><label
+                for="checked5">上游订单号</label>
+            <input class="sc_frame" style="width: 180px;" type="text" name="KeyWords" id="key"
+                value="" />
+        </p>
+        <p class="sc_p">
+            <input class="list_submit" type="button" />
+            <input type="button" value="" class="export_btn hand" id="btnExport" />
+        </p>
+    </div>
+    <input type="hidden" value="0" name="pi" id="pi" />
+    <input type="hidden" value="10" name="ps" id="ps" />
+    <input type="hidden" value="@Model.TotalCount" id="count" />
+    </form>
+    <div>
+    </div>
+    <div class="list_content" id="divshelflist">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>
+                        发货编号
+                    </th>
+                    <th>
+                        订单号
+                    </th>
+                    <th>
+                        上游订单号
+                    </th>
+                    <th>
+                        下游渠道
+                    </th>
+                    <th>
+                        发货ip
+                    </th>
+                    <th>
+                        发货状态
+                    </th>
+                    <th>
+                        结果消息
+                    </th>
+                    <th>
+                        创建时间
+                    </th>
+                    <th>
+                        查询状态
+                    </th>
+                    <th>
+                        查询机器IP
+                    </th>
+                    <th>
+                        查询次数
+                    </th>
+                    <th>
+                        查询消息
+                    </th>
+                    <th>
+                        查询创建时间
+                    </th>
+                    <th>
+                        下次查询时间
+                    </th>
+                    <th>
+                        人工状态
+                    </th>
+                    <th>
+                        完成时间
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (ZDSystem.Entity.MOrderDelivery item in Model.List)
+                {
+                    <tr>
+                        <td>
+                            <a href="/OrderDelivery/Details?id=@item.OrderNo" title="点击查看详情" target="_blank">@item.DeliveryId</a>
+                        </td>
+                        <td>
+                            <a href="/OrderMain/Details?id=@item.OrderNo" title="点击查看详情" target="_blank">@item.OrderNo</a>
+                        </td>
+                        <td>
+                            @item.UpOrderNo
+                        </td>
+                        <td>
+                            @item.GetDataValue("DChannelName")
+                        </td>
+                        <td>
+                            @item.RobotIp
+                        </td>
+                        <td>
+                            @item.Status
+                        </td>
+                        <td>
+                            @if (item.ResultMsg != null)
+                            {
+                                @(item.ResultMsg.Length > 10 ? item.ResultMsg.Substring(0, 10) : item.ResultMsg)
+                            }
+                        </td>
+                        <td>
+                            @item.CreateTime
+                        </td>
+                        <td>
+                            @item.QueryStatus
+                        </td>
+                        <td>
+                            <a class="lblTextfull" style="width:100px;" title="@item.QueryIp">@item.QueryIp</a>
+                        </td>
+                        <td>
+                            @item.QueryCntr
+                        </td>
+                        <td>
+                            @if (item.QueryMsg != null)
+                            {
+                                @(item.QueryMsg.Substring(0, 10))
+                            }
+                        </td>
+                        <td>
+                            @item.QueryCreateTime
+                        </td>
+                        <td>
+                            @item.NextQueryTime
+                        </td>
+                        <td>
+                            @item.ManualStatus
+                        </td>
+                        <td>
+                            @item.FinishTime
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="list_number">
+            共 @Model.TotalCount 条记录 | 每页显示:
+            <select id="ddlps">
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+            </select>
+            条
+        </div>
+        <div id="pager" class="list_pager">
+        </div>
+        <div style="clear: both;">
+        </div>
+    </div>
+</div>

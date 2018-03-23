@@ -1,0 +1,161 @@
+﻿<!DOCTYPE html>
+<html style="font-size:1rem">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+
+
+    <link href="/HWServer/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/HWServer/css/mdb.min.css" rel="stylesheet" />
+    <link href="/HWServer/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="/HWServer/css/orderList.css" rel="stylesheet" />
+
+    <script src="/js/jquery.min.js" type="text/javascript"></script>
+    <script src="/js/popper.min.js" type="text/javascript"></script>
+    <script src="/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="/js/common.js" type="text/javascript"></script>
+    <script src="js/hwlogin.js" type="text/javascript"></script>
+
+    <link href="/WeUI/weui.min.css" rel="stylesheet" type="text/css" />
+    <link href="/WeUI/jquery-weui.min.css" rel="stylesheet" type="text/css" />
+    <script src="/WeUI/jquery.min.js" type="text/javascript"></script>
+    <script src="/WeUI/jquery-weui.min.js" type="text/javascript"></script>
+    <script src="/js/LordOrder.js" type="text/javascript"></script>
+    <title>订单记录</title>
+    <meta charset="utf-8" />
+    <script type="text/javascript">
+        var account =localStorage.getItem("recharge_account");
+        if (account==null) {
+            account =hw_getInfo();
+        }
+        var datas = {
+            state:true,
+            page: 1,
+            rows: 6,
+            account: account
+        };
+        $(function () {
+            //下来刷新的事件绑定
+            $(document.body).on("pull-to-refresh", function () {
+                datas.page = 1;
+                client.ajax.ajaxRequest("/HWServer/GetOrderList.ashx", datas, function (res) {
+                    setTimeout(function () {
+                        $('#centen').html('');
+                        datas.state = true;
+                        Lord.LordOrderList(res);
+                        $(document.body).pullToRefreshDone();
+                    }, 1000);
+                });
+            });
+            LoadData(datas, true);
+            $(window).scroll(function () {//绑定滚动事件
+                if ($(document).scrollTop() == $("#centen").height() - $(window).height()) {
+                    if (datas.state) {
+                        datas.page = datas.page + 1;
+                        LoadData(datas);
+                    }
+                }
+            });
+        });
+        function LoadData(datas, isfirst) {
+            if (!isfirst) { $('.load').show(); }
+            client.ajax.ajaxRequest("/HWServer/GetOrderList.ashx", datas, function (res) {
+                if (datas.page >= 1 && res.length > 0) { // 数据正常加载
+                    if (!isfirst) {
+                        setTimeout(function () {
+                            Lord.LordOrderList(res);
+                            $('.load').hide();
+                        }, 800);
+                    }
+                    else {
+                        Lord.LordOrderList(res);
+                    }
+                } else if (datas.page > 1 && res.length == 0) { //数据全部加载完成
+                    datas.state = false;
+                    $('.load').hide();
+                    return false;
+                } else if (datas.page == 1 && res.length == 0) { // 没有数据
+                    datas.state = false;
+                    Lord.IsDataNull();
+                }
+            }, function () {
+                toastr.error("请求超时");
+                return false;
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="weui-pull-to-refresh__layer"> 
+        <div class='weui-pull-to-refresh__arrow'></div>
+        <div class='weui-pull-to-refresh__preloader'></div>
+        <div class="down" style="font-size:13px">下拉刷新</div>
+        <div class="up" style="font-size:13px">释放刷新</div>
+        <div class="refresh" style="font-size:13px">正在刷新</div>
+    </div>
+    <script type="text/javascript">
+        $(document.body).pullToRefresh();
+    </script>
+    <div id="centen" style="margin-top:20px">
+        <!-- <div class="order">
+            <div class="container tit">
+                <div class="row">
+                    <div class="col lft">
+                        商品单号:&nbsp;100861110010111000011</div>
+                </div>
+                <div class="row time">
+                    <div class="col lft">
+                        省内流量100M</div>
+                    <div class="col rig">
+                        <span><i class="fa fa-clock-o"></i>2017-10-23 xx:xx:xx</span></div>
+                </div>
+            </div>
+            <div class="container tab">
+                <div class="row t">
+                    <div class="col">
+                        支付方式
+                    </div>
+                    <div class="col">
+                        号码</div>
+                    <div class="col">
+                        金额</div>
+                    <div class="col">
+                        状态</div>
+                </div>
+                <div class="row">
+                    <div class="col align-items-start">
+                        <img src="/img/WX.png" /></div>
+                    <div class="col">
+                        18581619978</div>
+                    <div class="col">
+                        29.97</div>
+                    <div class="col">
+                        初始化订单</div>
+                </div>
+            </div>
+        </div>-->
+        <!--<div calss="null" style="height: 100vh">
+            <div class="flex-center flex-column">
+                <img class="animated fadeIn mb-4" src="/img/dataNull.png" />
+                <h5 class="animated fadeIn mb-4">
+                    暂无数据</h5>
+            </div>
+        </div>-->
+    </div>
+    <div class="load" style="margin-top:8px;margin-bottom:4px;">
+        <div class="preloader-wrapper small active" style="width:20px;height:20px;">
+            <div class="spinner-layer spinner-green-only">
+              <div class="circle-clipper left">
+                <div class="circle"></div>
+              </div><div class="gap-patch">
+                <div class="circle"></div>
+              </div><div class="circle-clipper right">
+                <div class="circle"></div>
+              </div>
+            </div>
+          </div>
+          <span style="font-size: 14px;display: inline-block;line-height: 20px;vertical-align: top">正在加载</span>
+    </div>
+</body>
+</html>
+<script src="/js/mdb.min.js" type="text/javascript"></script>

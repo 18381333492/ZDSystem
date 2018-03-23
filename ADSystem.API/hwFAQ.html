@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <link href="/HWServer/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/HWServer/css/mdb.min.css" rel="stylesheet" />
+    <link href="/HWServer/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="/HWServer/css/orderList.css" rel="stylesheet" />
+    <script src="/js/jquery.min.js" type="text/javascript"></script>
+    <script src="/js/popper.min.js" type="text/javascript"></script>
+    <script src="/js/bootstrap.min.js" type="text/javascript"></script>
+    <link href="/HWServer/css/FAQ.Css" rel="stylesheet" type="text/css" />
+    <title>帮助</title>
+    <meta charset="utf-8" />
+    <script type="text/javascript">
+        $(function () {
+            $('.tit').click(function () {
+                if ($(this).attr('n') == '1') {
+                    $(this).attr('n', '0').children('i').removeClass('fa-angle-up').addClass('fa-angle-down').end().next('.conten').hide(); //.slideUp(180);
+                } else {
+                    $('.tit').attr('n', '0').children('i').removeClass('fa-angle-up').addClass('fa-angle-down');
+                    $('.conten').hide(); //.slideUp(180);
+                    $(this).attr('n', '1').children('i').removeClass('fa-angle-down').addClass('fa-angle-up').end().next('.conten').show(); //.slideDown(180);
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="FAQ">
+        <ul>
+            <li class="tit waves-effect">1、充值没到账怎么办？<i class="fa fa-angle-down rotate-icon"></i></li>
+            <li class="conten">
+                <p>
+                    话费/流量充值成功后一般在30分钟内可入账，月初/月末高峰可能出现延迟。若长时间后确认查询到未到账，请直接在对话框回复“充值未到账+您的手机号码”，我们的客服会在看到消息后第一时间为您查询。
+                </p>
+                <p>
+                    温馨提示：
+                </p>
+                <p>
+                    根据移动、联通及电信的官方回复，话费在月初/月末延迟24-48小时到账属于正常范围，因此，建议您避开月初/月末高峰时段充值。
+                </p>
+            </li>
+            <li class="tit waves-effect">2、如何查询是否到账？<i class="fa fa-angle-down rotate-icon"></i></li>
+            <li class="conten">
+                <p>
+                    一般情况下，微信会返回充值结果到“服务通知”，手机会收到充值成功提醒短信。若都没有，则可以选择
+                </p>
+                <p>
+                    ① 在对话框发送“查询订单+您的手机号码”，我们的客服会在收到消息后第一时间为您查询。
+                </p>
+                <p>
+                    ② 您也可以致电运营商进行查询。（移动1008611，联通1001011，电信10000）
+                </p>
+            </li>
+            <li class="tit waves-effect">3、为什么会充值失败？<i class="fa fa-angle-down rotate-icon"></i></li>
+            <li class="conten">
+                <p>
+                    以下情况会导致无法充值：
+                </p>
+                <p>
+                    ① 运营商繁忙。可稍后再次尝试充值
+                </p>
+                <p>
+                    ② 手机号状态异常。如手机号为空号、手机号已注销。若手机欠费，也会导致流量充值失败。
+                </p>
+                <p>
+                    ③ 针对部分流量商品，运营商有充值次数的限制，若您对同一个手机号的充值次数过多，请更换充值面值或其他类型商品后重试。
+                </p>
+                <p>
+                    ④ 未在运营商处实名登记的用户无法充值。若您手机号码尚未实名登记，可在运营商掌上营业厅进行登记。如未覆盖，请携带身份证及SIM卡到线下营业厅补登记。
+                </p>
+            </li>
+            <li class="tit waves-effect">4、流量/话费充错号码怎么办?<i class="fa fa-angle-down rotate-icon"></i></li>
+            <li class="conten">
+                <p>
+                    ① 若您充值的号码为空号或号码不正常，运营商充值失败后会自动返还您的充值金额。
+                </p>
+                <p>
+                    ② 若您充值的号码真实存在，运营商会实时扣款并充值，不能退款，所以也无法返还充值金额。给您带来的不便，尽请谅解。请您在下次操作的时候注意核对号码是否正确。</p>
+            </li>
+            <li class="tit waves-effect">5、人工客服联系方式及服务时间<i class="fa fa-angle-down rotate-icon"></i></li>
+            <li class="conten">
+                <p>
+                    售后电话：4008111801
+                </p>
+                <p>
+                    在线QQ：3482114418
+                </p>
+                <p>
+                    人工客服在线时间为每天上午8:00至晚上23:00。 其他时间可留言，我们的客服会在看到消息后第一时间回复您。
+                </p>
+            </li>
+        </ul>
+        <div style="width: 100%; text-align: center;">
+            <button type="button" class="btn btn-outline-warning waves-effect">
+                联系在线客服</button>
+            <a href="tel:4008111801" class="btn btn-outline-warning waves-effect">联系客服电话</a>
+        </div>
+    </div>
+</body>
+</html>
+<script src="/js/mdb.min.js" type="text/javascript"></script>
+<script src="js/hwlogin.js" type="text/javascript"></script>
+<script src="js/common.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $('button').click(function () {
+        if (hw_IsExitQQ()) {
+            location.href = "mqqwpa://im/chat?chat_type=wpa&uin=3482114418&version=1&src_type=web&web_src=bjhuli.com";
+        }
+        else {
+            dialog.alert("没有安装手机qq，建议安装后联系qq客服", null, 3000);
+        }
+    });
+</script>

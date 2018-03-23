@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<config>
+  <table name="UP_CHANNEL_CONFIG">
+    <fields>
+      <field pname="RechargeUrl" name="Recharge_Url" label="充值地址"/>
+      <field pname="QueryUrl" name="Query_Url" label="查询地址"/>
+      <field pname="NotifyUrl" name="Notify_Url" label="通知地址"/>
+      <field pname="RechargeScript" name="Recharge_Script" label="充值脚本"/>
+      <field pname="QueryScript" name="Query_Script" label="查询脚本"/>
+      <field pname="ApiUid" name="Api_Uid" label="接口id"/>
+      <field pname="ApiKey" name="Api_Key" label="接口Key"/>
+      <field pname="NotifyScript" name="Notify_Script" label="接口Key"/>
+      <field pname="ProductQueryUrl" name="Product_Query_Url" label="接口Key"/>
+      <field pname="MobileQueryUrl" name="Mobile_Query_Url" label="接口Key"/>
+      <field pname="DownChannelNo" name="Down_Channel_No" label="接口Key"/>
+      <field pname="Id" name="Id" label="接口Key" isPk="true" buildType ="0" valueSql="select UP_CHANNEL_CONFIG_auto_ID.nextval from dual"/>
+    </fields>
+  </table>
+  <template>
+    <item name="getList">
+      <sql>
+        <![CDATA[
+          SELECT t.*,
+                 dc.CHANNEL_NAME DChannelName
+                FROM (SELECT RID
+                        FROM (SELECT R.RID, ROWNUM LINENUM
+                                FROM (SELECT t.rowid RID
+                                        FROM UP_CHANNEL_CONFIG t
+                                       WHERE 
+                                       {@t.DownChannelNo}
+                                       order by t.Id desc) R
+                               WHERE ROWNUM <= { :PS} * { :PI})
+                       WHERE LINENUM > { :PS} * ({ :PI} - 1)) TAB1
+               inner join UP_CHANNEL_CONFIG t on t.rowid = TAB1.RID
+               left join DOWN_CHANNEL dc on t.Down_Channel_No = dc.DOWN_CHANNEL_NO
+               order by t.Id desc
+        ]]>
+      </sql>
+    </item>
+    <item name="getCount">
+      <sql>
+        <![CDATA[
+          select count(t.id)  FROM UP_CHANNEL_CONFIG t
+                                       WHERE 
+                                       {@t.DownChannelNo}
+        ]]>
+      </sql>
+    </item>
+    <item name="getData">
+      <sql>
+        <![CDATA[
+          select t.* from UP_CHANNEL_CONFIG t
+        ]]>
+      </sql>
+    </item>
+  </template>
+</config>

@@ -1,0 +1,30 @@
+﻿/****订单详细页面的公共样式*****/
+.order_detail{margin-top:-10px;}
+/******tab标签不符*****/
+.tab_menu_bg{height:27px; line-height:27px; background:url(/Content/images/tab_menu_bg.gif) repeat-x; padding:18px 0 0 10px; overflow:hidden;}
+.tab_menu_bg ul li{float:left;}
+/****标题正常样式****/
+.li_normal{margin:0 5px; display:inline;}
+.li_normal .li_bg_left{width:5px; height:27px; float:left;}
+.li_normal .li_bg_ceter{float:left;}
+.li_normal .li_bg_right{width:5px; height:27px; float:left;}
+/****标题被选中的样式****/
+.li_selet{margin:0 5px; display:inline;}
+.li_selet .li_bg_left{background:url(/Content/images/tab_menu_select.gif) 0 0; width:5px; height:27px; float:left;}
+.li_selet .li_bg_ceter{background:url(/Content/images/tab_menu_select.gif) 0px -30px repeat-x; color:#950606; height:27px; float:left;}
+.li_selet .li_bg_right{background:url(/Content/images/tab_menu_select.gif) 0px -60px; width:5px; height:27px; float:left;}
+/****标签部分结束***/
+/**table部分的样式**/
+.order_detail .detailed_content{margin:10px;}
+.order_detail .detailed_content table{color:#555555; border:1px solid #BCDAE4; border-bottom:none;}
+.order_detail .detailed_content table tr td{height:32px; border-bottom:1px solid #BCDAE4; text-indent:5px;}
+.order_detail .detailed_content .col_span{color:#ff6600;}
+.order_detail .detailed_content .td_title{background:#f1f7f9; text-align:right; color:#055586;}
+
+.order_detail .list_content{margin:10px 0;}
+.order_detail .list_content table{ text-align:center; border:1px solid #bcdae4; border-bottom:none;}
+.order_detail .list_content table th{ font-weight:400;color:#055586; height:28px; line-height:28px; background:url(/Content/images/order_list1.gif) repeat-x;border-bottom:1px solid #bcdae4; border-left:1px solid #bcdae4;}
+.order_detail .list_content table tr td{ height:28px; line-height:20px; border-bottom:1px solid #bcdae4;}
+.order_detail .list_content table span{ color:#ff0000;}
+.order_detail .list_content table .border0{ border-left:0 none;}
+.order_detail .li_right{float:right;}

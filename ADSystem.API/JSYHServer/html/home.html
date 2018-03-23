@@ -1,0 +1,448 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>话费充值</title>
+    <!-- 引入 WeUI -->
+    <link rel="stylesheet" href="//cdn.bootcss.com/weui/1.1.1/style/weui.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/jquery-weui/1.0.1/css/jquery-weui.min.css">
+    <script src="//cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/jquery-weui/1.0.1/js/jquery-weui.min.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
+    <style>
+        .weui-cell:before {
+            right: 15px;
+        }
+        .mobile_focus{
+            font-weight:600;
+        }
+        /*style的第一种样式*/
+        .able_ul{
+            list-style:none;
+            width:100%;
+        }
+        .able_ul li{
+            float:left;
+            border:1px solid #09b6f2;
+            height:60px;
+            text-align:center;
+            width:29.1%;
+            line-height:12px;
+            border-radius:5px;
+            margin-right:5%;
+            margin-bottom:10px;
+            color:#09b6f2;
+        }
+        .able_ul li p{
+            margin-top:17.5px;
+        }
+        .able_ul li span{
+            font-size:10px;
+        }
+        /*style的第二种样式*/
+        .unable_ul{
+            list-style:none;
+            width:100%;
+        }
+        .unable_ul li{
+            float:left;
+            border:1px solid #CACACA;
+            height:60px;
+            text-align:center;
+            width:29.1%;
+            line-height:60px;
+            border-radius:5px;
+            margin-right:5%;
+            margin-bottom:10px;
+            color:#CACACA;
+        }
+        .unable_ul li span{
+            display:none;
+            font-size:10px;
+        }
+        ul li:nth-child(3n+0)
+        {
+          margin-right:0%;
+        }
+        
+        .liuliang_unable{
+            float:left;
+            border:1px solid #CACACA;
+            height:60px;
+            text-align:center;
+            width:29.1%;
+            line-height:60px;
+            border-radius:5px;
+            margin-right:5%;
+            margin-bottom:10px;
+            color:#CACACA;
+        }
+         .liuliang_able{
+            float:left;
+            border:1px solid #09b6f2;
+            height:60px;
+            text-align:center;
+            width:29.1%;
+            line-height:60px;
+            border-radius:5px;
+            margin-right:5%;
+            margin-bottom:10px;
+            color:#09b6f2;
+        }
+        :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+            color: #09b6f2; opacity:1; 
+        }
+
+        ::-moz-placeholder { /* Mozilla Firefox 19+ */
+            color: #09b6f2;opacity:1;
+        }
+
+        input:-ms-input-placeholder{
+            color:#09b6f2;opacity:1;
+        }
+
+        input::-webkit-input-placeholder{
+            color: #09b6f2;opacity:1;
+        }
+        
+        /*--新增--*/
+        .header
+        {
+            width:100%;
+            height:44px;
+            background-color:#09b6f2;
+            position:fixed;
+            top:0;
+            margin-bottom:44px;
+            text-align:center;
+            font-size:18px;
+            color:White;
+            line-height:44px;
+            z-index:10;
+        }
+        .bottom
+        {
+             width:100%;
+             text-align:center;
+             position:fixed;
+             bottom:0;
+             line-height:25px;
+             height:25px;
+             font-size:13px;
+             color:#ccc;
+             z-index=-100;
+        }
+        .weui-cells:after
+        {
+            border:none;
+        }
+    </style>
+</head>
+<body ontouchstart>
+    <div class="header">话费充值</div>
+    <div class="weui-cells weui-cells_form" style="margin-top: 44px;">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <input class="weui-input mobile_blur" type="tel" name="mobile" maxlength="13" placeholder="请输入手机号码"
+                    style="height: 30px; font-size: 21px;width:90%">
+                <a class="weui-icon-clear" style="display: inline-block;margin: auto;margin-bottom: 5px; display:none"></a>
+                <input class="weui-input" id="tip" type="text" style="height: 16px; font-size: 12px;
+                    color: #ccc;display: inherit" readonly="readonly" value="移动 联通 电信">
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <p style="height: 18px; font-size: 14px; color: #cacaca; margin-bottom: 10px;">
+                    充话费</p>
+                <div style="display: block; width: 100%">
+                    <ul class="unable_ul">
+                       <li>
+                            <p>
+                                10元</p>
+                            <span>售价:99.99</span> </li>
+                        <li>
+                            <p>
+                                20元</p>
+                            <span>售价:99.99</span> </li>
+                        <li>
+                            <p>
+                                30元</p>
+                            <span>售价:99.99</span> </li>
+                        <li>
+                            <p>
+                                50元</p>
+                            <span>售价:99.99</span> </li>
+                        <li>
+                            <p>
+                                100元</p>
+                            <span>售价:99.99</span> </li>
+                        <li>
+                            <p>
+                                200元</p>
+                            <span>售价:99.99</span> </li>
+                        <li>
+                            <p>
+                                300元</p>
+                            <span>售价:99.99</span> </li>
+                        <li>
+                            <p>
+                                500元</p>
+                            <span>售价:99.99</span> </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <p style="height: 18px; font-size: 14px; color: #cacaca; margin-bottom: 10px;">
+                    充流量</p>
+                <div style="display: block; width: 100%">
+                    <p id="other" class="liuliang_unable">
+                        选流量包</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--bottom-->
+    <div class="hw_bottom" style="font-size: 12px;padding-top: 3px;
+        color: #0B346E; text-align: center; position: fixed; bottom: 0px; width: 100%; z-index:-100">
+        <a  href="query.html">充值记录</a>
+        <div style="margin-bottom: 0px;">
+            <a style="display: inline-block; color: #91989F;">©此服务由千行你我科技提供
+            <img id="help_tip" align="absmiddle"; src="help_tip.png" style="width:18px;height: 18px;margin-bottom: 3.5px" /></a>
+        </div>
+    </div>
+   <!-- <div class="bottom">   <a class="recharge_record">充值记录</a>©此服务由千行你我科技提供
+                       <img id="help_tip" align="absmiddle"; src="help_tip.png" style="width:18px;height: 18px;margin-bottom: 3.5px" />
+    </div>-->
+    </body>
+</html>
+<script type="text/javascript">
+    $(function () {
+        //获取链接参数
+        function GetQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        }
+
+        //提示框的弹出
+        $('#help_tip').on("click", function () {
+            var content = [];
+            content.push('<span style="height:66px;line-height:22px;padding-left:30px">1.话费充值成功后一般30分钟内可入账，月初/月末高峰可能出现延迟</span>');
+            content.push("<br>");
+            content.push('<span style="height:66px;line-height:22px;padding-left:30px">2.长时间后确认查询到未到账,请联系客服,客服会在第一时间为您查询</span>');
+            content.push("<div style='color:black;font-weight:600;text-align: left;margin-bottom:8px;padding-left: 7px;margin-top: 5px'>客服联系方式</div>");
+            content.push("<span>客服QQ:<a style='color:#09b6f2;font-size:16px'>2602661296</a></span><br/>");
+            content.push('<p style="height: 5px"></p>');
+            content.push("<span>客服电话:<a href='tel:18774376622' style='color:#09b6f2;font-size:16px'>18774376622</a></span>");
+            content.push("<div style='color:black;font-weight:600;text-align: left;margin-bottom:8px;padding-left: 7px;margin-top: 5px'>客服在线时间</div>");
+            content.push('<div>')
+            content.push("<span>工作日：上午8:00-23:00 <br/></span>");
+            content.push("<span>周末和法定节假日：8:00-23:00</span>");
+            content.push('</div>')
+            $.modal({
+                title: "<span style='color:#09b6f2;font-size:18px;'>温馨提示</span>",
+                text: content.join(''),
+                buttons: [
+                 { text: "<span style='color:#09b6f2;font-size:16px;'>我知道了</span>"}]
+            });
+        });
+
+        //充值流量
+        $('#other').on("click", function () {
+            if ($(this).hasClass("liuliang_able")) {
+                //登录华为生活账号
+                localStorage.setItem("recharge_mobile", $('input[name=mobile]').val());
+                localStorage.setItem("orderinfo", JSON.stringify({
+                    businessType:'',
+                    account: '', //账号加手机类型
+                    product_name:'',
+                    mobile:'', //充值的手机号
+                    product_id:'', //产品编号
+                    face:'', //面值
+                    price:'', //售价,
+                    card_type: 2, //充值类型 1-话费 2-流量
+                    flow_type: '', //流量类型
+                    pay_type: 4//龙支付
+                }));
+                location.href = "flow.html" + window.location.search;
+            }
+        });
+
+        //清除输入框的值
+        $('.weui-icon-clear').on("click", function () {
+            $('input[name=mobile]').val('');
+            $('input[name=mobile]').removeClass("mobile_focus");
+            $(this).hide();
+            //关闭效果    
+            $('#tip').val("移动 联通 电信");
+            $('#tip').css("color", "#ccc");
+            if ($('ul').hasClass("able_ul")) {
+                $('ul').removeClass("able_ul").addClass("unable_ul");
+            }
+            if ($('#other').hasClass("liuliang_able")) {
+                $('#other').removeClass("liuliang_able").addClass("liuliang_unable");
+            }
+            $('input[name=mobile]').focus();
+        });
+
+        //页面初始化的时候进行
+        $('input[name=mobile]').val(localStorage.getItem("recharge_mobile"));
+        var ph = $('input[name=mobile]').val();
+        if (ph.length == 13) {
+            $('.weui-icon-clear').show();
+            $('input[name=mobile]').blur(); //失去焦点
+            ph = ph.replace(/\D/g, '');
+            LoadMobile(ph);
+        }
+
+        //输入手机号码效果的切换
+        $('input[name=mobile]').on("keyup", function (e) {
+            var value = $(this).val();
+            if (e.keyCode != 8) {
+                if (value.length == 4 || value.length == 9) {
+                    var i = value.length;
+                    value = client.string.insert(value, i - 1, " ");
+                    $(this).val(value);
+                }
+            }
+            else {
+                if (value.length == 9 || value.length == 4)
+                    value = $(this).val(value.trim());
+                if (value.length < 13) {
+                    //关闭效果    
+                    $('#tip').val("移动 联通 电信");
+                    $('#tip').css("color", "#ccc");
+                }
+                if ($('ul').hasClass("able_ul")) {
+                    $('ul').removeClass("able_ul").addClass("unable_ul");
+                }
+                if ($('#other').hasClass("liuliang_able")) {
+                    $('#other').removeClass("liuliang_able").addClass("liuliang_unable");
+                }
+            }
+        });
+
+        //样式的切换
+        $('input[name=mobile]').on("input", function () {
+            var value = $(this).val();
+            if (value.length > 0) $('.weui-icon-clear').show();
+            if (!$(this).hasClass("mobile_focus")) {
+                $(this).addClass("mobile_focus");
+            }
+            if (value.length == 0) {
+                $('.weui-icon-clear').hide();
+                $(this).removeClass("mobile_focus");
+            }
+            if (value.length == 13) {
+                $(this).blur(); //失去焦点
+                value = value.replace(/\D/g, '');
+                //判断检查号码的区段
+                if (client.regex.isPhone(value)) {
+                    //interfaceType 1-获取好码归属地 2-获取产品
+                    LoadMobile(value);
+                }
+                else {
+                    setTimeout(function () {
+                        $.toast("手机号码格式错误", "cancel");
+                    }, 500);
+                }
+            }
+        });
+
+        //判断号码区段
+        function LoadMobile(value) {
+            client.ajax.ajaxRequest("/JSYHServer/server/ProductQuery.ashx", { sPhone: value, interfaceType: 1 }, function (r) {
+                if (r.code == 100 && r.data.carrierNo) {
+                    $('#tip').val(r.data.provinceNo + r.data.cityNo + r.data.carrierNo);
+                    $('#tip').css("color", "#09b6f2");
+                    loadProduct(value);
+                }
+                else {
+                    $.toast("无效的号码", "cancel");
+                }
+            });
+        }
+
+
+        //根据手机号码加载产品列表
+        function loadProduct(phone) {
+            client.ajax.ajaxRequest("/JSYHServer/server/ProductQuery.ashx", { sPhone: phone, interfaceType: 2, businessType: 1 }, function (r) {
+                if (r.code == 100) {
+                    var array = r.data;
+                    var html = [];
+                    $(array).each(function () {
+                        html.push('<li data-productId="' + this.productID + '"  data-businessType="' + this.businessType + '" data-flowType="' + this.flowType + '">');
+                        html.push('<p  data-face="' + this.face + '">' + this.face + '元</p>');
+                        html.push('<span data-fee="' + this.fee + '">售价:' + this.fee + '</span>');
+                        html.push('</li>');
+                    });
+                    if (array.length > 0) {
+                        $('ul').html('').append(html.join(''));
+                        $('ul').removeClass("unable_ul").addClass("able_ul");
+                        $('#other').removeClass("liuliang_unable").addClass("liuliang_able");
+                        //绑定点击事件
+                        $('ul li').on("click", function () {
+                            var mobile_type = GetQueryString("mobileType"); //获取手机类型
+                            var user_id = GetQueryString("user_id") || '';
+                            if (mobile_type) {
+                                localStorage.setItem("mobileType", mobile_type);
+                            }
+                            else {
+                                mobile_type = localStorage.getItem("mobileType");
+                            }
+                            if (!mobile_type || mobile_type == 0) {
+                                return dialog.alert("请用建设银行APP发起支付", null, 3000);
+                            }
+                            var phoneType = mobile_type == 1 ? "IOS" : "Android";
+                            if ($('ul').hasClass("able_ul")) {
+                                localStorage.setItem("recharge_mobile", $('input[name=mobile]').val());
+                                $.showLoading("支付请求中");
+                                var productId = $(this).attr("data-productId");
+                                var face = $(this).find('p').attr("data-face");
+                                var fee = $(this).find('span').attr("data-fee");
+                                var flow_type = $(this).attr("data-flowType");
+                                var businessType = $(this).attr("data-businessType");
+                                var product_name = "充话费-" + face + "元";
+                                //提交请求
+                                client.ajax.ajaxRequest("/JSYHServer/server/BookOrder.ashx", {
+                                    orderInfo: JSON.stringify({
+                                        businessType: businessType,
+                                        account: user_id + "-" + phoneType, //账号加手机类型
+                                        product_name: product_name,
+                                        mobile: phone, //充值的手机号
+                                        product_id: productId, //产品编号
+                                        face: face, //面值
+                                        price: fee, //售价,
+                                        card_type: 1, //充值类型 1-话费 2-流量
+                                        flow_type: flow_type, //流量类型
+                                        pay_type: 4//龙支付
+                                    })
+                                }, function (r) {
+                                    $.hideLoading();
+                                    if (r.success) {
+                                        if (mobile_type == 1) {
+                                            //ios跳转APP龙支付
+                                            window.location = "mbspay://direct?" + r.data;
+                                        }
+                                        if (mobile_type == 2) {
+                                            //安卓跳转APP龙支付
+                                            mbspay.directpay(r.data);
+                                        }
+                                    }
+                                    else {
+                                        dialog.alert(r.info, null, 3000);
+                                    }
+                                });
+                            }
+                        });
+                    }
+                } else {
+                    $.toast(r.info, "cancel");
+                }
+            });
+        }
+    });
+</script>

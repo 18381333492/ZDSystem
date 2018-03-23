@@ -1,0 +1,239 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>充值查询</title>
+    <!-- 引入 WeUI -->
+    
+    <link href="/HWServer/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/HWServer/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="/HWServer/css/orderList.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/weui/1.1.1/style/weui.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/jquery-weui/1.0.1/css/jquery-weui.min.css">
+    <script src="//cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/jquery-weui/1.0.1/js/jquery-weui.min.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
+    <style>
+        .weui-cell:before {
+            right: 15px;
+        }
+        :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+            color: #09b6f2; opacity:1; 
+        }
+        ::-moz-placeholder { /* Mozilla Firefox 19+ */
+            color: #09b6f2;opacity:1;
+        }
+
+        input:-ms-input-placeholder{
+            color:#09b6f2;opacity:1;
+        }
+
+        input::-webkit-input-placeholder{
+            color: #09b6f2;opacity:1;
+        }
+        
+        /*--新增--*/
+        .header
+        {
+            width:100%;
+            height:44px;
+            background-color:#09b6f2;
+            position:fixed;
+            top:0;
+            margin-bottom:44px;
+            text-align:center;
+            font-size:18px;
+            color:White;
+            line-height:44px;
+            z-index:10;
+        }
+    </style>
+</head>
+<body ontouchstart>
+    <div class="header">
+        <img src="left_back.png" style="position: absolute;left: 8px;top: 6px; width:32px; height:32px;" />
+        充值查询</div>
+    <div class="weui-cells weui-cells_form" style="margin-top: 44px; position:fixed; width:100%;z-index:50">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <input class="weui-input mobile_blur" type="tel" name="mobile" maxlength="13" placeholder="请输入您的手机号码"
+                    style="height: 30px; font-size: 21px;width:90%; border-bottom:none">
+                <a class="weui-icon-clear" style="display: inline-block;margin: auto;margin-bottom: 5px; display:none"></a>
+            </div>
+        </div>  
+    </div>
+       <div id="centen" style=" padding-top:90px">
+      <!--   <div class="order">
+            <div class="container tit">
+                <div class="row">
+                    <div class="col lft">
+                        订单号:QX201712141731087784</div>
+                </div>
+                <div class="row time">
+                     <div style=" padding-left:3px;">话费30元</div>
+                    <div class="col rig"><span style=" color:#CACACA"><i class="fa fa-clock-o"></i>2017-10-23 17:43:55</span></div>
+                </div>
+            </div>
+            <div class="container tab" style="background-color: #eee;">
+                <div class="row" style="padding-bottom:0px;">
+                    <div class="col" style="color:#CACACA">手机号码</div>
+                    <div class="col" style="color:#CACACA">支付金额</div>
+                    <div class="col" style="color:#CACACA">充值状态</div>
+                </div>
+                <div class="row">
+                    <div class="col align-items-start">18581619978</div>
+                    <div class="col">29.97</div>
+                    <div class="col" style="color:#09b6f2">正在充值</div>
+                </div>
+            </div>
+        </div>-->
+        </div>
+        <div style="padding-top:100px; display:none" id="noData">
+        <div style=" text-align:center">
+            <img class="animated fadeIn mb-4" src="/img/dataNull.png" />
+            <h5 class="animated fadeIn mb-4" style=" color:#CACACA">
+                暂无数据</h5>
+        </div>
+    </div>    
+    </body>
+</html>
+<script type="text/javascript">
+    $(function () {
+
+        var orderParams = {
+            page: 1,
+            rows: 6,
+            mobile: '',
+            state: true
+        };
+
+        $('.header img').on("click", function () {
+            history.back();
+        });
+
+        //清除输入框的值
+        $('.weui-icon-clear').on("click", function () {
+            $('input[name=mobile]').val('');
+            $('input[name=mobile]').removeClass("mobile_focus");
+            $(this).hide();
+            $('input[name=mobile]').focus();
+        });
+
+        //输入手机号码效果的切换
+        $('input[name=mobile]').on("keyup", function (e) {
+            var value = $(this).val();
+            if (e.keyCode != 8) {
+                if (value.length == 4 || value.length == 9) {
+                    var i = value.length;
+                    value = client.string.insert(value, i - 1, " ");
+                    $(this).val(value);
+                }
+            }
+            else {
+                if (value.length == 9 || value.length == 4)
+                    value = $(this).val(value.trim());
+            }
+        });
+
+        //样式的切换
+        $('input[name=mobile]').on("input", function () {
+            var value = $(this).val();
+            if (value.length > 0) $('.weui-icon-clear').show();
+            if (!$(this).hasClass("mobile_focus")) {
+                $(this).addClass("mobile_focus");
+            }
+            if (value.length == 0) {
+                $('.weui-icon-clear').hide();
+                $(this).removeClass("mobile_focus");
+            }
+            if (value.replace(/\D/g, '').length > 0 && client.regex.isPhone(value.replace(/\D/g, ''))) {
+                //如果直接赋值号码
+                value = value.replace(/\D/g, '');
+                value = client.string.insert(value, 3, ' ');
+                value = client.string.insert(value, 8, ' ');
+                $(this).val(value);
+            }
+            if (value.length == 13) {
+                $(this).blur(); //失去焦点
+                value = value.replace(/\D/g, '');
+                //判断检查号码的区段
+                if (value.length > 0 && client.regex.isPhone(value)) {
+                    $('#noData').hide();
+                    $('#centen').html('');
+                    orderParams.page = 1;
+                    orderParams.state = true;
+                    loadOrderList(value);
+                }
+                else {
+                    setTimeout(function () {
+                        $.toast("手机号格式错误", "cancel");
+                    }, 500);
+                }
+            }
+        });
+
+        $(window).scroll(function () {//绑定滚动事件
+            if ($(document).scrollTop() == $("#centen").height() + 90 - $(window).height()) {
+                if (orderParams.state) {
+                    orderParams.page = orderParams.page + 1;
+                    loadOrderList(orderParams.mobile);
+                }
+            }
+        });
+
+        //根据手机号码加载产品列表
+        function loadOrderList(phone) {
+            $.showLoading();
+            orderParams.mobile = phone;
+            client.ajax.ajaxRequest("/JSYHServer/server/Query.ashx", orderParams, function (r) {
+                $.hideLoading();
+                if (r.rows.length > 0) {
+                    var array = r.rows;
+                    var html = [];
+                    $(array).each(function () {
+                        html.push('<div class="order">');
+                        html.push('<div class="container tit">');
+                        html.push('<div class="row">');
+                        html.push('<div class="col lft">订单号:' + this.ORDERNO + '</div>');
+                        html.push('</div>');
+                        html.push('<div class="row time">');
+                        html.push('<div style=" padding-left:3px;">' + this.PRODUCTNAME + '</div>');
+                        html.push('<div class="col rig"><span style=" color:#CACACA"><i class="fa fa-clock-o"></i>' + this.CREATETIME + '</span></div>');
+                        html.push('</div>');
+                        html.push('</div>');
+                        html.push('<div class="container tab" style="background-color: #eee;">');
+                        html.push('<div class="row" style="padding-bottom:0px;">');
+                        html.push('<div class="col" style="color:#CACACA">手机号码</div>');
+                        html.push('<div class="col" style="color:#CACACA">支付金额</div>');
+                        html.push('<div class="col" style="color:#CACACA">充值状态</div>');
+                        html.push('</div>');
+                        html.push('<div class="row">');
+                        html.push('<div class="col align-items-start">' + this.MOBILE + '</div>');
+                        html.push('<div class="col">' + this.USERPAY + '</div>');
+                        html.push('<div class="col" style="color:#09b6f2">' + this.STATUS + '</div>');
+                        html.push('</div>');
+                        html.push('</div>');
+                        html.push('</div>');
+                    });
+                    $('#centen').append(html.join(''));
+                    if (r.rows.length < orderParams.rows) {
+                        orderParams.state = false;
+                    }
+                }
+                else {
+                    if ($('#centen .order').length == 0) {
+                        $('#noData').show();
+                    }
+                    else {
+                        if (!r.rows)
+                            $.toast(r, "cancel");
+                        else
+                          orderParams.state = false;
+                    }
+                }
+            });
+        }
+    });
+</script>

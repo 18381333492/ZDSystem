@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Settings>
+  <Item name="title" value="中大后台管理系统" />
+  <!--订单查询时间段-->
+  <Item name="OrderQueryTime" value="30" />
+  <!--订单查询时间段的Label-->
+  <Item name="OrderQueryTimeLabel" value="近半小时" />
+  <!--验证码文件路径-->
+  <Item name="CodeImagePath" value="../ValidateCodeImg/" />
+  <Item name="RequstPath" value="http://www.18pingtai.cn:8094/data/"/>
+  <!--<Item name="LoginUrl" value="http://192.168.5.200:8085"/>-->
+  <Item name="LoginUrl" value="http://192.168.0.39:8095"/>
+  <Item name="GetValueUrl" value="http://192.168.0.39:8095/UnionLoginPermissionGet.ashx"/>
+    
+  <Item name="JSVerson" value="1"/>
+  <Item name="SystemNo" value="ZDWS"/> <!--ZDWS-->
+</Settings>

@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>充值查询</title>
+    <!-- 引入 WeUI -->
+    
+    <link href="/HWServer/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/HWServer/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="/HWServer/css/orderList.css" rel="stylesheet" />
+
+    <link href="/WeUI/weui.min.css" rel="stylesheet" type="text/css" />
+    <link href="/WeUI/jquery-weui.min.css" rel="stylesheet" type="text/css" />
+    <script src="/WeUI/jquery.min.js" type="text/javascript"></script>
+    <script src="/WeUI/jquery-weui.min.js" type="text/javascript"></script>
+
+    <script type="text/javascript" src="/js/common.js"></script>
+    <style>
+        :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+            color: #F1682E; opacity:1; 
+        }
+        ::-moz-placeholder { /* Mozilla Firefox 19+ */
+            color:#F1682E;opacity:1;
+        }
+
+        input:-ms-input-placeholder{
+            color:#F1682E;opacity:1;
+        }
+
+        input::-webkit-input-placeholder{
+            color: #F1682E;opacity:1;
+        }
+        .weui-cell
+        {
+            padding:8px 15px;
+        }
+        .weui-cells:after
+        {
+            border:none;
+        }
+        
+    </style>
+</head>
+<body ontouchstart>
+    <div class="weui-cells weui-cells_form" style="margin-top: 0px; position:fixed; width:100%;z-index:50">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <input class="weui-input mobile_blur" type="tel" name="mobile" maxlength="13" placeholder="输入手机号码"
+                    style="height: 30px; font-size: 18px;width:90%; border-bottom:none">
+                <a class="weui-icon-clear" style="display: inline-block;margin: auto;margin-bottom: 5px; display:none;color:#b2b2b2"></a>
+            </div>
+        </div>  
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+                 <input class="weui-input" type="tel" maxlength="5" placeholder="输入验证码" id="code"
+                    style="height: 30px; font-size: 18px;width:70%; border-bottom:none">
+                       <a  id="getCode" class="weui-btn weui-btn_plain-primary" style="width:28%; vertical-align:bottom;border: 1px solid #F1682E; color:#F1682E;
+                           display:inline-block; padding:2px; line-height:normal; font-size:14px; line-height:25px;">获取验证码</a>
+            </div>
+        </div>  
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <a  id="query" class="weui-btn weui-btn_primary" style="background-color:#F1682E; line-height:40px; color:#fff; margin-top:10px;">查 询</a>
+            </div>
+        </div>
+    </div>
+    <div class="hw_bottom" style="font-size: 12px; background-color: #fff; padding-top: 3px;
+        color: #0B346E; text-align: center; position: fixed; bottom: 0px; width: 100%; z-index:-100">   
+        <div style="margin-bottom: 5px;">
+            <a style="display: inline-block; color: #91989F;">温馨提示：查询充值记录需本机号码通过验证</a>
+        </div>
+    </div>
+       <div id="centen" style=" padding-top:0px">
+      <!--   <div class="order">
+            <div class="container tit">
+                <div class="row">
+                    <div class="col lft">
+                        订单号:QX201712141731087784</div>
+                </div>
+                <div class="row time">
+                     <div style=" padding-left:3px;">话费30元</div>
+                    <div class="col rig"><span style=" color:#CACACA"><i class="fa fa-clock-o"></i>2017-10-23 17:43:55</span></div>
+                </div>
+            </div>
+            <div class="container tab" style="background-color: #eee;">
+                <div class="row" style="padding-bottom:0px;">
+                    <div class="col" style="color:#CACACA">手机号码</div>
+                    <div class="col" style="color:#CACACA">支付金额</div>
+                    <div class="col" style="color:#CACACA">充值状态</div>
+                </div>
+                <div class="row">
+                    <div class="col align-items-start">18581619978</div>
+                    <div class="col">29.97</div>
+                    <div class="col" style="color:#F1682E">正在充值</div>
+                </div>
+            </div>
+        </div>-->
+        </div>
+        <div style="padding-top:100px; display:none" id="noData">
+        <div style=" text-align:center">
+            <img class="animated fadeIn mb-4" src="/img/dataNull.png" />
+            <h5 class="animated fadeIn mb-4" style=" color:#CACACA">
+                暂无数据</h5>
+        </div>
+    </div>    
+    </body>
+</html>
+<script src="js/wapquery.js" type="text/javascript"></script>

@@ -1,0 +1,180 @@
+﻿@model ZDSystem.Model.ReceiptAccountInfoItemModel
+@{
+    Layout = null;
+}
+<script type="text/javascript">
+    $(function () {
+        $('#mainForm').validate({
+            errorClass: "error",
+            focusInvalid: true,
+            submitHandler: function (form) {
+                if (!$(form).valid()) {
+                    return false;
+                }
+                var data = $(form).serialize();
+                $.ajax({
+                    type: "post",
+                    data: data,
+                    url: "/ReceiptAccountInfo/Edit",
+                    success: function (data) {
+                        data = $.parseJSON(data);
+                        if (data.Status) {
+                            alert("操作成功");
+                            if ($("#__id").val() != "") {
+                                window.location.href = location.href;
+                            }
+                            return true;
+                        }
+                        return false;
+                    },
+                    error: function () {
+                        alert("请求出错");
+                    }
+                });
+            },
+            rules: {
+                DChannelNo: { required: true }
+        }
+    });
+    $('select').each(function () {
+        if ($(this).css('display') != "none") {
+            $(this).sSelect();
+        }
+    });
+});
+</script>
+<form id="mainForm" method="post">
+<input type="hidden" name="__id" value="@Model.Id" />
+<table>
+    <tr height="20">
+        <td width="120" class="textalign_r">
+            账户类型：
+        </td>
+        <td width="300" class="textalign_l">
+            @Html.DropDownList("AccountType", new SelectList(SysDictionaryService.Instance.GetDataListByType("AccountType"), "Value", "Name", @Model.CurrentModel.Appid), "--请选择--", new { style = " width:200px;" })
+        </td>
+        <td width="120" class="textalign_r">
+            收款账户ID：
+        </td>
+        <td width="300" class="textalign_l">
+            <input class="widthinput" type="text" name="Appid"  value="@Model.CurrentModel.Appid"  style="width:200px"/>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            下游渠道:
+        </td>
+        <td>
+            @Html.DropDownList("DChannelNo", new SelectList(DownChannelSerivce.Instance.GetDataList(), "DownChannelNo", "ChannelName", Model.CurrentModel.DownChannelNo), "--请选择--", new { style = " width:120px;" })
+        </td>
+    </tr>
+    <tr height="20">
+        <td width="120" class="textalign_r">
+            商户号：
+        </td>
+        <td width="300" class="textalign_l">
+            <input class="widthinput" type="text" name="MchId" value="@Model.CurrentModel.MchId"  style="width:200px"/>
+        </td>
+      @*  <td width="120" class="textalign_r">
+            密(公)钥：
+        </td>
+        <td width="300" class="textalign_l">
+            <input class="widthinput" type="text" name="PubKey" value="@Model.CurrentModel.PubKey"  style="width:200px" />
+        </td>*@
+    </tr>
+    <tr height="20">
+       @* <td width="120" class="textalign_r">
+            私钥：
+        </td>
+        <td width="300" class="textalign_l">
+            <input class="widthinput" type="text" name="PriKey" value="@Model.CurrentModel.PriKey"  style="width:200px"/>
+        </td>*@
+        <td width="120" class="textalign_r">
+            证书路径：
+        </td>
+        <td width="300" class="textalign_l">
+            <input class="widthinput" type="text" name="CertificatePath" value="@Model.CurrentModel.CertificatePath"  style="width:200px"/>
+        </td>
+    </tr>
+    <tr height="20">
+        <td class="textalign_r">
+            手续费率：
+        </td>
+        <td width="300" class="textalign_l">
+            <input class="widthinput" type="text" name="ServiceRadio" value="@Model.CurrentModel.ServiceRadio"  style="width:200px"/>
+        </td>
+        <td class="textalign_r">
+            扩展1：
+        </td>
+        <td width="300" class="textalign_l">
+            <input class="widthinput" type="text" name="Ext1" value="@Model.CurrentModel.Ext1"  style="width:200px" />
+        </td>
+    </tr>
+    <tr height="20">
+        <td width="120" class="textalign_r">
+            扩展2：
+        </td>
+        <td width="200" class="textalign_l">
+            <input class="widthinput" type="text" name="Ext2" value="@Model.CurrentModel.Ext2"  style="width:200px"/>
+        </td>
+        <td width="120" class="textalign_r">
+            扩展3：
+        </td>
+        <td width="300" class="textalign_l">
+            <input class="widthinput" type="text" name="Ext3" value="@Model.CurrentModel.Ext3"  style="width:200px"/>
+        </td>
+    </tr>
+    <tr height="20">
+        <td width="120" class="textalign_r">
+            扩展4：
+        </td>
+        <td width="300" class="textalign_l">
+            <input class="widthinput" type="text" name="Ext4" value="@Model.CurrentModel.Ext4"  style="width:200px"/>
+        </td>
+        <td width="120" class="textalign_r">
+            扩展5：
+        </td>
+        <td width="300" class="textalign_l">
+            <input class="widthinput" type="text" name="Ext5" value="@Model.CurrentModel.Ext5"  style="width:200px" />
+        </td>
+    </tr>
+    <tr height="20">
+        <td width="120" class="textalign_r">
+            同步通知地址：
+        </td>
+        <td width="300" class="textalign_l" colspan="3">
+            <input class="widthinput" type="text" name="SyncNotifyUrl" value="@Model.CurrentModel.SyncNotifyUrl"  style="width:400px" />
+        </td>
+    </tr>
+    <tr height="20">
+        <td width="120" class="textalign_r">
+            异步通知地址：
+        </td>
+        <td width="300" class="textalign_l" colspan="3">
+            <input class="widthinput" type="text" name="NonsyncNotifyUrl" value="@Model.CurrentModel.NonsyncNotifyUrl"  style="width:400px" />
+        </td>
+    </tr>
+    <tr height="20">
+        <td width="120" class="textalign_r">
+            退款脚本地址：
+        </td>
+        <td width="300" class="textalign_l" colspan="3">
+            <input class="widthinput" type="text" name="RefundScriptUrl" value="@Model.CurrentModel.RefundScriptUrl"  style="width:400px" />
+        </td>
+    </tr>
+    <tr>
+        <td width="120" class="textalign_r">
+            备注：
+        </td>
+        <td width="300" class="textalign_l">
+            <textarea name="Remark" rows="15" style="margin: 0px; width: 295px; height: 232px;">@Model.CurrentModel.Remark</textarea>
+        </td>
+        <td width="120" class="textalign_r">
+            状态：
+        </td>
+        <td width="300" class="textalign_l">
+            <input class="widthinput" type="checkbox" name="Status" value="0" @(Model.CurrentModel.Status == 0 ? "checked=checked" : "")/>
+        </td>
+    </tr>
+</table>
+</form>

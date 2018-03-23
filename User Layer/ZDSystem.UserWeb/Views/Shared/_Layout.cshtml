@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link href="/Content/comm.css" rel="stylesheet" type="text/css" />
+    <link href="/Content/main.css" rel="stylesheet" type="text/css" />
+    <link href="/Content/st_main.css" rel="stylesheet" type="text/css" />
+    <link href="/Content/pagination.css" rel="stylesheet" type="text/css" />
+    <link href="/Content/user_layout.css" rel="stylesheet" type="text/css" />
+    <link href="/Scripts/Calendar/skin/WdatePicker.css" rel="stylesheet" type="text/css" />
+    <link href="/Content/jquery.select.debug.css" rel="stylesheet" type="text/css" />
+    <script src="/Scripts/jquery-1.4.4.min.js" type="text/javascript"></script>
+    <script src="/Scripts/ArtDialog/artDialog.js?skin=chrome" type="text/javascript"></script>
+    <script src="/Scripts/ArtDialog/plugins/iframeTools.js" type="text/javascript"></script>
+    <script src="/Scripts/Common.js" type="text/javascript"></script>
+    <script src="/Scripts/jquery.serialize.js" type="text/javascript"></script>
+    <script src="/Scripts/jquery.validate.js" type="text/javascript"></script>
+    <script src="/Scripts/jquery.tablesorter.min.js" type="text/javascript"></script>
+    <script src="/Scripts/zk.textSelect.js" type="text/javascript"></script>
+    <link href="/Content/pagination.css" rel="stylesheet" type="text/css" />
+    <script src="/Scripts/jquery.pagination.js" type="text/javascript"></script>
+    <script src="/Scripts/jquery.query.js" type="text/javascript"></script>
+    <script src="/Scripts/jquery.paging.js" type="text/javascript"></script>
+    <script src="/Scripts/Calendar/WdatePicker.js" type="text/javascript"></script>
+    @*<link href="/Scripts/Ss/jquery.select1.0.css" rel="stylesheet" type="text/css" />
+    <script src="/Scripts/Ss/jquery.select1.0.js" type="text/javascript"></script>*@
+    <script src="/Scripts/plugin.chinese.to.pinyin.js" type="text/javascript"></script>
+    <script src="/Scripts/jquery.select.debug.js" type="text/javascript"></script>
+    <style type="text/css">
+        body
+        {
+            background: #fff;
+            color: #055586;
+        }
+    </style>
+</head>
+<body style="padding-top: 10px;">
+    @RenderBody()
+    <script type="text/javascript">
+        $(function () {
+            //使页面数据排序.必须要有<thead></thead><tbody></tbody>
+            if ($(".list_content table tr th input").length > 0) {
+                if ($(".list_content table tr th input[type=checkbox]").attr("type") == "checkbox") {
+                    $(".list_content table").tablesorter({ headers: { 0: { sorter: false}} });
+                } else {
+                    $(".list_content table").tablesorter();
+                }
+            } else {
+                $(".list_content table").tablesorter();
+            }
+            $('select').each(function () {
+                if ($(this).attr("id") == "ddlps") {
+                    SelectHelper.init();
+                }
+                else {
+                    if ($(this).css('display') == "none") {
+                    }
+                    else {
+                        $(this).sSelect();
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

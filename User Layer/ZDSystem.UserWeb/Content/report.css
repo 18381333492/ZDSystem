@@ -1,0 +1,31 @@
+﻿/***充值主订单订单列表/充值记录***/
+.report_list{ width:100%; font-size:12px;}
+.report_list .list_title{ width:1033px; color:#007310; font-size:16px; font-weight:bold; padding:0 0 0 7px; height:30px; line-height:30px; border-bottom:1px solid #d3d3d3;}
+.report_list .list_head{}
+.report_list .list_input{ width:90px; padding-left:5px; color:#73a2b2; height:18px; line-height:18px; border:1px solid #e0e1e3; border-top-color:#87abb9; border-left-color:#87abb9;}
+.report_list .list_select{ width:85px; height:20px; border:1px solid #7f9db9;}
+.report_list .widthinput{ height:24px; width:200px; border:1px solid #e0e1e3; border-top-color:#87abb9; border-left-color:#87abb9; color:#888888;line-height:24px; font-size:14px;}
+.report_list .chaxun{padding:0\9;}
+.report_list .list_submit{ background:url(/Content/images/order_list.gif); width:64px; height:25px; border:0 none; line-height:25px; cursor:pointer;}
+.report_list .textalign{ text-align:right;}
+.report_list .list_content{border:1px solid #bcdae4; clear:both;}
+.report_list .list_content table{ text-align:center; margin-bottom:10px;}
+.report_list .list_content table th{ font-weight:400; height:28px; line-height:28px; background:url(images/order_list1.gif) repeat-x;border-bottom:1px solid #bcdae4; border-left:1px solid #bcdae4;}
+.report_list .list_content table tr td{ height:28px; line-height:20px; border-bottom:1px solid #bcdae4;}
+.report_list .list_content table tr td a{display:inline-block;}
+.report_list .list_content table .border0{ border-left:0 none;}
+.report_list .query_time{height:25; line-height:25px; font-weight:bold; color:#666666;}
+.report_list .red{color:#ff6600;}
+.report_list .col_span{color:#FF6600; font-weight:bold;}
+.report_list .bd_l{border-left:1px solid #c9c9c9;}
+.report_list .statistics{color:#007310; font-size:14px; font-weight:bold;}
+.report_list .frm{color:#404040;}
+.report_list .red{color:#ff0000;}
+/**订单详细**/
+.report_list .detailed_content{ width:760px; padding-top:20px; font-size:14px;}
+.report_list .li_left{ width:376px; float:left;}
+.report_list .li_right{ width:369px; float:right; text-align:right; padding-right:7px; font-size:12px; font-weight:300;}
+.report_list .detailed_content table{ color:#404040; text-align:right;}
+.report_list .detailed_content table tr td{ height:34px; line-height:34px;}
+.report_list .textstyle{ text-align:left;}
+.report_list .detailed_content .col_span{color: #FF6600;font-size: 18px;font-weight: bold;}

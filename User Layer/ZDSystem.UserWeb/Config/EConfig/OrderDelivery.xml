@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<config>
+  <table name="Order_Delivery">
+    <fields>
+      <field pname="DeliveryId" name="Delivery_Id" label="发货编号"/>
+      <field pname="OrderNo" name="Order_No" label="订单号"/>
+      <field pname="RobotIp" name="Robot_Ip" label="发货ip"/>
+      <field pname="UpOrderNo" name="Up_Order_No" label="上游订单号"/>
+      <field pname="Status" name="Status" label="状态:20-等待发货30-正在发货90-失败0-成功"/>
+      <field pname="ManualStatus" name="Manual_Status" label="人工状态:10-无需20-等待人工0-成功"/>
+      <field pname="ResultMsg" name="Result_Msg" label="结果消息"/>
+      <field pname="QueryStatus" name="Query_Status" label="查询状态10-无需20-等待查询90-失败0-成功"/>
+      <field pname="QueryMsg" name="Query_Msg" label="查询消息"/>
+      <field pname="QueryIp" name="Query_Ip" label="查询机器IP"/>
+      <field pname="CreateTime" name="Create_Time" label="创建时间"/>
+      <field pname="FinishTime" name="Finish_Time" label="完成时间"/>
+      <field pname="QueryCreateTime" name="Query_Create_Time" label="查询创建时间"/>
+      <field pname="NextQueryTime" name="Next_Query_Time" label="下次查询时间"/>
+      <field pname="QueryCntr" name="Query_Cntr" label="查询次数"/>
+      <field pname="DownChannelNo" name="Down_Channel_No" label="下游渠道"/>
+    </fields>
+  </table>
+  <template>
+    <item name="getDeliveryDetialsByOrderNo">
+      <sql>
+        <![CDATA[
+          select t.delivery_id,
+               t.order_no,
+               t.robot_ip,
+               t.up_order_no,
+               t.status,
+               t.manual_status,
+               t.result_msg,
+               t.query_status,
+               t.query_msg,
+               t.query_ip,
+               t.create_time,
+               t.finish_time,
+               t.query_create_time,
+               t.next_query_time,
+               t.query_cntr,
+               t1.name  StatusName,
+               t2.name ManualStatusName,
+               t3.name QueryStatusName
+               from ORDER_DELIVERY t 
+               left join sys_dictionary t1 on t.status = t1.value and t1.type='DeliveryStatus'
+               left join sys_dictionary t2 on t.manual_status = t2.value and t2.type ='ManualStatus'
+               left join sys_dictionary t3 on t.query_status = t3.value and t3.type ='QueryStatus'
+               where {@t.OrderNo}
+        ]]>
+      </sql>
+    </item>
+    <item name="getReviewList">
+      <sql>
+        <![CDATA[
+           SELECT a.*,
+                  t1.name DeliveryStatus,
+                  t3.name QueryStatus
+                  from (
+                  select RID
+                  FROM (SELECT d.RID, rownum LineNum
+                      FROM (SELECT t.rowid RID
+                           FROM ORDER_DELIVERY t 
+                           where t.Manual_Status = 20
+                            {&@t.CreateTime >= to_date($ST,'yyyy-MM-dd')}
+                            {&@t.CreateTime < to_date($ET,'yyyy-MM-dd')+1}
+                            {&@t.OrderNo}
+                            {&@t.DeliveryId}
+                            {&@t.UpOrderNo}
+                           order by t.Create_Time desc) d  where rownum <= { :PS} * { :PI}) r 
+                            where LineNum > { :PS} * ({ :PI} - 1)) tab
+                            inner join order_delivery a  on a.rowid=tab.rid
+          left join sys_dictionary t1 on a.status = t1.value and t1.type='DeliveryStatus'
+          left join sys_dictionary t3 on a.query_status = t3.value and t3.type ='QueryStatus'
+        ]]>
+      </sql>
+    </item>
+    <item name="getReviewCount">
+      <sql>
+        <![CDATA[
+          select count(1) from Order_Delivery t where t.Manual_Status = 20
+                                                      {&@t.CreateTime >= to_date($ST,'yyyy-MM-dd')}
+                                                      {&@t.CreateTime < to_date($ET,'yyyy-MM-dd')+1}
+                                                      {&@t.OrderNo}
+                                                      {&@t.DeliveryId}
+                                                      {&@t.UpOrderNo}
+        ]]>
+      </sql>
+    </item>
+    <item name="getList">
+      <sql>
+        <![CDATA[
+           SELECT a.*,
+                  t1.name DeliveryStatus,
+                  t3.name QueryStatus,
+                  t4.CHANNEL_NAME DChannelName
+                  from (
+                  select RID
+                  FROM (SELECT d.RID, rownum LineNum
+                      FROM (SELECT t.rowid RID
+                           FROM ORDER_DELIVERY t 
+                           where {@t.CreateTime >= to_date($ST,'yyyy-MM-dd')}
+                            {&@t.CreateTime < to_date($ET,'yyyy-MM-dd')+1}
+                            {&@t.OrderNo}
+                            {&@t.DeliveryId}
+                            {&@t.UpOrderNo}
+                            {&@t.Status}
+                            {&@t.QueryStatus}
+                            {&@t.DownChannelNo}
+                           order by t.Create_Time desc) d  where rownum <= { :PS} * { :PI}) r 
+                            where LineNum > { :PS} * ({ :PI} - 1)) tab
+                            inner join order_delivery a  on a.rowid=tab.rid
+          left join sys_dictionary t1 on a.status = t1.value and t1.type='DeliveryStatus'
+          left join sys_dictionary t3 on a.query_status = t3.value and t3.type ='QueryStatus'
+          left join DOWN_CHANNEL t4 on a.Down_Channel_No = t4.DOWN_CHANNEL_NO
+        ]]>
+      </sql>
+    </item>
+    <item name="getCount">
+      <sql>
+        <![CDATA[
+          select count(1) from Order_Delivery t where {@t.CreateTime >= to_date($ST,'yyyy-MM-dd')}
+                                                      {&@t.CreateTime < to_date($ET,'yyyy-MM-dd')+1}
+                                                      {&@t.OrderNo}
+                                                      {&@t.DeliveryId}
+                                                      {&@t.UpOrderNo}
+                                                      {&@t.Status}
+                                                      {&@t.QueryStatus}
+                                                      {&@t.DownChannelNo}
+        ]]>
+      </sql>
+    </item>
+  </template>
+</config>

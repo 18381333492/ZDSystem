@@ -1,0 +1,55 @@
+﻿
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>支付</title>
+    <!-- 引入 WeUI -->
+    <link rel="stylesheet" href="//cdn.bootcss.com/weui/1.1.1/style/weui.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/jquery-weui/1.0.1/css/jquery-weui.min.css">
+
+    <script src="//cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/jquery-weui/1.0.1/js/jquery-weui.min.js"></script>
+    <style>
+        .weui-icon-success
+        {
+            color: #09b6f2;
+        }
+         .weui-icon-warn.weui-icon_msg
+        {
+            color: #09b6f2;
+        }
+        .weui-btn_primary
+        {
+            background-color: #09b6f2;
+         }
+         .weui-btn_default
+         {
+             background-color: #09b6f2;
+         }
+         .header
+        {
+            width:100%;
+            height:44px;
+            background-color:#09b6f2;
+            position:fixed;
+            top:0;
+            margin-bottom:44px;
+            text-align:center;
+            font-size:18px;
+            color:White;
+            line-height:44px;
+            z-index:10;
+        }
+    </style>
+    </head>
+<body ontouchstart>
+   <div class="header">支付通知</div>
+    <div class="PaySuccess" style="text-align:center;margin-top:94px;">
+        <i class="weui-icon-success weui-icon_msg"></i>
+        <p style="color:#09b6f2;margin-top:20px;">支付成功，正在充值！</p>
+        <a class="weui-btn weui-btn_primary" href="/JSYHServer/html/home.html" style=" font-size:16px; width:85%;margin-top:30px;border-radius:5px;height:32px;line-height:32px;width:100px;">返  回</a>
+    </div>
+</body>
+</html>

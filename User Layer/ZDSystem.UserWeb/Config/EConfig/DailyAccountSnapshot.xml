@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<config>
+  <table name="Daily_Account_Snapshot">
+    <fields>
+      <field pname="CreateTime" name="Create_Time" label="快照时间"/>
+      <field pname="DownChannelNo" name="Down_Channel_No" label="下游渠道编号"/>
+      <field pname="CardType" name="Card_Type" label="业务类型"/>
+      <field pname="PayType" name="Pay_Type" label="支付方式"/>
+      <field pname="BusinessType" name="Business_Type" label="业务类型"/>
+      <field pname="ProductFace" name="Product_Face" label="订单面值"/>
+      <field pname="AllPrice" name="All_Price" label="订单总金额"/>
+      <field pname="AllOrderCntr" name="All_Order_Cntr" label="订单总笔数"/>
+      <field pname="SuccessMoney" name="Success_Money" label="成功支付金额"/>
+      <field pname="SuccessOrderCntr" name="Success_Order_Cntr" label="成功支付笔数"/>
+      <field pname="SuccessCoupon" name="Success_Coupon" label="成功优惠卷金额"/>
+      <field pname="ServiceFee" name="Service_Fee" label="服务费"/>
+      <field pname="RefundMoney" name="Refund_Money" label="退款金额"/>
+      <field pname="RefundOrderCntr" name="Refund_Order_Cntr" label="退款笔数"/>
+      <field pname="LossService" name="Loss_Service" label="退款亏损服务费"/>
+    </fields>
+  </table>
+  <template>
+    <item name="getList">
+      <sql>
+        <![CDATA[    
+            SELECT t.create_time,
+                   t.down_channel_no,
+                   t.card_type,
+                   t.pay_type,
+                   t.business_type,
+                   sum(t.product_face) SumProductFace,
+                   sum(t.all_price) SumAllPrice,
+                   sum(t.all_order_cntr) allOrdCntr,
+                   sum(t.success_money) SucMoney,
+                   sum(t.success_order_cntr) sucOrderCntr,
+                   sum(t.success_coupon) SucCoupon,
+                   sum(t.service_fee) SumSerFee,
+                   sum(t.refund_money) SumRefMoney,
+                   sum(t.refund_order_cntr) SumRefOrdCntr,
+                   sum(t.loss_service) SumLossSer,
+                   t1.name Card,
+                   t2.name Pay,
+                   t3.name Business,
+                   dc.channel_name ChannelName,
+                   (case when decode(sum(t.success_order_cntr),0,0) = 0 or decode(sum(t.all_order_cntr),0,0) = 0
+                   then 0 else round(sum(t.success_order_cntr) / sum(t.all_order_cntr)* 100,5) end) PayProbability,
+                   (case when decode(sum(t.refund_order_cntr),0,0) = 0 or decode(sum(t.success_order_cntr),0,0) = 0
+                   then 0 else round(sum(t.refund_order_cntr) / sum(t.success_order_cntr)* 100,5) end)RefundProbability
+                   FROM Daily_Account_Snapshot t 
+                 left join sys_dictionary t1 on t.Card_Type = t1.value and t1.type = 'CardType'
+                 left join sys_dictionary t2 on t2.value = t.Pay_Type and t2.type = 'PayType'
+                 left join sys_dictionary t3 on t3.value = t.Business_Type and t3.type = 'BusinessType'
+                 left join down_channel dc on t.down_channel_no = dc.down_channel_no
+                 where
+                {@t.CreateTime >= to_date($ST,'yyyy-MM-dd')}
+                {&@t.CreateTime < to_date($ET,'yyyy-MM-dd')+1}
+                {&@t.DownChannelNo}
+                {&@t.CardType}
+                {&@t.PayType}
+                {&@t.BusinessType}
+                 group by t.create_time,t.down_channel_no,t.card_type,t.pay_type,t.business_type,t1.name,
+                 t2.name,t3.name,dc.channel_name
+                 order by t.create_time desc
+        ]]>
+      </sql>
+    </item>
+    <item name="getCount">
+      <sql>
+        <![CDATA[
+          select count(1) from
+          (select count(*) from Daily_Account_Snapshot t where 
+                                       {@t.CreateTime >= to_date($ST,'yyyy-MM-dd')}
+                                       {&@t.CreateTime < to_date($ET,'yyyy-MM-dd')+1}
+                                       {&@t.DownChannelNo}
+                                       {&@t.CardType}
+                                       {&@t.PayType}
+                                       {&@t.BusinessType}
+          group by t.create_time,t.down_channel_no,t.card_type,t.pay_type,t.business_type)
+        ]]>
+      </sql>
+    </item>
+
+    <item name="getStatistics">
+      <sql>
+        <![CDATA[
+          SELECT 
+                   sum(t.product_face) SumProductFace,
+                   sum(t.all_price) SumAllPrice,
+                   sum(t.all_order_cntr) allOrdCntr,
+                   sum(t.success_money) SucMoney,
+                   sum(t.success_order_cntr) sucOrderCntr,
+                   sum(t.success_coupon) SucCoupon,
+                   sum(t.service_fee) SumSerFee,
+                   sum(t.refund_money) SumRefMoney,
+                   sum(t.refund_order_cntr) SumRefOrdCntr,
+                   sum(t.loss_service) SumLossSer,
+                   (case when decode(sum(t.success_order_cntr),0,0) = 0 or decode(sum(t.all_order_cntr),0,0) = 0
+                   then 0 else round(sum(t.success_order_cntr) / sum(t.all_order_cntr)* 100,5) end) PayProbability,
+                   (case when decode(sum(t.refund_order_cntr),0,0) = 0 or decode(sum(t.success_order_cntr),0,0) = 0
+                   then 0 else round(sum(t.refund_order_cntr) / sum(t.success_order_cntr)* 100,5) end)RefundProbability
+                   FROM Daily_Account_Snapshot t 
+                    where
+                    {@t.CreateTime >= to_date($ST,'yyyy-MM-dd')}
+                    {&@t.CreateTime < to_date($ET,'yyyy-MM-dd')+1}
+                    {&@t.DownChannelNo}
+                    {&@t.CardType}
+                    {&@t.PayType}
+                    {&@t.BusinessType}
+                 order by t.create_time desc
+        ]]>
+      </sql>
+    </item>
+  </template>
+</config>

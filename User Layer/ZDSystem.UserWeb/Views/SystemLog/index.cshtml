@@ -1,0 +1,43 @@
+﻿@model ZDSystem.Model.SystemLogListModel
+ @{
+    ViewBag.Title = "错误日志";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="order_list">
+    <div class="list_title">
+    错误日志
+    </div>
+    <form method="get" action="/systemlog/index">
+    <div class="search_box clearfix">
+               <p><label>编号:</label><input type="text" name="LogId" /></p><p><label>对象名称:</label><input type="text" name="ObjectName" /></p><p><label>内容:</label><input type="text" name="Content" /></p><p><label>创建时间:</label><input class="list_input Wdate" type="text" name="s" id="s" onclick="WdatePicker({maxDate:'#F{$dp.$D(\'e\')||\'%y-%M-%d\'}',minDate:'#F{$dp.$D(\'e\',{M:-1})}'});" />
+		<input class="list_input Wdate" type="text" name="e" id="e" onclick="WdatePicker({maxDate:'#F{$dp.$D(\'s\',{M:1})||\'%y-%M-%d\'}',minDate:'#F{$dp.$D(\'s\')}'});" /></p><div class="search_btn_box"><input class="search_btn"  type="button" name="qsubmit"/> <a onclick="popEditDialog('SystemLog','','错误日志')">添加</a></div>
+              
+            </div>
+            <input type="hidden" id="__msg" value="@Model.Message" />
+<input type="hidden" id="hm_id" value="SystemLog" />
+
+
+<input type="hidden" value="0" name="pi" id="pi" />
+<input type="hidden" value="@Model.TotalCount" id="count" />    
+<input type="hidden" value="@Lib4Net.Framework.Settings.SettingHelper.Instance.GetInt("pagesize", 10)" id="ps" /> 
+</form>
+    <div class="list_content">
+        <table width="758" border="0" cellpadding="0"  cellspacing="0">
+            <tr>
+               <th>编号</th><th>对象名称</th><th>内容</th><th>创建时间</th><th>操作</th>
+             </tr>
+            @foreach (ZDSystem.Entity.MSystemLog item in Model.List)
+            {
+                <tr>
+                  {# path='index.lua',method='list_item()' #}                   
+                </tr>
+            }
+           
+        </table>
+         <div id="pager" class="list_pager">
+         </div>
+    <div style=" clear:both;"></div>
+    </div>
+</div>

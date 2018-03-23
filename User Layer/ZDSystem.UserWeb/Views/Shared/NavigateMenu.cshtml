@@ -1,0 +1,42 @@
+﻿@using LoginSystem.Model;
+@{
+    int index = 0;
+    Layout = null;
+    List<MRolePermission> allMenus = ViewBag.MenuList as List<MRolePermission>;
+    List<MRolePermission> TopMenus = allMenus.Where(u => u.FunctionLevel == 2).OrderBy(u => Convert.ToInt32(u.ShowSeq)).ToList();
+}
+<div id="leftMenu" class="con_left">
+    @foreach (var top in TopMenus)
+    {
+        List<MRolePermission> FirstMenus = allMenus.Where(u => u.FunctionPid == top.FunctionID).OrderBy(u => Convert.ToInt32(u.ShowSeq)).ToList();
+        if (FirstMenus == null || FirstMenus.Count == 0)
+        {
+            continue;
+        }
+
+        index++;
+        string dis = index == 0 ? "" : "display:none";
+        <div class="con_left_menu" module='@top.FunctionID' style='@dis'>
+            <span class="titel_h3">@top.DisplayName</span>
+            <div class="con_left_nav">
+                @foreach (var first in FirstMenus)
+                {
+                    List<MRolePermission> SecondeMenus = allMenus.Where(u => u.FunctionPid == first.FunctionID).OrderBy(u => u.ShowSeq).ToList();
+                    if (SecondeMenus == null || SecondeMenus.Count == 0)
+                    {
+                        continue;
+                    }
+                    <div class="con_left_bg">
+                        <span>@first.DisplayName</span>
+                    </div>
+                    <ul show="@((int)first.DefaultOpen)">
+                        @foreach (var sencond in SecondeMenus)
+                        {
+                            <li><a href="@sencond.PagePath">@sencond.DisplayName</a> </li>
+                        }
+                    </ul>
+                }
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<config>
+  <table name="Receipt_Account_Info">
+    <fields>
+      <field pname="AccountId" name="Account_Id" label="账户编号" isPk="true" buildType ="0" valueSql="select SEQ_RECEIPT_ACCOUNT_INFO_ID.nextval from dual"/>
+      <field pname="AccountType" name="Account_Type" label="账户类型1:支付宝2:微信3:优惠券"/>
+      <field pname="Appid" name="Appid" label="收款账号ID"/>
+      <field pname="MchId" name="Mch_Id" label="商户号"/>
+      <field pname="PubKey" name="Pub_Key" label="支付宝公钥,微信秘钥"/>
+      <field pname="PriKey" name="Pri_Key" label="私钥"/>
+      <field pname="CertificatePath" name="Certificate_Path" label="证书路径"/>
+      <field pname="Balance" name="Balance" label="余额"/>
+      <field pname="ServiceRadio" name="Service_Radio" label="手续费率"/>
+      <field pname="Ext1" name="Ext_1" label="扩展1"/>
+      <field pname="Ext2" name="Ext_2" label="扩展2"/>
+      <field pname="Ext3" name="Ext_3" label="扩展3"/>
+      <field pname="Ext4" name="Ext_4" label="扩展4"/>
+      <field pname="Ext5" name="Ext_5" label="扩展5"/>
+      <field pname="Remark" name="Remark" label="备注"/>
+      <field pname="Status" name="Status" label="状态0有效1无效"/>
+      <field pname="SyncNotifyUrl" name="Sync_Notify_Url" label="同步通知地址"/>
+      <field pname="NonsyncNotifyUrl" name="Nonsync_Notify_Url" label="异步通知地址"/>
+      <field pname="RefundScriptUrl" name="REFUND_SCRIPT_PATH" label="退款lua脚本名称"/>
+      <field pname="DownChannelNo" name="Down_Channel_No" label="下游渠道编号"/>
+      <field pname="ServiceLoss" name="Service_Loss" label="退款亏损"/>
+    </fields>
+  </table>
+  <template>
+    <item name="getList">
+      <sql>
+        <![CDATA[
+          select t.*,
+                   t1.name StatusName,
+                   t2.name AccountTypeName,
+                   dc.CHANNEL_NAME DChannelName
+                                  from (select RID
+                                          from (select R.RID, rownum LineNum
+                                          from (select t.rowid RID
+                                                  from Receipt_Account_Info t
+                                                 where {@t.AccountType}
+                                                       {&@t.Status}
+                                                       {&@t.DownChannelNo}
+                                                 order by t.account_id desc) R
+                                         where rownum <= { :PS} * { :PI})
+                                 where LineNum > { :PS} * ({ :PI} - 1)) tab
+                         inner join Receipt_Account_Info t on t.rowid = tab.RID
+                         left join sys_dictionary t1 on t1.value = t.status and t1.type = 'AccountStatus' 
+                         left join sys_dictionary t2 on t2.value = t.account_type and t2.type = 'AccountType'
+                         left join DOWN_CHANNEL dc on t.Down_Channel_No = dc.DOWN_CHANNEL_NO
+                         order by t.account_id desc
+        ]]>
+      </sql>
+    </item>
+    <item name="getCount">
+      <sql>
+        <![CDATA[
+          select count(*) from Receipt_Account_Info t where {@t.AccountType}
+                                                       {&@t.Status}
+                                                       {&@t.DownChannelNo}
+        ]]>
+      </sql>
+    </item>
+  </template>
+</config>
